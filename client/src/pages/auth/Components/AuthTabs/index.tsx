@@ -32,18 +32,18 @@ function AuthTabs({
                 }`}
                 onClick={() => {
                     setActiveTab("login");
-                    setUserInfo({
-                        login: {
-                            email: "",
-                            password: "",
-                        },
-                        signup: {
-                            username: "",
-                            email: "",
-                            password: "",
-                            confirmPassword: "",
-                        },
-                    });
+                    // setUserInfo({
+                    //     login: {
+                    //         email: "",
+                    //         password: "",
+                    //     },
+                    //     signup: {
+                    //         username: "",
+                    //         email: "",
+                    //         password: "",
+                    //         confirmPassword: "",
+                    //     },
+                    // });
                 }}
             >
                 Login
@@ -57,18 +57,18 @@ function AuthTabs({
                 }`}
                 onClick={() => {
                     setActiveTab("signup");
-                    setUserInfo({
-                        login: {
-                            email: "",
-                            password: "",
-                        },
-                        signup: {
-                            username: "",
-                            email: "",
-                            password: "",
-                            confirmPassword: "",
-                        },
-                    });
+                    // setUserInfo({
+                    //     login: {
+                    //         email: "",
+                    //         password: "",
+                    //     },
+                    //     signup: {
+                    //         username: "",
+                    //         email: "",
+                    //         password: "",
+                    //         confirmPassword: "",
+                    //     },
+                    // });
                 }}
             >
                 Sign-up

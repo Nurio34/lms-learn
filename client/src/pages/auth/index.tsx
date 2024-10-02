@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AuthTabs from "./Components/AuthTabs";
 import SubmitButton from "./Components/SubmitButton";
-import axios from "axios";
+import { AxiosError } from "axios";
+import toast from "react-hot-toast";
+import axiosInstance from "../../../services/axios";
 
 function AuthPage() {
     const [activeTab, setActiveTab] = useState("signup");
     const [userInfo, setUserInfo] = useState({
         login: {
-            email: "",
-            password: "",
+            email: "nuri@mail.com",
+            password: "1234",
         },
         signup: {
             username: "nuri",
@@ -17,22 +19,94 @@ function AuthPage() {
             confirmPassword: "1234",
         },
     });
+    const [auth, setAuth] = useState({
+        authenticated: false,
+        user: null,
+    });
+    console.log(auth);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        //! --- CHECK IF IS CONFIRMATION PASSWORD OK ---
+        const isPasswordConfirmed =
+            userInfo.signup.password === userInfo.signup.confirmPassword;
+
+        if (!isPasswordConfirmed) {
+            toast.error("Confirmation Password is not correct !");
+            return;
+        }
+        //! --------------------------------------------
+
+        //! --- SIGNUP ---
         if (activeTab === "signup") {
             try {
-                const response = await axios.post(
-                    "http://localhost:5000/auth/signup",
+                const response = await axiosInstance.post(
+                    "/auth/signup",
                     userInfo.signup,
                 );
-                console.log(response);
+                toast.success(response.data.message);
             } catch (error) {
-                console.log(error);
+                if (error instanceof AxiosError) {
+                    toast.error(error.response?.data.message);
+                } else {
+                    toast.error("Unexpecter Error occured. Please try again !");
+                }
             }
         }
+        //! --------------
+
+        //! --- LOGIN ---
+        else {
+            try {
+                const response = await axiosInstance.post(
+                    "/auth/login",
+                    userInfo.login,
+                );
+                toast.success(response.data.message);
+
+                const token = response.data.token;
+                sessionStorage.setItem("token", JSON.stringify(token));
+
+                const user = response.data.user;
+            } catch (error) {
+                if (error instanceof AxiosError) {
+                    toast.error(error.response?.data.message);
+                } else {
+                    toast.error("Unexpecter Error occured. Please try again !");
+                }
+            }
+        }
+        //! -------------
     };
+
+    const checkAuthorization = async () => {
+        try {
+            const response = await axiosInstance.get("/auth/check-auth");
+
+            if (!response.data.success) {
+                setAuth({
+                    authenticated: false,
+                    user: null,
+                });
+
+                return;
+            } else {
+                setAuth({
+                    authenticated: true,
+                    user: response.data.user,
+                });
+
+                return;
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        checkAuthorization();
+    }, []);
 
     return (
         <div className="flex justify-center items-center min-h-[600px] ">

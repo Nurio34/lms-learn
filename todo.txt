@@ -1,0 +1,2 @@
+-- RouteGuard oluştur ama önce Context oluşturup authenticated ve user variablelarını RouteGuard'a 
+paslamam lazım.
