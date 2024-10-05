@@ -1,0 +1,4 @@
+. Üç route olcak
+ 1."/" => Bu sayfa login/register sayfası olcak.
+ 2."/student" => Student rouetes.
+ 3."/instructer" => Teachers routes.

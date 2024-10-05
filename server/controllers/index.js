@@ -7,9 +7,9 @@ const signup = async (req, res) => {
     const { username, email, password, confirmPassword } = req.body;
 
     try {
+        //! --- CHECK EXISTING USER WITH SAME EMAIL ---
         const isEmailExist = await User.findOne({ email });
 
-        //! --- CHECK EXISTING USER WITH SAME EMAIL ---
         if (isEmailExist) {
             return res.status(400).json({
                 success: false,
