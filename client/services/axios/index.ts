@@ -9,7 +9,7 @@ axiosInstance.interceptors.request.use(
         const storage = sessionStorage.getItem("token");
 
         if (!storage) {
-            console.log("No token in Storage");
+            // console.log("No token in Storage");
         } else {
             const token = JSON.parse(storage);
             config.headers.Authorization = `Bearer ${token}`;

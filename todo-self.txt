@@ -1,4 +1,15 @@
-. Üç route olcak
+-- Üç route olcak
  1."/" => Bu sayfa login/register sayfası olcak.
  2."/student" => Student rouetes.
  3."/instructer" => Teachers routes.
+
+-- RouteGuard'ları oluştur ve uygula.
+    1.RouteGuard "register" sayfasına yönlendirdğinde form gözüküyor. Loading state ile çöz
+
+-- Not-found sayfası oluştur
+
+-- Instructer sayfasını oluştur
+    1. Create New Course sayfası için "config" dosyasını arakla.
+    2. "InfoForm"u oluştur.
+    3. "Settings"i oluştur.
+    4. "Curriculum"u oluştur.

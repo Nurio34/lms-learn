@@ -35,7 +35,7 @@ const signup = async (req, res) => {
             username,
             email,
             password: hashedPassword,
-            role: "user",
+            role: "student",
         });
 
         await newUser.save();
@@ -92,7 +92,7 @@ const login = async (req, res) => {
             role: user.role,
         },
         JWT_SECRET,
-        { expiresIn: "5m" },
+        { expiresIn: "1h" },
     );
 
     return res.status(201).json({

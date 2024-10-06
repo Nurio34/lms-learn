@@ -4,6 +4,7 @@ import SubmitButton from "./Components/SubmitButton";
 import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import axiosInstance from "../../../services/axios";
+import { initialUser, useGlobalContext } from "../../GlobalContext";
 
 function AuthPage() {
     const [activeTab, setActiveTab] = useState("signup");
@@ -19,11 +20,8 @@ function AuthPage() {
             confirmPassword: "1234",
         },
     });
-    const [auth, setAuth] = useState({
-        authenticated: false,
-        user: null,
-    });
-    console.log(auth);
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    const { setAuthenticated, setUser } = useGlobalContext();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -68,7 +66,7 @@ function AuthPage() {
                 const token = response.data.token;
                 sessionStorage.setItem("token", JSON.stringify(token));
 
-                const user = response.data.user;
+                setIsLoggedIn(true);
             } catch (error) {
                 if (error instanceof AxiosError) {
                     toast.error(error.response?.data.message);
@@ -85,17 +83,13 @@ function AuthPage() {
             const response = await axiosInstance.get("/auth/check-auth");
 
             if (!response.data.success) {
-                setAuth({
-                    authenticated: false,
-                    user: null,
-                });
+                setAuthenticated(false);
+                setUser(initialUser);
 
                 return;
             } else {
-                setAuth({
-                    authenticated: true,
-                    user: response.data.user,
-                });
+                setAuthenticated(true);
+                setUser(response.data.user);
 
                 return;
             }
@@ -106,7 +100,7 @@ function AuthPage() {
 
     useEffect(() => {
         checkAuthorization();
-    }, []);
+    }, [isLoggedIn]);
 
     return (
         <div className="flex justify-center items-center min-h-[600px] ">

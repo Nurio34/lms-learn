@@ -4,11 +4,17 @@ import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import GlobalProvider from "./GlobalContext.tsx";
+import InstructerProvider from "./pages/instructer/InstructerContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
         <BrowserRouter>
-            <App />
+            <GlobalProvider>
+                <InstructerProvider>
+                    <App />
+                </InstructerProvider>
+            </GlobalProvider>
         </BrowserRouter>
         <Toaster />
     </StrictMode>,
