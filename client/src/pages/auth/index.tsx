@@ -10,7 +10,7 @@ function AuthPage() {
     const [activeTab, setActiveTab] = useState("signup");
     const [userInfo, setUserInfo] = useState({
         login: {
-            email: "nuri@mail.com",
+            email: "emy@mail.com",
             password: "1234",
         },
         signup: {

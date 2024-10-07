@@ -2,7 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const router = require("./routes");
+const AuthRouter = require("./routes");
+const MediaRouter = require("./routes/cloudinary");
 
 const app = express();
 app.use(express.json());
@@ -31,7 +32,8 @@ mongoose
 //! ---------------------------
 
 //! --- ROUTER ---
-app.use("/auth", router);
+app.use("/auth", AuthRouter);
+app.use("/media", MediaRouter);
 //! --------------
 
 //! --- GLOBAL ERROR HANDLER  ---

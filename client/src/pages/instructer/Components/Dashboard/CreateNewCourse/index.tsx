@@ -5,6 +5,7 @@ import TabButtons, { TabButtonValueType } from "./Components/TabButtons";
 import Curriculum from "./Components/Curriculum";
 import { useInstructerContext } from "../../../InstructerContext";
 import Dashboard from "..";
+import ProgressBar from "../../ProgressBar";
 
 function CreateNewCourse() {
     const [createActiveTab, setCreateActiveTab] =
@@ -15,7 +16,7 @@ function CreateNewCourse() {
 
     return (
         <section className=" bg-white my-8 mx-16 py-3 px-6 rounded-l space-y-3 min-h-[760px]">
-            <div className="flex justify-between items-center border-b-2 shadow-sm pb-1 px-3">
+            <div className="flex justify-between items-center border-b-2 shadow-sm pb-1 px-3 relative">
                 <h1 className=" text-2xl font-semibold">Create New Course</h1>
                 <div className=" space-x-3">
                     <button
@@ -32,6 +33,7 @@ function CreateNewCourse() {
                     </button>
                     <CreateButton />
                 </div>
+                <ProgressBar />
             </div>
             <TabButtons
                 activeTab={createActiveTab}

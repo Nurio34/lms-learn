@@ -1,0 +1,12 @@
+.ProgressLight {
+    animation: light 2s linear infinite;
+}
+
+@keyframes light {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}

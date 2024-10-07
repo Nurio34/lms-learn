@@ -1,11 +1,14 @@
 import { InfoFormControls } from "../../../../../../../config";
+import { useInstructerContext } from "../../../../../InstructerContext";
 
 function InfoForm() {
+    const { infoForm, setInfoForm } = useInstructerContext();
+
     return (
         <form className=" space-y-3">
-            {InfoFormControls.map((item) => {
+            {InfoFormControls.map((item, index) => {
                 return (
-                    <div>
+                    <div key={index}>
                         <label
                             htmlFor={item.name}
                             className="flex gap-3 items-center"
@@ -20,16 +23,33 @@ function InfoForm() {
                                     id={item.name}
                                     placeholder={item.placeholder}
                                     className="border-2 py-1 px-3 rounded-md grow"
+                                    value={infoForm[item.name]}
+                                    onChange={(e) =>
+                                        setInfoForm((prev) => ({
+                                            ...prev,
+                                            [item.name]: e.target.value,
+                                        }))
+                                    }
                                 />
                             ) : item.componentType === "select" ? (
                                 <select
                                     name={item.name}
                                     id={item.name}
                                     className="border-2 py-1 px-3 rounded-md grow"
+                                    value={infoForm[item.name]}
+                                    onChange={(e) =>
+                                        setInfoForm((prev) => ({
+                                            ...prev,
+                                            [item.name]: e.target.value,
+                                        }))
+                                    }
                                 >
                                     {item.options?.map((option) => {
                                         return (
-                                            <option value={option.id}>
+                                            <option
+                                                key={option.id}
+                                                value={option.id}
+                                            >
                                                 {option.label}
                                             </option>
                                         );
@@ -43,6 +63,13 @@ function InfoForm() {
                                     rows={10}
                                     placeholder={item.placeholder}
                                     className="border-2 py-1 px-3 rounded-md grow"
+                                    value={infoForm[item.name]}
+                                    onChange={(e) =>
+                                        setInfoForm((prev) => ({
+                                            ...prev,
+                                            [item.name]: e.target.value,
+                                        }))
+                                    }
                                 ></textarea>
                             )}
                         </label>

@@ -98,7 +98,11 @@ export const InfoFormControls = [
     },
 ];
 
-export const courseLandingInitialFormData = {
+export type InfoFormType = {
+    [key: string]: string; // This allows any string key with a string value
+};
+
+export const InfoFormInitialFormData = {
     title: "",
     category: "",
     level: "",
@@ -111,14 +115,39 @@ export const courseLandingInitialFormData = {
     image: "",
 };
 
-export const courseCurriculumInitialFormData = [
+export type CurriculumFormType = {
+    title: string;
+    videoUrl: string;
+    freePreview: boolean;
+    public_id: string;
+    isFileLoading: boolean;
+}[];
+
+export const CurriculumFormInitialData = [
     {
         title: "",
         videoUrl: "",
         freePreview: false,
         public_id: "",
+        isFileLoading: false,
     },
 ];
+
+export type SettingsType = {
+    image: {
+        isFileLoading: boolean;
+        imageUrl: string;
+        public_id: string;
+    };
+};
+
+export const SettingsInitialData = {
+    image: {
+        isFileLoading: false,
+        imageUrl: "",
+        public_id: "",
+    },
+};
 
 export const sortOptions = [
     { id: "price-lowtohigh", label: "Price: Low to High" },
