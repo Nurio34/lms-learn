@@ -27,7 +27,6 @@ function Curriculum() {
         const selectedFile = file[0];
         const FileForm = new FormData();
         FileForm.append("file", selectedFile);
-        const url = URL.createObjectURL(selectedFile);
 
         setCurriculumForm((prev) => {
             return prev.map((item, ind) => {
@@ -66,7 +65,6 @@ function Curriculum() {
                             videoUrl: response.data.data.url,
                             public_id: response.data.data.public_id,
                             isFileLoading: false,
-                            previewUrl: url,
                         };
                     }
                     return item;
@@ -97,6 +95,8 @@ function Curriculum() {
             >
                 Add Lecture
             </button>
+            <VideoPlayer lecture={0} />
+
             {curriculumForm.map((_, index) => {
                 return (
                     <div

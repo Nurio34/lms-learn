@@ -32,6 +32,7 @@ const GlobalContext = createContext({} as GlobalContextType);
 function InstructerProvider({ children }: { children: JSX.Element }) {
     const [activeTab, setActiveTab] =
         useState<ActiveTabType>("createNewCourse");
+
     const [activeComponent, setActiveComponent] = useState<JSX.Element>(
         <CreateNewCourse />,
     );

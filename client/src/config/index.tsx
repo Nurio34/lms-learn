@@ -126,7 +126,8 @@ export type CurriculumFormType = {
 export const CurriculumFormInitialData = [
     {
         title: "",
-        videoUrl: "",
+        videoUrl:
+            "http://res.cloudinary.com/dmvfabr5i/video/upload/v1728333854/akkpoa9bgfxmiea0pc8a.mp4",
         freePreview: false,
         public_id: "",
         isFileLoading: false,
