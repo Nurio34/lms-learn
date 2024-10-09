@@ -33,7 +33,6 @@ function PlayPauseButton({
                     if (Player.current) {
                         Player.current.seekTo(0);
                         setIsPlaying(true);
-                        console.log("Set isPlaying from PlayPauseButton");
                     }
                 } else {
                     if (isPlaying) {

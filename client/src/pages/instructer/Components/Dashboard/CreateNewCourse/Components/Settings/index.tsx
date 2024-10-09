@@ -34,7 +34,6 @@ function Settings() {
                         const percentCompleted = Math.round(
                             (progressEvent.loaded * 100) / progressEvent.total,
                         );
-                        console.log({ percentCompleted });
 
                         setUploadProgress(percentCompleted);
                         // Update the progress bar and percentage text

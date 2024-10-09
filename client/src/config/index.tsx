@@ -103,15 +103,16 @@ export type InfoFormType = {
 };
 
 export const InfoFormInitialFormData = {
-    title: "1",
-    category: "1",
-    level: "1",
+    title: "React.js",
+    category: "Web Development",
+    level: "Beginner",
     primaryLanguage: "1",
-    subtitle: "1",
-    description: "1",
-    pricing: "1",
-    objectives: "1",
-    welcomeMessage: "1",
+    subtitle: "English",
+    description: "This course is beginner level friendly React.js course.",
+    pricing: "20",
+    objectives:
+        "You will be able to understand my intermediate level React.js course.",
+    welcomeMessage: "Welceome",
 };
 
 export type CurriculumFormType = {
@@ -124,10 +125,35 @@ export type CurriculumFormType = {
 
 export const CurriculumFormInitialData = [
     {
-        title: "1",
-        videoUrl: "1",
+        title: "Fundementals",
+        videoUrl:
+            "https://res.cloudinary.com/dmvfabr5i/video/upload/v1728488874/oi2lrmx2aypirrbbwtcu.mp4",
         freePreview: false,
-        public_id: "1",
+        public_id: "oi2lrmx2aypirrbbwtcu",
+        isFileLoading: false,
+    },
+    {
+        title: "useState",
+        videoUrl:
+            "https://res.cloudinary.com/dmvfabr5i/video/upload/v1728488888/chhjppwaxvxe4b4lv2dg.mp4",
+        freePreview: false,
+        public_id: "chhjppwaxvxe4b4lv2dg",
+        isFileLoading: false,
+    },
+    {
+        title: "useEffect",
+        videoUrl:
+            "https://res.cloudinary.com/dmvfabr5i/video/upload/v1728488911/sxtcjbrqrqgolugo5vfg.mp4",
+        freePreview: false,
+        public_id: "sxtcjbrqrqgolugo5vfg",
+        isFileLoading: false,
+    },
+    {
+        title: "useContext",
+        videoUrl:
+            "https://res.cloudinary.com/dmvfabr5i/video/upload/v1728488934/mcmu74y3ys0fs82vkrmn.mp4",
+        freePreview: false,
+        public_id: "mcmu74y3ys0fs82vkrmn",
         isFileLoading: false,
     },
 ];
@@ -143,8 +169,9 @@ export type SettingsType = {
 export const SettingsInitialData = {
     image: {
         isFileLoading: false,
-        imageUrl: "1",
-        public_id: "1",
+        imageUrl:
+            "https://res.cloudinary.com/dmvfabr5i/image/upload/v1728488784/i2cmcogrv9szqkreosfd.jpg",
+        public_id: "i2cmcogrv9szqkreosfd",
     },
 };
 

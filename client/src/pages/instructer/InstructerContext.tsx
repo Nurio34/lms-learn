@@ -40,7 +40,7 @@ function InstructerProvider({ children }: { children: JSX.Element }) {
         CurriculumFormInitialData,
     );
     const [settings, setSettings] = useState<SettingsType>(SettingsInitialData);
-    const [uploadProgress, setUploadProgress] = useState<number>(0);
+    const [uploadProgress, setUploadProgress] = useState<number>(100);
     const [infoForm, setInfoForm] = useState<InfoFormType>(
         InfoFormInitialFormData,
     );

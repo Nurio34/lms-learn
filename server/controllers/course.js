@@ -29,8 +29,19 @@ const addCourse = async (req, res) => {
         const NewCourse = new Course(courseForm);
 
         await NewCourse.save();
+
+        return res.status(201).json({
+            success: true,
+            message: "Course!s been added successfully...",
+            data: NewCourse,
+        });
+
+        retur;
     } catch (error) {
-        console.log(error);
+        return res.status(404).json({
+            status: false,
+            message: "Unexpected error while adding course !",
+        });
     }
 };
 

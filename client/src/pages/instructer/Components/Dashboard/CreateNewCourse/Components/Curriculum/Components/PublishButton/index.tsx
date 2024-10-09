@@ -1,8 +1,12 @@
+import { AxiosError } from "axios";
 import axiosInstance from "../../../../../../../../../../services/axios";
 import { useInstructerContext } from "../../../../../../../InstructerContext";
+import toast from "react-hot-toast";
+import { useGlobalContext } from "../../../../../../../../../GlobalContext";
 
 function PublishButton() {
     const { curriculumForm, infoForm, settings } = useInstructerContext();
+    const { setNewCouse } = useGlobalContext();
 
     const isCurriculumFormValid = curriculumForm.every(
         (item) => item.title.trim() !== "" && item.videoUrl.trim() !== "",
@@ -27,7 +31,7 @@ function PublishButton() {
         ),
     };
 
-    const publisCourse = async () => {
+    const publishCourse = async () => {
         const course = {
             lectures: curriculumForm,
             ...infoForm,
@@ -35,12 +39,14 @@ function PublishButton() {
         };
 
         try {
-            console.log("Adding course");
-
             const response = await axiosInstance.post("/course/add", course);
-            console.log(response);
+            toast.success(response.data.message);
+            setNewCouse(response.data.data);
         } catch (error) {
-            console.log(error);
+            if (error instanceof AxiosError) {
+                toast.error(error.response?.data.message);
+                throw new Error(error.response?.data);
+            }
         }
     };
 
@@ -51,7 +57,7 @@ function PublishButton() {
             disabled={
                 !isCurriculumFormValid || !isInfoFormValid || !isSettingsValid
             }
-            onClick={publisCourse}
+            onClick={publishCourse}
         >
             Publish
         </button>

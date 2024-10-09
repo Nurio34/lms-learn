@@ -8,8 +8,6 @@ type RouteGuardType = {
 
 function RouteGuard({ authenticated, role, element }: RouteGuardType) {
     const location = useLocation();
-    console.log({ authenticated, role, element });
-    console.log(location.pathname === "/");
 
     if (!authenticated && location.pathname !== "/") {
         return <Navigate to={"/"} />;
