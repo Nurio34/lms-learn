@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .c-btn {
+        @apply py-1 px-3 font-semibold rounded-md transition-all cursor-pointer hover:scale-105 active:scale-95;
+    }
+}

@@ -6,6 +6,7 @@ import Curriculum from "./Components/Curriculum";
 import { useInstructerContext } from "../../../InstructerContext";
 import Dashboard from "..";
 import ProgressBar from "../../ProgressBar";
+import PublishButton from "./Components/Curriculum/Components/PublishButton";
 
 function CreateNewCourse() {
     const [createActiveTab, setCreateActiveTab] =
@@ -35,11 +36,15 @@ function CreateNewCourse() {
                 </div>
                 <ProgressBar />
             </div>
-            <TabButtons
-                activeTab={createActiveTab}
-                setActiveTab={setCreateActiveTab}
-                setComponent={setComponent}
-            />
+            <div className=" flex items-center justify-between">
+                <TabButtons
+                    activeTab={createActiveTab}
+                    setActiveTab={setCreateActiveTab}
+                    setComponent={setComponent}
+                />
+                <PublishButton />
+            </div>
+
             <ActiveTab component={component} />
         </section>
     );

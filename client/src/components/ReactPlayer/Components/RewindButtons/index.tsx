@@ -6,6 +6,7 @@ type RewindButtonsType = {
     Player: React.MutableRefObject<ReactPlayer | null>;
     isComplated: boolean;
     isLast5Seconds: boolean;
+    setIsLastSecconds: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 function RewindButtons({
@@ -13,16 +14,17 @@ function RewindButtons({
     Player,
     isComplated,
     isLast5Seconds,
+    setIsLastSecconds,
 }: RewindButtonsType) {
-    console.log({ isComplated, isLast5Seconds });
-
     const back5 = () => {
+        setIsLastSecconds(false);
         if (Player.current) {
             const time = Player.current.getCurrentTime();
             Player.current.seekTo(time - 5);
         }
     };
     const forward5 = () => {
+        setIsLastSecconds(false);
         if (Player.current) {
             const time = Player.current.getCurrentTime();
             Player.current.seekTo(time + 5);
@@ -41,9 +43,10 @@ function RewindButtons({
             <button
                 type="button"
                 onClick={() => {
-                    if (!isComplated || !isLast5Seconds) {
-                        forward5();
+                    if (isComplated || isLast5Seconds) {
+                        return;
                     }
+                    forward5();
                 }}
             >
                 <TbRewindForward5

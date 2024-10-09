@@ -4,12 +4,14 @@ type DurationProgressBarType = {
     playedRange: number;
     setPlayedRange: React.Dispatch<React.SetStateAction<number>>;
     Player: React.MutableRefObject<ReactPlayer | null>;
+    setIsLastSecconds: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 function DurationProgressBar({
     playedRange,
     setPlayedRange,
     Player,
+    setIsLastSecconds,
 }: DurationProgressBarType) {
     return (
         <input
@@ -25,6 +27,8 @@ function DurationProgressBar({
                 if (Player.current) {
                     Player.current.seekTo(newPlayed / 100);
                 }
+
+                setIsLastSecconds(false);
             }}
         />
     );

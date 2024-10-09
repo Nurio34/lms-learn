@@ -103,16 +103,15 @@ export type InfoFormType = {
 };
 
 export const InfoFormInitialFormData = {
-    title: "",
-    category: "",
-    level: "",
-    primaryLanguage: "",
-    subtitle: "",
-    description: "",
-    pricing: "",
-    objectives: "",
-    welcomeMessage: "",
-    image: "",
+    title: "1",
+    category: "1",
+    level: "1",
+    primaryLanguage: "1",
+    subtitle: "1",
+    description: "1",
+    pricing: "1",
+    objectives: "1",
+    welcomeMessage: "1",
 };
 
 export type CurriculumFormType = {
@@ -125,11 +124,10 @@ export type CurriculumFormType = {
 
 export const CurriculumFormInitialData = [
     {
-        title: "",
-        videoUrl:
-            "http://res.cloudinary.com/dmvfabr5i/video/upload/v1728333854/akkpoa9bgfxmiea0pc8a.mp4",
+        title: "1",
+        videoUrl: "1",
         freePreview: false,
-        public_id: "",
+        public_id: "1",
         isFileLoading: false,
     },
 ];
@@ -145,8 +143,8 @@ export type SettingsType = {
 export const SettingsInitialData = {
     image: {
         isFileLoading: false,
-        imageUrl: "",
-        public_id: "",
+        imageUrl: "1",
+        public_id: "1",
     },
 };
 

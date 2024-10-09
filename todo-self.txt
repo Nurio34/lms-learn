@@ -15,4 +15,7 @@
     4. "Curriculum"u oluştur.
     5. "server" klasöründe "cloudinary" config file oluştur.Cloudinary "upload" ve "delete" fonksitonlarını oluştur
     6. Bu fonksiyonlar için "route" oluştur. ("multer" ile)
-    7. Lecture videosu yüklediğinde cloudinary'ye yükle
+    7. Lecture videosu yüklediğinde cloudinary'ye yükle"
+    8. Video "replace" ve "delete" metodları oluştur.
+
+-- React-Player ile güzel bir video player oluştur

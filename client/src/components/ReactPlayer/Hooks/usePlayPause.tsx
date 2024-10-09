@@ -21,7 +21,7 @@ const usePlayPause = () => {
         }
     }, [isMuted]);
 
-    return { isPlaying, pauseVideo, playVideo };
+    return { isPlaying, setIsPlaying, pauseVideo, playVideo };
 };
 
 export default usePlayPause;

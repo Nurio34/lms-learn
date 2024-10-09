@@ -1,5 +1,6 @@
 import { FaVolumeUp } from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
+import { IoVolumeMuteSharp } from "react-icons/io5";
 
 type VolumeContainerType = {
     isFullScreen: boolean;
@@ -13,6 +14,7 @@ type VolumeContainerType = {
         totalTime: string;
         playedTime: string;
     };
+    isMuted: boolean;
 };
 
 function VolumeContainer({
@@ -24,18 +26,35 @@ function VolumeContainer({
     handleVolume,
     volume,
     time,
+    isMuted,
 }: VolumeContainerType) {
     return (
-        <div className="flex gap-3 items-center relative">
-            <button type="button" onClick={handleOnClickVolumeButton}>
-                <FaVolumeUp
-                    size={20}
-                    className={`${
-                        isFullScreen ? "text-2xl text-blue-500" : ""
-                    }`}
-                />
+        <div className="flex items-center relative">
+            <button
+                type="button"
+                onClick={handleOnClickVolumeButton}
+                onMouseLeave={handleOnMouseLeaveFromVolumeRange}
+                onMouseEnter={handleOnMouseEnterToVolumeRange}
+            >
+                {isMuted ? (
+                    <IoVolumeMuteSharp
+                        size={20}
+                        color="white"
+                        className={`${isFullScreen && "text-2xl"}`}
+                    />
+                ) : (
+                    <FaVolumeUp
+                        size={20}
+                        color="white"
+                        className={`${isFullScreen && "text-2xl"}`}
+                    />
+                )}
             </button>
-            <div className="flex gap-3 items-center relative">
+            <div
+                className="pl-3 flex gap-3 items-center relative"
+                onMouseEnter={handleOnMouseEnterToVolumeRange}
+                onMouseLeave={handleOnMouseLeaveFromVolumeRange}
+            >
                 <AnimatePresence>
                     {isVolumeRangeVisible && (
                         <motion.input

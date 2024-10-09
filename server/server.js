@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const AuthRouter = require("./routes");
 const MediaRouter = require("./routes/cloudinary");
+const CourseRouter = require("./routes/course");
 
 const app = express();
 app.use(express.json());
@@ -34,6 +35,7 @@ mongoose
 //! --- ROUTER ---
 app.use("/auth", AuthRouter);
 app.use("/media", MediaRouter);
+app.use("/course", CourseRouter);
 //! --------------
 
 //! --- GLOBAL ERROR HANDLER  ---

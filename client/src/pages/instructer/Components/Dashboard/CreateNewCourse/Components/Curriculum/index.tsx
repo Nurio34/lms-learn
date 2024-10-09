@@ -1,10 +1,10 @@
 import axiosInstance from "../../../../../../../../services/axios";
-import { CurriculumFormInitialData } from "../../../../../../../config";
 import { useInstructerContext } from "../../../../../InstructerContext";
-import { RotatingLines } from "react-loader-spinner";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
-import VideoPlayer from "../../../../../../../components/ReactPlayer";
+
+import AddLectureButton from "./Components/AddLectureButton";
+import LectureForm from "./Components/LectureForm";
 
 function Curriculum() {
     const {
@@ -14,7 +14,7 @@ function Curriculum() {
         setUploadProgress,
     } = useInstructerContext();
 
-    const handleFileChose = async (
+    const uploadVideo = async (
         e: React.ChangeEvent<HTMLInputElement>,
         index: number,
     ) => {
@@ -71,7 +71,7 @@ function Curriculum() {
                 });
             });
 
-            toast.success(response.data.message);
+            return response.data;
         } catch (error) {
             if (error instanceof AxiosError) {
                 toast.error(error.response?.data.message);
@@ -79,114 +79,51 @@ function Curriculum() {
         }
     };
 
+    const deleteVideo = async (index: number) => {
+        try {
+            const response = await axiosInstance.delete(
+                `/media/delete/${curriculumForm[index].public_id}`,
+            );
+            if (response.data.data.result === "ok") {
+                setCurriculumForm((prev) => {
+                    return prev.map((item, ind) => {
+                        if (ind === index) {
+                            return { ...item, videoUrl: "", public_id: "" };
+                        } else {
+                            return item;
+                        }
+                    });
+                });
+                return response.data;
+            } else {
+                return {
+                    success: false,
+                    message: "Video couldn't be found !",
+                };
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <form className="space-y-6">
-            <button
-                type="button"
-                className="py-1 px-3 rounded-md font-semibold bg-green-500 text-white transition-all
-                    hover:bg-green-400 hover:scale-105 active:scale-95    
-                "
-                onClick={() =>
-                    setCurriculumForm((prev) => [
-                        ...prev,
-                        ...CurriculumFormInitialData,
-                    ])
-                }
-            >
-                Add Lecture
-            </button>
-            <VideoPlayer lecture={0} />
+            <AddLectureButton
+                curriculumForm={curriculumForm}
+                setCurriculumForm={setCurriculumForm}
+            />
 
             {curriculumForm.map((_, index) => {
                 return (
-                    <div
+                    <LectureForm
                         key={index}
-                        className=" border-b-2 shadow-md py-3 px-6 flex gap-12 items-center flex-wrap"
-                    >
-                        <div className=" space-y-3">
-                            <div className="flex items-center gap-6">
-                                <label
-                                    htmlFor={"title" + index}
-                                    className=" flex gap-3 items-center"
-                                >
-                                    <p className="font-semibold">
-                                        Lecture {index + 1}
-                                    </p>
-                                    <input
-                                        type="text"
-                                        name={"title" + index}
-                                        id={"title" + index}
-                                        placeholder="Enter lecture title ..."
-                                        className="border-2 py-1 px-3 rounded-md"
-                                        value={curriculumForm[index].title}
-                                        onChange={(e) => {
-                                            setCurriculumForm((prev) => {
-                                                return prev.map((item, ind) => {
-                                                    if (ind === index) {
-                                                        return {
-                                                            ...item,
-                                                            title: e.target
-                                                                .value,
-                                                        };
-                                                    }
-                                                    return item;
-                                                });
-                                            });
-                                        }}
-                                    />
-                                </label>
-                                <label
-                                    htmlFor={"freePreview" + index}
-                                    className="flex items-center gap-3"
-                                >
-                                    <input
-                                        type="checkbox"
-                                        name={"freePreview" + index}
-                                        id={"freePreview" + index}
-                                        className="border-2 py-1 px-3 rounded-md"
-                                        checked={
-                                            curriculumForm[index].freePreview
-                                        }
-                                        onChange={(e) => {
-                                            setCurriculumForm((prev) => {
-                                                return prev.map((item, ind) => {
-                                                    if (ind === index) {
-                                                        return {
-                                                            ...item,
-                                                            freePreview:
-                                                                e.target
-                                                                    .checked,
-                                                        };
-                                                    }
-                                                    return item;
-                                                });
-                                            });
-                                        }}
-                                    />
-                                    <p className="font-semibold">
-                                        Free Preview
-                                    </p>
-                                </label>
-                            </div>
-                            <input
-                                type="file"
-                                name="video"
-                                id="video"
-                                className="border-2  rounded-md"
-                                onChange={(e) => handleFileChose(e, index)}
-                            />
-                        </div>
-                        {curriculumForm[index].isFileLoading ? (
-                            <RotatingLines
-                                visible={true}
-                                strokeWidth="5"
-                                animationDuration="0.75"
-                                ariaLabel="rotating-lines-loading"
-                            />
-                        ) : uploadProgress !== 0 ? (
-                            <VideoPlayer lecture={index} />
-                        ) : null}
-                    </div>
+                        index={index}
+                        curriculumForm={curriculumForm}
+                        setCurriculumForm={setCurriculumForm}
+                        uploadVideo={uploadVideo}
+                        uploadProgress={uploadProgress}
+                        deleteVideo={deleteVideo}
+                    />
                 );
             })}
         </form>

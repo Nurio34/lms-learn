@@ -12,6 +12,16 @@ export const useVolume = () => {
             clearTimeout(VolumeTimeoutRef.current);
         }
         setIsVolumRangeVisible((prev) => !prev);
+
+        if (isVolumeRangeVisible) {
+            if (isMuted) {
+                setIsMuted(false);
+                setVolume(lastVolume);
+            } else {
+                setIsMuted(true);
+                setVolume(0);
+            }
+        }
     };
 
     const handleOnMouseEnterToVolumeRange = () => {
@@ -23,13 +33,14 @@ export const useVolume = () => {
     const handleOnMouseLeaveFromVolumeRange = () => {
         VolumeTimeoutRef.current = setTimeout(() => {
             setIsVolumRangeVisible(false);
-        }, 1000);
+        }, 500);
     };
     //! *******************************************
 
     //! *** HANDLE VOLUME CHANGE ***
-    const [volume, setVolume] = useState(0.1);
+    const [volume, setVolume] = useState(0.3);
     const [isMuted, setIsMuted] = useState(true);
+    const [lastVolume, setLastVolume] = useState(0);
 
     useEffect(() => {
         if (volume === 0) {
@@ -43,6 +54,7 @@ export const useVolume = () => {
         const vol = Number(e.target.value);
 
         setVolume(vol / 100);
+        setLastVolume(vol / 100);
     };
     //! ****************************
 

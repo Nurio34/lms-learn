@@ -1,6 +1,5 @@
 import ReactPlayer from "react-player/lazy";
 import { useInstructerContext } from "../../pages/instructer/InstructerContext";
-import { TbRewindBackward5, TbRewindForward5 } from "react-icons/tb";
 
 import VolumeContainer from "./Components/VolumeContainer";
 import { MdFullscreen } from "react-icons/md";
@@ -9,11 +8,12 @@ import PlayPauseButton from "./Components/PlayPauseButton";
 import useControlsVisibility from "./Hooks/useControlsVisibility";
 import usePlayPause from "./Hooks/usePlayPause";
 import { useVolume } from "./Hooks/useVolume";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import getFormattedTime from "../../../utils/getFormattedTime";
 import useSeekAndTime from "./Hooks/useSeekAndTime";
 import DurationProgressBar from "./Components/DurationProgressBar";
 import RewindButtons from "./Components/RewindButtons";
+import useRewind from "./Hooks/useRewind";
 
 export type VideoPlayerType = {
     lecture: number;
@@ -28,7 +28,7 @@ function VideoPlayer({ lecture }: VideoPlayerType) {
     const { isControlsVisible, showControls, showControlsInfinitly } =
         useControlsVisibility();
 
-    const { isPlaying, playVideo, pauseVideo } = usePlayPause();
+    const { isPlaying, setIsPlaying, playVideo, pauseVideo } = usePlayPause();
 
     const {
         handleOnClickVolumeButton,
@@ -45,25 +45,11 @@ function VideoPlayer({ lecture }: VideoPlayerType) {
     const { playedRange, setPlayedRange, time, setTime } =
         useSeekAndTime(PlayerRef);
 
-    const [isComplated, setIsComplated] = useState(false);
-
-    useEffect(() => {
-        setIsComplated(time.playedTime === time.totalTime);
-    }, [time]);
-
-    const [isLast5Seconds, setIsLastSecconds] = useState(false);
-
-    useEffect(() => {
-        if (PlayerRef.current) {
-            const timeDif =
-                PlayerRef.current?.getDuration() -
-                PlayerRef.current?.getCurrentTime();
-
-            if (timeDif !== 0 && timeDif <= 5) {
-                setIsLastSecconds(true);
-            }
-        }
-    }, [playedRange]);
+    const { isComplated, isLast5Seconds, setIsLastSecconds } = useRewind(
+        time,
+        PlayerRef,
+        playedRange,
+    );
 
     return (
         <div
@@ -107,6 +93,7 @@ function VideoPlayer({ lecture }: VideoPlayerType) {
                     playedRange={playedRange}
                     setPlayedRange={setPlayedRange}
                     Player={PlayerRef}
+                    setIsLastSecconds={setIsLastSecconds}
                 />
                 <div className="flex gap-4 items-center py-1 px-3">
                     <PlayPauseButton
@@ -115,12 +102,16 @@ function VideoPlayer({ lecture }: VideoPlayerType) {
                         playVideo={playVideo}
                         pauseVideo={pauseVideo}
                         isComplated={isComplated}
+                        Player={PlayerRef}
+                        setIsLastSecconds={setIsLastSecconds}
+                        setIsPlaying={setIsPlaying}
                     />
                     <RewindButtons
                         isFullScreen={isFullScreen}
                         Player={PlayerRef}
                         isComplated={isComplated}
                         isLast5Seconds={isLast5Seconds}
+                        setIsLastSecconds={setIsLastSecconds}
                     />
                     <VolumeContainer
                         isFullScreen={isFullScreen}
@@ -135,6 +126,7 @@ function VideoPlayer({ lecture }: VideoPlayerType) {
                         handleVolume={handleVolume}
                         volume={volume}
                         time={time}
+                        isMuted={isMuted}
                     />
                     <button
                         type="button"
