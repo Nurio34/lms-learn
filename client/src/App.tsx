@@ -7,12 +7,14 @@ import InstructerPage from "./pages/instructer";
 import StudentHomePage from "./pages/student/home";
 import StudentLessonsPage from "./pages/student/lessons";
 import NotFoundPage from "./pages/not-found";
+import HiddenCredentials from "./components/HiddenCredentials";
 
 function App() {
     const { authenticated, user } = useGlobalContext();
 
     return (
         <div className="m-3">
+            <HiddenCredentials />
             <Header />
             <Routes>
                 <Route

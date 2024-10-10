@@ -4,10 +4,16 @@ export type LectureType = {
     freePreview: boolean;
     public_id: string;
     isFileLoading: boolean;
-    id: string;
+    _id: string;
 };
 
-export type NewCourseType = {
+export type StudentType = {
+    id: string;
+    name: string;
+    email: string;
+};
+
+export type CourseType = {
     instructerId: string;
     instructerName: string;
     lectures: LectureType[];
@@ -25,8 +31,9 @@ export type NewCourseType = {
         public_id: string;
         _id: string;
     };
-    students: [];
-    id: string;
+    students: StudentType[];
+    _id: string;
+    isPublished: boolean;
 };
 
 const useNewCourse = () => {};

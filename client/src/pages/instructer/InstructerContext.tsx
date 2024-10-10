@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import Dashboard from "./Components/Dashboard";
 import {
     CurriculumFormInitialData,
@@ -8,7 +8,10 @@ import {
     SettingsInitialData,
     SettingsType,
 } from "../../config";
-import CreateNewCourse from "./Components/Dashboard/CreateNewCourse";
+import { CourseType } from "../../Hooks/useCourse";
+import axiosInstance from "../../../services/axios";
+import { AxiosError } from "axios";
+import { useLocation } from "react-router-dom";
 
 export type ActiveTabType = "dashboard" | "courses" | "createNewCourse";
 
@@ -25,16 +28,21 @@ type GlobalContextType = {
     setUploadProgress: React.Dispatch<React.SetStateAction<number>>;
     infoForm: InfoFormType;
     setInfoForm: React.Dispatch<React.SetStateAction<InfoFormType>>;
+    courses: CourseType[];
+    setCourses: React.Dispatch<React.SetStateAction<CourseType[]>>;
+    courseToEdit: CourseType;
+    setCourseToEdit: React.Dispatch<React.SetStateAction<CourseType>>;
+    isEditing: boolean;
+    setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const GlobalContext = createContext({} as GlobalContextType);
 
 function InstructerProvider({ children }: { children: JSX.Element }) {
-    const [activeTab, setActiveTab] =
-        useState<ActiveTabType>("createNewCourse");
+    const [activeTab, setActiveTab] = useState<ActiveTabType>("dashboard");
 
     const [activeComponent, setActiveComponent] = useState<JSX.Element>(
-        <CreateNewCourse />,
+        <Dashboard />,
     );
     const [curriculumForm, setCurriculumForm] = useState<CurriculumFormType>(
         CurriculumFormInitialData,
@@ -44,6 +52,34 @@ function InstructerProvider({ children }: { children: JSX.Element }) {
     const [infoForm, setInfoForm] = useState<InfoFormType>(
         InfoFormInitialFormData,
     );
+
+    //! ****
+    const [courses, setCourses] = useState<CourseType[]>([] as CourseType[]);
+
+    const location = useLocation();
+
+    const fetchCourses = async () => {
+        try {
+            const response = await axiosInstance.get(`/course/get-courses`);
+            setCourses(response.data.courses);
+        } catch (error) {
+            if (error instanceof AxiosError) {
+                console.log(error);
+            }
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchCourses();
+    }, [activeComponent, location.pathname]);
+
+    const [courseToEdit, setCourseToEdit] = useState<CourseType>(
+        {} as CourseType,
+    );
+    const [isEditing, setIsEditing] = useState(false);
+
+    //! ******
 
     return (
         <GlobalContext.Provider
@@ -60,6 +96,12 @@ function InstructerProvider({ children }: { children: JSX.Element }) {
                 setUploadProgress,
                 infoForm,
                 setInfoForm,
+                courses,
+                setCourses,
+                courseToEdit,
+                setCourseToEdit,
+                isEditing,
+                setIsEditing,
             }}
         >
             {children}

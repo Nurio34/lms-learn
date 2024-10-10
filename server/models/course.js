@@ -84,8 +84,18 @@ const CourseSchema = new mongoose.Schema({
         required: true,
     },
     image: ImageSchema,
-    students: [StudentSchema],
-    date: Date,
+    students: {
+        type: [StudentSchema],
+        default: [],
+    },
+    date: {
+        type: Date,
+        default: Date.now,
+    },
+    isPublished: {
+        type: Boolean,
+        default: true,
+    },
 });
 
 module.exports = mongoose.model("Course", CourseSchema);

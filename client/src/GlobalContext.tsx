@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { NewCourseType } from "./Hooks/useNewCourse";
+import { CourseType } from "./Hooks/useCourse";
 
 export type UserType = {
     id: string;
@@ -24,8 +24,8 @@ type GlobalContextType = {
     setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
     user: UserType;
     setUser: React.Dispatch<React.SetStateAction<UserType>>;
-    newCouse: NewCourseType;
-    setNewCouse: React.Dispatch<React.SetStateAction<NewCourseType>>;
+    courses: CourseType;
+    setCourses: React.Dispatch<React.SetStateAction<CourseType>>;
 };
 
 const GlobalContext = createContext({} as GlobalContextType);
@@ -34,12 +34,9 @@ function GlobalProvider({ children }: { children: React.ReactNode }) {
     const [authenticated, setAuthenticated] = useState<boolean>(false);
     const [user, setUser] = useState<UserType>(initialUser);
 
-    //! ***********************
+    //! *** GET ALL COURSES ***********************
 
-    const [newCouse, setNewCouse] = useState<NewCourseType>(
-        {} as NewCourseType,
-    );
-    console.log(newCouse);
+    const [courses, setCourses] = useState<CourseType>({} as CourseType);
 
     //! ****************************
 
@@ -50,8 +47,8 @@ function GlobalProvider({ children }: { children: React.ReactNode }) {
                 setAuthenticated,
                 user,
                 setUser,
-                newCouse,
-                setNewCouse,
+                courses,
+                setCourses,
             }}
         >
             {children}

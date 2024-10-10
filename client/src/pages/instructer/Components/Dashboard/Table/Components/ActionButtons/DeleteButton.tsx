@@ -1,6 +1,10 @@
 import { RiChatDeleteFill } from "react-icons/ri";
 
-function DeleteButton() {
+type DeleteButtoType = {
+    courseId: string;
+};
+
+function DeleteButton({ courseId }: DeleteButtoType) {
     return (
         <button type="button" title="Delete">
             <RiChatDeleteFill

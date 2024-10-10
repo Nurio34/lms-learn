@@ -99,20 +99,19 @@ export const InfoFormControls = [
 ];
 
 export type InfoFormType = {
-    [key: string]: string; // This allows any string key with a string value
+    [key: string]: string;
 };
 
 export const InfoFormInitialFormData = {
-    title: "React.js",
-    category: "Web Development",
-    level: "Beginner",
-    primaryLanguage: "1",
-    subtitle: "English",
-    description: "This course is beginner level friendly React.js course.",
-    pricing: "20",
-    objectives:
-        "You will be able to understand my intermediate level React.js course.",
-    welcomeMessage: "Welceome",
+    title: "",
+    category: "",
+    level: "",
+    primaryLanguage: "",
+    subtitle: "",
+    description: "",
+    pricing: "",
+    objectives: "",
+    welcomeMessage: "",
 };
 
 export type CurriculumFormType = {
@@ -125,35 +124,10 @@ export type CurriculumFormType = {
 
 export const CurriculumFormInitialData = [
     {
-        title: "Fundementals",
-        videoUrl:
-            "https://res.cloudinary.com/dmvfabr5i/video/upload/v1728488874/oi2lrmx2aypirrbbwtcu.mp4",
+        title: "",
+        videoUrl: "",
         freePreview: false,
-        public_id: "oi2lrmx2aypirrbbwtcu",
-        isFileLoading: false,
-    },
-    {
-        title: "useState",
-        videoUrl:
-            "https://res.cloudinary.com/dmvfabr5i/video/upload/v1728488888/chhjppwaxvxe4b4lv2dg.mp4",
-        freePreview: false,
-        public_id: "chhjppwaxvxe4b4lv2dg",
-        isFileLoading: false,
-    },
-    {
-        title: "useEffect",
-        videoUrl:
-            "https://res.cloudinary.com/dmvfabr5i/video/upload/v1728488911/sxtcjbrqrqgolugo5vfg.mp4",
-        freePreview: false,
-        public_id: "sxtcjbrqrqgolugo5vfg",
-        isFileLoading: false,
-    },
-    {
-        title: "useContext",
-        videoUrl:
-            "https://res.cloudinary.com/dmvfabr5i/video/upload/v1728488934/mcmu74y3ys0fs82vkrmn.mp4",
-        freePreview: false,
-        public_id: "mcmu74y3ys0fs82vkrmn",
+        public_id: "",
         isFileLoading: false,
     },
 ];
@@ -169,9 +143,8 @@ export type SettingsType = {
 export const SettingsInitialData = {
     image: {
         isFileLoading: false,
-        imageUrl:
-            "https://res.cloudinary.com/dmvfabr5i/image/upload/v1728488784/i2cmcogrv9szqkreosfd.jpg",
-        public_id: "i2cmcogrv9szqkreosfd",
+        imageUrl: "",
+        public_id: "",
     },
 };
 

@@ -1,23 +1,28 @@
 import { useState } from "react";
 import ActiveTab from "./Components/ActiveTab";
-import CreateButton from "./Components/CreateButton";
 import TabButtons, { TabButtonValueType } from "./Components/TabButtons";
 import Curriculum from "./Components/Curriculum";
 import { useInstructerContext } from "../../../InstructerContext";
 import Dashboard from "..";
 import ProgressBar from "../../ProgressBar";
 import PublishButton from "./Components/Curriculum/Components/PublishButton";
+import { CourseType } from "../../../../../Hooks/useCourse";
 
-function CreateNewCourse() {
+type CreateNewCourseType = {
+    courseToEdit: CourseType;
+};
+
+function CreateNewCourse({ courseToEdit }: CreateNewCourseType) {
     const [createActiveTab, setCreateActiveTab] =
         useState<TabButtonValueType>("curriculum");
     const [component, setComponent] = useState<JSX.Element>(<Curriculum />);
 
     const { setActiveTab, setActiveComponent } = useInstructerContext();
+    console.log(courseToEdit);
 
     return (
         <section className=" bg-white my-8 mx-16 py-3 px-6 rounded-l space-y-3 min-h-[760px]">
-            <div className="flex justify-between items-center border-b-2 shadow-sm pb-1 px-3 relative">
+            <div className="flex justify-between items-center border-b-2 shadow-sm pb-1  relative">
                 <h1 className=" text-2xl font-semibold">Create New Course</h1>
                 <div className=" space-x-3">
                     <button
@@ -32,7 +37,6 @@ function CreateNewCourse() {
                     >
                         Dashboard
                     </button>
-                    <CreateButton />
                 </div>
                 <ProgressBar />
             </div>

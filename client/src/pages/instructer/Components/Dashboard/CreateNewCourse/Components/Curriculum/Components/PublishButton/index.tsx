@@ -2,11 +2,24 @@ import { AxiosError } from "axios";
 import axiosInstance from "../../../../../../../../../../services/axios";
 import { useInstructerContext } from "../../../../../../../InstructerContext";
 import toast from "react-hot-toast";
-import { useGlobalContext } from "../../../../../../../../../GlobalContext";
+import {
+    CurriculumFormInitialData,
+    InfoFormInitialFormData,
+    SettingsInitialData,
+} from "../../../../../../../../../config";
+import Dashboard from "../../../../..";
 
 function PublishButton() {
-    const { curriculumForm, infoForm, settings } = useInstructerContext();
-    const { setNewCouse } = useGlobalContext();
+    const {
+        curriculumForm,
+        infoForm,
+        settings,
+        setCurriculumForm,
+        setInfoForm,
+        setSettings,
+        setActiveTab,
+        setActiveComponent,
+    } = useInstructerContext();
 
     const isCurriculumFormValid = curriculumForm.every(
         (item) => item.title.trim() !== "" && item.videoUrl.trim() !== "",
@@ -22,26 +35,25 @@ function PublishButton() {
         );
     });
 
-    const correctSettings = {
-        ...settings,
-        image: Object.fromEntries(
-            Object.entries(settings.image).filter(
-                ([key, _]) => key !== "isFileLoading",
-            ),
-        ),
-    };
+    const isAtLeastOneLectureFreePreview = curriculumForm.some(
+        (lecture) => lecture.freePreview,
+    );
 
     const publishCourse = async () => {
         const course = {
             lectures: curriculumForm,
             ...infoForm,
-            ...correctSettings,
+            ...settings,
         };
 
         try {
             const response = await axiosInstance.post("/course/add", course);
             toast.success(response.data.message);
-            setNewCouse(response.data.data);
+            setCurriculumForm(CurriculumFormInitialData);
+            setInfoForm(InfoFormInitialFormData);
+            setSettings(SettingsInitialData);
+            setActiveTab("dashboard");
+            setActiveComponent(<Dashboard />);
         } catch (error) {
             if (error instanceof AxiosError) {
                 toast.error(error.response?.data.message);
@@ -53,9 +65,12 @@ function PublishButton() {
     return (
         <button
             type="button"
-            className="c-btn bg-primary text-white disabled:pointer-events-auto disabled:bg-gray-600"
+            className="c-btn bg-primary text-white disabled:pointer-events-none disabled:bg-gray-600 "
             disabled={
-                !isCurriculumFormValid || !isInfoFormValid || !isSettingsValid
+                !isCurriculumFormValid ||
+                !isInfoFormValid ||
+                !isSettingsValid ||
+                !isAtLeastOneLectureFreePreview
             }
             onClick={publishCourse}
         >

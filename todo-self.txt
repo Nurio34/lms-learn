@@ -19,3 +19,9 @@
     8. Video "replace" ve "delete" metodları oluştur.
 
 -- React-Player ile güzel bir video player oluştur
+
+-- Lecure validation ve Publish validationları oluştur ( En az 1 Lecture free-preview olmak zorunda)
+
+-- Publislediğin course mongoDB'ye kaydet. Ayrıca; getMyAllCourses, getCourseDetailsById and updateCourseByID metodları oluştur.
+
+-- "edit course" fonksiyonunu hallet.
