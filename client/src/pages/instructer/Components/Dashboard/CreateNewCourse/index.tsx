@@ -5,20 +5,15 @@ import Curriculum from "./Components/Curriculum";
 import { useInstructerContext } from "../../../InstructerContext";
 import Dashboard from "..";
 import ProgressBar from "../../ProgressBar";
-import PublishButton from "./Components/Curriculum/Components/PublishButton";
-import { CourseType } from "../../../../../Hooks/useCourse";
+import PublishButton from "./Components/PublishButton";
 
-type CreateNewCourseType = {
-    courseToEdit: CourseType;
-};
-
-function CreateNewCourse({ courseToEdit }: CreateNewCourseType) {
+function CreateNewCourse() {
     const [createActiveTab, setCreateActiveTab] =
         useState<TabButtonValueType>("curriculum");
     const [component, setComponent] = useState<JSX.Element>(<Curriculum />);
 
-    const { setActiveTab, setActiveComponent } = useInstructerContext();
-    console.log(courseToEdit);
+    const { setActiveTab, setActiveComponent, setIsEditing } =
+        useInstructerContext();
 
     return (
         <section className=" bg-white my-8 mx-16 py-3 px-6 rounded-l space-y-3 min-h-[760px]">
@@ -31,6 +26,7 @@ function CreateNewCourse({ courseToEdit }: CreateNewCourseType) {
                         hover:bg-blue-400 hover:scale-105 active:scale-95
                     "
                         onClick={() => {
+                            setIsEditing(false);
                             setActiveTab("dashboard");
                             setActiveComponent(<Dashboard />);
                         }}

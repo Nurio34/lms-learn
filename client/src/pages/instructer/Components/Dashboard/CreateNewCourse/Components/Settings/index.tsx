@@ -5,8 +5,7 @@ import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 
 function Settings() {
-    const { settings, setSettings, uploadProgress, setUploadProgress } =
-        useInstructerContext();
+    const { settings, setSettings, setUploadProgress } = useInstructerContext();
 
     const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;

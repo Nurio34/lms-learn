@@ -34,6 +34,8 @@ export type CourseType = {
     students: StudentType[];
     _id: string;
     isPublished: boolean;
+    createdAt: Date;
+    updatedAt: Date;
 };
 
 const useNewCourse = () => {};

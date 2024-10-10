@@ -1,13 +1,13 @@
 import { AxiosError } from "axios";
-import axiosInstance from "../../../../../../../../../../services/axios";
-import { useInstructerContext } from "../../../../../../../InstructerContext";
+import axiosInstance from "../../../../../../../../services/axios";
+import { useInstructerContext } from "../../../../../InstructerContext";
 import toast from "react-hot-toast";
 import {
     CurriculumFormInitialData,
     InfoFormInitialFormData,
     SettingsInitialData,
-} from "../../../../../../../../../config";
-import Dashboard from "../../../../..";
+} from "../../../../../../../config";
+import Dashboard from "../../..";
 
 function PublishButton() {
     const {
@@ -19,6 +19,9 @@ function PublishButton() {
         setSettings,
         setActiveTab,
         setActiveComponent,
+        isEditing,
+        setIsEditing,
+        courseToEdit,
     } = useInstructerContext();
 
     const isCurriculumFormValid = curriculumForm.every(
@@ -44,14 +47,29 @@ function PublishButton() {
             lectures: curriculumForm,
             ...infoForm,
             ...settings,
+            _id: courseToEdit._id,
         };
+        console.log({ isEditing });
 
         try {
-            const response = await axiosInstance.post("/course/add", course);
-            toast.success(response.data.message);
+            if (isEditing) {
+                const response = await axiosInstance.post(
+                    "/course/update",
+                    course,
+                );
+                toast.success(response.data.message);
+                console.log(response);
+            } else {
+                const response = await axiosInstance.post(
+                    "/course/add",
+                    course,
+                );
+                toast.success(response.data.message);
+            }
             setCurriculumForm(CurriculumFormInitialData);
             setInfoForm(InfoFormInitialFormData);
             setSettings(SettingsInitialData);
+            setIsEditing(false);
             setActiveTab("dashboard");
             setActiveComponent(<Dashboard />);
         } catch (error) {
@@ -65,7 +83,13 @@ function PublishButton() {
     return (
         <button
             type="button"
-            className="c-btn bg-primary text-white disabled:pointer-events-none disabled:bg-gray-600 "
+            className={`c-btn text-white disabled:pointer-events-none 
+                ${
+                    isEditing
+                        ? "bg-secondary disabled:bg-gray-600, "
+                        : "bg-primary disabled:bg-gray-600, "
+                }    
+            `}
             disabled={
                 !isCurriculumFormValid ||
                 !isInfoFormValid ||
@@ -74,7 +98,7 @@ function PublishButton() {
             }
             onClick={publishCourse}
         >
-            Publish
+            {isEditing ? "Update" : "Publish"}
         </button>
     );
 }

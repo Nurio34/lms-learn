@@ -26,6 +26,7 @@ function DeleteLectureButton({
                 return ind !== index;
             });
         });
+        setWannaDelete(false);
     };
 
     return (

@@ -14,4 +14,9 @@ export const users = [
         email: "ins2@mail.com",
         password: "1234",
     },
+    {
+        role: "instructer",
+        email: "ins3@mail.com",
+        password: "1234",
+    },
 ];

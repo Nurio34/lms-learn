@@ -1,8 +1,19 @@
+import {
+    CurriculumFormInitialData,
+    InfoFormInitialFormData,
+    SettingsInitialData,
+} from "../../../../../config";
 import { useInstructerContext } from "../../../InstructerContext";
 import CreateNewCourse from "../CreateNewCourse";
 
 function CreateNewCourseButton() {
-    const { setActiveTab, setActiveComponent } = useInstructerContext();
+    const {
+        setActiveTab,
+        setActiveComponent,
+        setCurriculumForm,
+        setInfoForm,
+        setSettings,
+    } = useInstructerContext();
 
     return (
         <button
@@ -11,6 +22,9 @@ function CreateNewCourseButton() {
                 hover:scale-105 active:scale-95 hover:bg-orange-300    
             "
             onClick={() => {
+                setCurriculumForm(CurriculumFormInitialData);
+                setInfoForm(InfoFormInitialFormData);
+                setSettings(SettingsInitialData);
                 setActiveTab("createNewCourse");
                 setActiveComponent(<CreateNewCourse />);
             }}

@@ -33,7 +33,6 @@ const addCourse = async (req, res) => {
         return res.status(201).json({
             success: true,
             message: "Course!s been added successfully...",
-            data: NewCourse,
         });
 
         retur;
@@ -114,4 +113,41 @@ const getCourse = async (req, res) => {
     }
 };
 
-module.exports = { addCourse, getCourses, getCourse };
+const updateCourse = async (req, res) => {
+    const course = req.body;
+
+    if (!course) {
+        return res.status(404).json({
+            success: false,
+            message: "Failed to update course !",
+        });
+    }
+
+    const courseId = course._id;
+    console.log({ courseId });
+    try {
+        const UpdatedCourse = await Course.findByIdAndUpdate(courseId, course, {
+            new: true,
+            runValidators: true,
+        });
+
+        if (!UpdatedCourse) {
+            return res.status(404).json({
+                success: false,
+                message: "Failed to getting updated course !",
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Curse's been updated successfully",
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Unexpected error while updating course !",
+        });
+    }
+};
+
+module.exports = { addCourse, getCourses, getCourse, updateCourse };

@@ -37,65 +37,65 @@ const StudentSchema = new mongoose.Schema({
     email: String,
 });
 
-const CourseSchema = new mongoose.Schema({
-    instructerId: {
-        type: String,
-        required: true,
+const CourseSchema = new mongoose.Schema(
+    {
+        instructerId: {
+            type: String,
+            required: true,
+        },
+        instructerName: {
+            type: String,
+            required: true,
+        },
+        lectures: [LectureSchema],
+        title: {
+            type: String,
+            required: true,
+        },
+        category: {
+            type: String,
+            required: true,
+        },
+        level: {
+            type: String,
+            required: true,
+        },
+        primaryLanguage: {
+            type: String,
+            required: true,
+        },
+        subtitle: {
+            type: String,
+            required: true,
+        },
+        description: {
+            type: String,
+            required: true,
+        },
+        pricing: {
+            type: String,
+            required: true,
+        },
+        objectives: {
+            type: String,
+            required: true,
+        },
+        welcomeMessage: {
+            type: String,
+            required: true,
+        },
+        image: ImageSchema,
+        students: {
+            type: [StudentSchema],
+            default: [],
+        },
+
+        isPublished: {
+            type: Boolean,
+            default: true,
+        },
     },
-    instructerName: {
-        type: String,
-        required: true,
-    },
-    lectures: [LectureSchema],
-    title: {
-        type: String,
-        required: true,
-    },
-    category: {
-        type: String,
-        required: true,
-    },
-    level: {
-        type: String,
-        required: true,
-    },
-    primaryLanguage: {
-        type: String,
-        required: true,
-    },
-    subtitle: {
-        type: String,
-        required: true,
-    },
-    description: {
-        type: String,
-        required: true,
-    },
-    pricing: {
-        type: String,
-        required: true,
-    },
-    objectives: {
-        type: String,
-        required: true,
-    },
-    welcomeMessage: {
-        type: String,
-        required: true,
-    },
-    image: ImageSchema,
-    students: {
-        type: [StudentSchema],
-        default: [],
-    },
-    date: {
-        type: Date,
-        default: Date.now,
-    },
-    isPublished: {
-        type: Boolean,
-        default: true,
-    },
-});
+    { timestamps: true },
+);
 
 module.exports = mongoose.model("Course", CourseSchema);
