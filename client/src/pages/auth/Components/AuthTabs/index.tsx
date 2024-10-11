@@ -1,7 +1,6 @@
 function AuthTabs({
     activeTab,
     setActiveTab,
-    setUserInfo,
 }: {
     activeTab: string;
     setActiveTab: React.Dispatch<React.SetStateAction<string>>;

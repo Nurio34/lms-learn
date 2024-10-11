@@ -1,8 +1,4 @@
-import { useEffect } from "react";
-import {
-    courseCategories,
-    InfoFormControls,
-} from "../../../../../../../config";
+import { InfoFormControls } from "../../../../../../../config";
 import { useInstructerContext } from "../../../../../InstructerContext";
 
 function InfoForm() {

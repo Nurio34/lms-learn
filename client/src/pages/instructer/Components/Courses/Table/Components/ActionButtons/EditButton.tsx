@@ -9,7 +9,6 @@ type EditButtoType = {
 
 function EditButton({ courseId }: EditButtoType) {
     const {
-        courseToEdit,
         setCourseToEdit,
         activeTab,
         setActiveTab,
@@ -29,7 +28,7 @@ function EditButton({ courseId }: EditButtoType) {
 
     useEffect(() => {
         if (isEditing) {
-            setActiveComponent(<CreateNewCourse courseToEdit={courseToEdit} />);
+            setActiveComponent(<CreateNewCourse />);
         }
     }, [activeTab, isEditing]);
 

@@ -163,7 +163,7 @@ function Curriculum() {
             } else {
                 setCurriculumForm((prev) => [
                     ...prev,
-                    ...response.data.videos.map((video: any, index: number) => {
+                    ...response.data.videos.map((video: any) => {
                         return {
                             title: `Lecture`,
                             videoUrl: video.url,

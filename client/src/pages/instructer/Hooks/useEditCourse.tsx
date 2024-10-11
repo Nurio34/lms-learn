@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { CourseType } from "../../../Hooks/useInstructerActiveTab";
 import {
     CurriculumFormType,
     InfoFormType,
     SettingsType,
 } from "../../../config";
+import { CourseType } from "../../../types/course";
 
 const useEditCourse = (
     setCurriculumForm: React.Dispatch<React.SetStateAction<CurriculumFormType>>,
