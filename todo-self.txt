@@ -25,3 +25,9 @@
 -- Publislediğin course mongoDB'ye kaydet. Ayrıca; getMyAllCourses, getCourseDetailsById and updateCourseByID metodları oluştur.
 
 -- "edit course" fonksiyonunu hallet.
+
+-- "bulk-upload" fonksiyonunu hallet.
+
+    **! STUDENT VİEW kısmına geç ***
+
+--

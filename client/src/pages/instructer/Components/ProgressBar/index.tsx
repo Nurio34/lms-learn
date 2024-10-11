@@ -2,11 +2,11 @@ import { useInstructerContext } from "../../InstructerContext";
 import "./index.css";
 
 function ProgressBar() {
-    const { uploadProgress } = useInstructerContext();
+    const { uploadProgress, isBulkUploading } = useInstructerContext();
 
     return (
         <>
-            {uploadProgress < 100 && (
+            {isBulkUploading && (
                 <div className=" bg-gray-200 absolute bottom-0 left-0 translate-y-full w-full h-1">
                     <div
                         className={`bg-blue-500 h-full transition-all`}

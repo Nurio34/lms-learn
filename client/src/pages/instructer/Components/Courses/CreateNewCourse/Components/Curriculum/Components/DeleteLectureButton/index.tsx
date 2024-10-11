@@ -16,22 +16,45 @@ function DeleteLectureButton({
     const [wannaDelete, setWannaDelete] = useState(false);
 
     const deleteLecture = () => {
-        if (!wannaDelete) {
-            setWannaDelete(true);
-            return;
-        }
-
-        setCurriculumForm((prev) => {
-            return prev.filter((_, ind) => {
-                return ind !== index;
+        if (
+            curriculumForm[index].videoUrl.trim() === "" &&
+            curriculumForm[index].title.trim() === ""
+        ) {
+            setCurriculumForm((prev) => {
+                return prev.filter((_, ind) => {
+                    return ind !== index;
+                });
             });
-        });
+        } else {
+            if (!wannaDelete) {
+                setWannaDelete(true);
+                return;
+            }
+
+            setCurriculumForm((prev) => {
+                return prev.filter((_, ind) => {
+                    return ind !== index;
+                });
+            });
+        }
         setWannaDelete(false);
+    };
+
+    const deleteButtonVisibilityValidation = () => {
+        if (curriculumForm.length === 1) {
+            if (curriculumForm[0].videoUrl.trim() === "") {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
     };
 
     return (
         <>
-            {curriculumForm[index].videoUrl.trim() !== "" && (
+            {deleteButtonVisibilityValidation() && (
                 <button
                     type="button"
                     className={`ml-auto c-btn border-2

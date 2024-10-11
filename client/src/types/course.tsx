@@ -37,7 +37,3 @@ export type CourseType = {
     createdAt: Date;
     updatedAt: Date;
 };
-
-const useNewCourse = () => {};
-
-export default useNewCourse;

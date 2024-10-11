@@ -1,9 +1,0 @@
-.Flip {
-    animation: flip 0.6s ease-in-out forwards;
-}
-
-@keyframes flip {
-    to {
-        transform: rotateY(360deg);
-    }
-}

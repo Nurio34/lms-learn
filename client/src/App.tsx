@@ -4,8 +4,8 @@ import Header from "./components/Header";
 import RouteGuard from "./components/Route-Guard";
 import { useGlobalContext } from "./GlobalContext";
 import InstructerPage from "./pages/instructer";
-import StudentHomePage from "./pages/student/home";
-import StudentLessonsPage from "./pages/student/lessons";
+import StudentHomePage from "./pages/student/pages/home";
+import StudentLessonsPage from "./pages/student/pages/lessons";
 import NotFoundPage from "./pages/not-found";
 import HiddenCredentials from "./components/HiddenCredentials";
 
@@ -47,9 +47,9 @@ function App() {
                         />
                     }
                 >
-                    {/* Nested Route under /student */}
                     <Route path="lessons" element={<StudentLessonsPage />} />
                 </Route>
+
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
         </div>

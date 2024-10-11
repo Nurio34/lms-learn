@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
-import { CourseType } from "./Hooks/useCourse";
+import useInstructerActiveTab from "./Hooks/useInstructerActiveTab";
+import { ActiveTabType } from "./pages/instructer/InstructerContext";
 
 export type UserType = {
     id: string;
@@ -24,21 +25,31 @@ type GlobalContextType = {
     setAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
     user: UserType;
     setUser: React.Dispatch<React.SetStateAction<UserType>>;
-    courses: CourseType;
-    setCourses: React.Dispatch<React.SetStateAction<CourseType>>;
+    activeComponent: JSX.Element;
+    activeTab: ActiveTabType;
+    setActiveComponent: React.Dispatch<React.SetStateAction<JSX.Element>>;
+    setActiveTab: React.Dispatch<React.SetStateAction<ActiveTabType>>;
+    headerHeight: number;
+    setHeaderHeight: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const GlobalContext = createContext({} as GlobalContextType);
 
 function GlobalProvider({ children }: { children: React.ReactNode }) {
-    const [authenticated, setAuthenticated] = useState<boolean>(false);
+    const tokenInStorage = sessionStorage.getItem("token");
+
+    const token = JSON.parse(tokenInStorage!);
+
+    const [authenticated, setAuthenticated] = useState<boolean>(
+        token ? true : false,
+    );
+
     const [user, setUser] = useState<UserType>(initialUser);
 
-    //! *** GET ALL COURSES ***********************
+    const { activeComponent, activeTab, setActiveComponent, setActiveTab } =
+        useInstructerActiveTab();
 
-    const [courses, setCourses] = useState<CourseType>({} as CourseType);
-
-    //! ****************************
+    const [headerHeight, setHeaderHeight] = useState<number>(0);
 
     return (
         <GlobalContext.Provider
@@ -47,8 +58,12 @@ function GlobalProvider({ children }: { children: React.ReactNode }) {
                 setAuthenticated,
                 user,
                 setUser,
-                courses,
-                setCourses,
+                activeComponent,
+                activeTab,
+                setActiveComponent,
+                setActiveTab,
+                headerHeight,
+                setHeaderHeight,
             }}
         >
             {children}

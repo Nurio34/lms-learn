@@ -49,7 +49,6 @@ function PublishButton() {
             ...settings,
             _id: courseToEdit._id,
         };
-        console.log({ isEditing });
 
         try {
             if (isEditing) {
@@ -58,7 +57,6 @@ function PublishButton() {
                     course,
                 );
                 toast.success(response.data.message);
-                console.log(response);
             } else {
                 const response = await axiosInstance.post(
                     "/course/add",
@@ -83,13 +81,7 @@ function PublishButton() {
     return (
         <button
             type="button"
-            className={`c-btn text-white disabled:pointer-events-none 
-                ${
-                    isEditing
-                        ? "bg-secondary disabled:bg-gray-600, "
-                        : "bg-primary disabled:bg-gray-600, "
-                }    
-            `}
+            className={`c-btn text-white disabled:pointer-events-none bg-primary disabled:bg-gray-600`}
             disabled={
                 !isCurriculumFormValid ||
                 !isInfoFormValid ||

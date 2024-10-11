@@ -28,15 +28,16 @@ const addCourse = async (req, res) => {
     try {
         const NewCourse = new Course(courseForm);
 
+        console.log(NewCourse);
         await NewCourse.save();
 
         return res.status(201).json({
             success: true,
-            message: "Course!s been added successfully...",
+            message: "Course's been added successfully...",
         });
-
-        retur;
     } catch (error) {
+        console.log(error);
+
         return res.status(404).json({
             status: false,
             message: "Unexpected error while adding course !",
@@ -150,4 +151,44 @@ const updateCourse = async (req, res) => {
     }
 };
 
-module.exports = { addCourse, getCourses, getCourse, updateCourse };
+const getAllCourses = async (req, res) => {
+    try {
+        const authHeader = req.headers.authorization;
+
+        if (!authHeader) {
+            return res.status(404).json({
+                status: false,
+                message: "Unauthorized action while getAllCourses",
+            });
+        }
+
+        const courses = await Course.find();
+        console.log(courses);
+
+        if (courses.length === 0) {
+            return res.status(404).json({
+                status: false,
+                message: "You don't have any courses yet !",
+            });
+        }
+
+        return res.status(200).json({
+            status: true,
+            message: "Here are your courses ...",
+            courses,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            status: false,
+            message: "Unexpected error while getCourses",
+        });
+    }
+};
+
+module.exports = {
+    addCourse,
+    getCourses,
+    getCourse,
+    updateCourse,
+    getAllCourses,
+};

@@ -1,9 +1,9 @@
 import { GoGraph } from "react-icons/go";
 import { SiGoogledisplayandvideo360 } from "react-icons/si";
 import Dashboard from "../Dashboard";
-import Courses from "../Courses";
 import MenuButton from "./Components/MenuButton";
 import { ActiveTabType } from "../../InstructerContext";
+import Courses from "../Courses";
 
 export type MenuItemType = {
     icon: JSX.Element;

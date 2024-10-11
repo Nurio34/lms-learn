@@ -1,16 +1,20 @@
 import { useLocation } from "react-router-dom";
 import { initialUser, useGlobalContext } from "../../../../GlobalContext";
+import Dashboard from "../../../../pages/instructer/Components/Dashboard";
 
 function LogoutButton() {
     const location = useLocation();
     const isAuthPage = location.pathname.includes("auth");
 
-    const { setAuthenticated, setUser } = useGlobalContext();
+    const { setAuthenticated, setUser, setActiveTab, setActiveComponent } =
+        useGlobalContext();
 
     const onClick = () => {
         sessionStorage.clear();
         setAuthenticated(false);
         setUser(initialUser);
+        setActiveTab("dashboard");
+        setActiveComponent(<Dashboard />);
     };
 
     return (

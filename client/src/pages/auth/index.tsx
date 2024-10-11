@@ -10,7 +10,7 @@ function AuthPage() {
     const [activeTab, setActiveTab] = useState("signup");
     const [userInfo, setUserInfo] = useState({
         login: {
-            email: "emy@mail.com",
+            email: "nuri@mail.com",
             password: "1234",
         },
         signup: {
@@ -79,6 +79,8 @@ function AuthPage() {
     };
 
     const checkAuthorization = async () => {
+        console.log("checkAuth");
+
         try {
             const response = await axiosInstance.get("/auth/check-auth");
 

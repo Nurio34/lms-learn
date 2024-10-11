@@ -3,9 +3,9 @@ import ActiveTab from "./Components/ActiveTab";
 import TabButtons, { TabButtonValueType } from "./Components/TabButtons";
 import Curriculum from "./Components/Curriculum";
 import { useInstructerContext } from "../../../InstructerContext";
-import Dashboard from "..";
 import ProgressBar from "../../ProgressBar";
 import PublishButton from "./Components/PublishButton";
+import Courses from "..";
 
 function CreateNewCourse() {
     const [createActiveTab, setCreateActiveTab] =
@@ -27,11 +27,11 @@ function CreateNewCourse() {
                     "
                         onClick={() => {
                             setIsEditing(false);
-                            setActiveTab("dashboard");
-                            setActiveComponent(<Dashboard />);
+                            setActiveTab("courses");
+                            setActiveComponent(<Courses />);
                         }}
                     >
-                        Dashboard
+                        Courses
                     </button>
                 </div>
                 <ProgressBar />

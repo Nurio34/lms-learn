@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
 const { uploadVideo, deleteVideo } = require("../cloudinary");
+
+const upload = multer({ dest: "uploads/" });
 
 router.post("/upload", upload.single("file"), async (req, res) => {
     try {
@@ -47,6 +48,33 @@ router.delete("/delete/:id", async (req, res) => {
         return res.status(404).json({
             success: false,
             message: "Error while deleting the video !",
+        });
+    }
+});
+
+router.post("/bulk-upload", upload.array("file", 10), async (req, res) => {
+    const files = req.files;
+
+    if (!files || files.length === 0) {
+        return res.status(404).json({
+            success: false,
+            message: "No file recived by server",
+        });
+    }
+
+    try {
+        const uploadPromises = files.map((file) => uploadVideo(file.path));
+        const results = await Promise.all(uploadPromises);
+
+        return res.status(201).json({
+            success: true,
+            message: "Videos uploaded successfully ...",
+            videos: results,
+        });
+    } catch (error) {
+        return res.status(404).json({
+            success: false,
+            message: "Unexpected error while bulk-uploading ",
         });
     }
 });

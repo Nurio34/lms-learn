@@ -5,6 +5,7 @@ import { AxiosError } from "axios";
 
 import AddLectureButton from "./Components/AddLectureButton";
 import LectureForm from "./Components/LectureForm";
+import AddLecturesButton from "./Components/AddLecturesButton";
 
 function Curriculum() {
     const {
@@ -12,7 +13,10 @@ function Curriculum() {
         setCurriculumForm,
         uploadProgress,
         setUploadProgress,
+        setIsBulkUploading,
     } = useInstructerContext();
+
+    console.log(curriculumForm);
 
     const uploadVideo = async (
         e: React.ChangeEvent<HTMLInputElement>,
@@ -106,12 +110,87 @@ function Curriculum() {
         }
     };
 
+    const uploadVideos = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        setIsBulkUploading(true);
+
+        const files = e.target.files;
+
+        if (!files || files.length === 0) {
+            throw new Error("Error while choosing video");
+        }
+
+        const filesArray = Object.values(files);
+
+        const FileForm = new FormData();
+
+        filesArray.forEach((file) => FileForm.append(`file`, file));
+
+        try {
+            const response = await axiosInstance.post(
+                "/media/bulk-upload",
+                FileForm,
+                {
+                    onUploadProgress: (progressEvent: ProgressEvent) => {
+                        // Calculate the percentage
+
+                        const percentCompleted = Math.round(
+                            (progressEvent.loaded * 100) / progressEvent.total,
+                        );
+
+                        setUploadProgress(percentCompleted);
+                        // Update the progress bar and percentage text
+                    },
+                },
+            );
+            console.log({ response });
+
+            setIsBulkUploading(false);
+
+            if (
+                curriculumForm[curriculumForm.length - 1].title.trim() === "" &&
+                curriculumForm[curriculumForm.length - 1].videoUrl.trim() === ""
+            ) {
+                setCurriculumForm(
+                    response.data.videos.map((video: any, index: number) => {
+                        return {
+                            title: `Lecture ${index + 1}`,
+                            videoUrl: video.url,
+                            public_id: video.public_id,
+                            freePreview: false,
+                        };
+                    }),
+                );
+            } else {
+                setCurriculumForm((prev) => [
+                    ...prev,
+                    ...response.data.videos.map((video: any, index: number) => {
+                        return {
+                            title: `Lecture`,
+                            videoUrl: video.url,
+                            public_id: video.public_id,
+                            freePreview: false,
+                        };
+                    }),
+                ]);
+            }
+
+            return response.data;
+        } catch (error) {
+            if (error instanceof AxiosError) {
+                toast.error(error.response?.data.message);
+            }
+        }
+    };
+
     return (
         <form className="space-y-6">
-            <AddLectureButton
-                curriculumForm={curriculumForm}
-                setCurriculumForm={setCurriculumForm}
-            />
+            <div>
+                <AddLectureButton
+                    curriculumForm={curriculumForm}
+                    setCurriculumForm={setCurriculumForm}
+                />
+                <AddLecturesButton uploadVideos={uploadVideos} />
+            </div>
 
             {curriculumForm.map((_, index) => {
                 return (

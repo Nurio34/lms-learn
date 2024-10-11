@@ -3,7 +3,6 @@ import { CurriculumFormType } from "../../../../../../../../../config";
 import { RotatingLines } from "react-loader-spinner";
 import VideoPlayer from "../../../../../../../../../components/ReactPlayer";
 import ReplaceVideoButton from "../ReplaceVideoButton";
-import DeleteVideoButton from "../DeleteVideoButton";
 import DeleteLectureButton from "../DeleteLectureButton";
 
 type LectureFormType = {
@@ -123,10 +122,6 @@ function LectureForm({
                     <VideoPlayer lecture={index} />
                     <ReplaceVideoButton
                         uploadVideo={uploadVideo}
-                        deleteVideo={deleteVideo}
-                        index={index}
-                    />
-                    <DeleteVideoButton
                         deleteVideo={deleteVideo}
                         index={index}
                     />
