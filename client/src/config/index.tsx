@@ -153,6 +153,7 @@ export const sortOptions = [
     { id: "price-hightolow", label: "Price: High to Low" },
     { id: "title-atoz", label: "Title: A to Z" },
     { id: "title-ztoa", label: "Title: Z to A" },
+    { id: "reset", label: "Reset" },
 ];
 
 export const filterOptions = {

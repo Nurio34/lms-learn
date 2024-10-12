@@ -13,8 +13,6 @@ function RouteGuard({ authenticated, user, element }: RouteGuardType) {
     const role = user.role;
 
     if (!authenticated && !location.pathname.includes("/auth")) {
-        console.log("1");
-
         return <Navigate to="/auth" />;
     } else if (
         authenticated &&
@@ -36,13 +34,15 @@ function RouteGuard({ authenticated, user, element }: RouteGuardType) {
     }
 
     return (
-        <div>
-            {location.pathname === "/student" ? (
+        <>
+            {!location.pathname.includes("student") ? (
+                <Fragment>{element}</Fragment>
+            ) : location.pathname === "/student" ? (
                 <Fragment>{element}</Fragment>
             ) : (
                 <Outlet />
             )}
-        </div>
+        </>
     );
 }
 

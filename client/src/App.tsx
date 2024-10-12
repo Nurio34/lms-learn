@@ -1,13 +1,13 @@
 import { Routes, Route } from "react-router-dom";
-import AuthPage from "./pages/auth";
 import Header from "./components/Header";
 import RouteGuard from "./components/Route-Guard";
 import { useGlobalContext } from "./GlobalContext";
 import InstructerPage from "./pages/instructer";
 import StudentHomePage from "./pages/student/pages/home";
-import StudentLessonsPage from "./pages/student/pages/lessons";
 import NotFoundPage from "./pages/not-found";
 import HiddenCredentials from "./components/HiddenCredentials";
+import AuthPage from "./pages/auth";
+import StudentCoursesPage from "./pages/student/pages/courses";
 
 function App() {
     const { authenticated, user } = useGlobalContext();
@@ -47,7 +47,7 @@ function App() {
                         />
                     }
                 >
-                    <Route path="lessons" element={<StudentLessonsPage />} />
+                    <Route path="courses" element={<StudentCoursesPage />} />
                 </Route>
 
                 <Route path="*" element={<NotFoundPage />} />

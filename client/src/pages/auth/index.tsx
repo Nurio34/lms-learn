@@ -22,6 +22,7 @@ function AuthPage() {
     });
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const { setAuthenticated, setUser } = useGlobalContext();
+    console.log("ok");
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
