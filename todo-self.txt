@@ -30,4 +30,14 @@
 
     **! STUDENT VİEW kısmına geç ***
 
---
+-- Homepage sayfasını oluştur
+    1. Hero section oluştur.
+    2. Feautered Courses section oluştur. Course'a tıkladığında courses/:id route geç
+    3. Course üstündeki instructerName'e tıkladığında instructer/:id route'a geç
+
+-- Header'da Explore Courses butonu oluştur
+    1. Tıkladığında courses route'a git. Bu sayfada filter ve sort fonksiyonları oluştur
+    2. Filter ve sort isteklerini url'de params olcak şekilde server'a yolla. Backend'den filtrelenmiş olan data'yı çek
+
+-- course/:id sayfası oluştur.
+    1.

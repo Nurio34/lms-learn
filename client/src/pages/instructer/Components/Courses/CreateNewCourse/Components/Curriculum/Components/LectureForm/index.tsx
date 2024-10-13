@@ -4,6 +4,7 @@ import { RotatingLines } from "react-loader-spinner";
 import VideoPlayer from "../../../../../../../../../components/ReactPlayer";
 import ReplaceVideoButton from "../ReplaceVideoButton";
 import DeleteLectureButton from "../DeleteLectureButton";
+import { LectureType } from "../../../../../../../../../types/course";
 
 type LectureFormType = {
     index: number;
@@ -15,6 +16,7 @@ type LectureFormType = {
     ) => Promise<any>;
     uploadProgress: number;
     deleteVideo: (index: number) => Promise<any>;
+    lecture: LectureType;
 };
 
 function LectureForm({
@@ -24,6 +26,7 @@ function LectureForm({
     uploadVideo,
     uploadProgress,
     deleteVideo,
+    lecture,
 }: LectureFormType) {
     return (
         <div
@@ -119,7 +122,7 @@ function LectureForm({
                 />
             ) : uploadProgress !== 0 && curriculumForm[index].videoUrl ? (
                 <div className=" flex gap-6 items-center">
-                    <VideoPlayer lecture={index} />
+                    <VideoPlayer lecture={lecture} />
                     <ReplaceVideoButton
                         uploadVideo={uploadVideo}
                         deleteVideo={deleteVideo}

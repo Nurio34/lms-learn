@@ -5,6 +5,7 @@ const cors = require("cors");
 const AuthRouter = require("./routes");
 const MediaRouter = require("./routes/cloudinary");
 const CourseRouter = require("./routes/course");
+const PaymentRouter = require("./routes/payment");
 
 const app = express();
 app.use(express.json());
@@ -36,6 +37,7 @@ mongoose
 app.use("/auth", AuthRouter);
 app.use("/media", MediaRouter);
 app.use("/course", CourseRouter);
+app.use("/payment", PaymentRouter);
 //! --------------
 
 //! --- GLOBAL ERROR HANDLER  ---

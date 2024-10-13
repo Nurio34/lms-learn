@@ -142,7 +142,6 @@ function Curriculum() {
                     },
                 },
             );
-            console.log({ response });
 
             setIsBulkUploading(false);
 
@@ -192,7 +191,7 @@ function Curriculum() {
                 <AddLecturesButton uploadVideos={uploadVideos} />
             </div>
 
-            {curriculumForm.map((_, index) => {
+            {curriculumForm.map((lecture, index) => {
                 return (
                     <LectureForm
                         key={index}
@@ -202,6 +201,7 @@ function Curriculum() {
                         uploadVideo={uploadVideo}
                         uploadProgress={uploadProgress}
                         deleteVideo={deleteVideo}
+                        lecture={lecture}
                     />
                 );
             })}

@@ -1,5 +1,4 @@
 import ReactPlayer from "react-player/lazy";
-import { useInstructerContext } from "../../pages/instructer/InstructerContext";
 
 import VolumeContainer from "./Components/VolumeContainer";
 import { MdFullscreen } from "react-icons/md";
@@ -14,14 +13,13 @@ import useSeekAndTime from "./Hooks/useSeekAndTime";
 import DurationProgressBar from "./Components/DurationProgressBar";
 import RewindButtons from "./Components/RewindButtons";
 import useRewind from "./Hooks/useRewind";
+import { LectureType } from "../../types/course";
 
 export type VideoPlayerType = {
-    lecture: number;
+    lecture: LectureType;
 };
 
 function VideoPlayer({ lecture }: VideoPlayerType) {
-    const { curriculumForm } = useInstructerContext();
-
     const { PlayerContainer, isFullScreen, handleOnClickOnFullScreenButton } =
         useFullscreen();
 
@@ -53,7 +51,7 @@ function VideoPlayer({ lecture }: VideoPlayerType) {
 
     return (
         <div
-            className={`w-96 aspect-video relative
+            className={`w-96 aspect-video relative rounded-lg overflow-hidden
                 ${isControlsVisible ? "cursor-auto" : "cursor-none"}    
             `}
             data-theme="mytheme"
@@ -64,7 +62,7 @@ function VideoPlayer({ lecture }: VideoPlayerType) {
         >
             <ReactPlayer
                 ref={PlayerRef}
-                url={curriculumForm[lecture].videoUrl}
+                url={lecture.videoUrl}
                 width={"100%"}
                 height={"100%"}
                 muted={isMuted}

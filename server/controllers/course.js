@@ -28,7 +28,6 @@ const addCourse = async (req, res) => {
     try {
         const NewCourse = new Course(courseForm);
 
-        console.log(NewCourse);
         await NewCourse.save();
 
         return res.status(201).json({

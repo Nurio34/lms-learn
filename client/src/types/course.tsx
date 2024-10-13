@@ -4,7 +4,7 @@ export type LectureType = {
     freePreview: boolean;
     public_id: string;
     isFileLoading: boolean;
-    _id: string;
+    _id?: string;
 };
 
 export type StudentType = {
