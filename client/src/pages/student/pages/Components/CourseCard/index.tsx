@@ -8,7 +8,7 @@ type CourseCardType = {
 function CourseCard({ course }: CourseCardType) {
     return (
         <li className="rounded-xl overflow-hidden shadow-lg border-2">
-            <Link to={"course"}>
+            <Link to={`/student/courses/${course._id}`}>
                 <img
                     src={course.image.imageUrl}
                     alt={`${course.title} image`}
@@ -26,7 +26,7 @@ function CourseCard({ course }: CourseCardType) {
                     <div className="flex gap-1 items-center">
                         <span>by</span>
                         <Link
-                            to={"instructer"}
+                            to={`/student/instrcter/${course.instructerId}`}
                             className=" font-semibold text-lg underline underline-offset-2"
                         >
                             {course.instructerName}

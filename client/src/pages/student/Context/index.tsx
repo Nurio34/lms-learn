@@ -22,7 +22,6 @@ function StudentProvider({ children }: { children: React.ReactNode }) {
     const { isLoading, courses, error } = useCourses();
     const { filter, setFilter, filteredCourses, setFilteredCourses } =
         useFilter(courses);
-    console.log(filteredCourses);
     const { sort, setSort } = useSort(setFilteredCourses);
 
     return (

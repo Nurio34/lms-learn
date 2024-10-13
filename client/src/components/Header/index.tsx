@@ -27,7 +27,7 @@ function index() {
             ref={HeaderElement}
             className=" border-b-2 flex justify-between items-center"
         >
-            <Link to="/" className="flex items-center gap-3">
+            <Link to="/auth" className="flex items-center gap-3">
                 <IoIosSchool className=" text-6xl" />
                 <p className=" font-bold text-3xl">LMS School</p>
             </Link>
