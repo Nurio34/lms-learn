@@ -6,7 +6,7 @@ import { AiOutlineFileDone } from "react-icons/ai";
 import VideoPlayer from "../../../../components/ReactPlayer";
 import { useEffect, useState } from "react";
 import { LectureType } from "../../../../types/course";
-import PurchaseButton from "./PurchaseButton";
+import PurchaseButton from "./Components/PurchaseButton";
 
 function StudentCoursePage() {
     const { id } = useParams();
