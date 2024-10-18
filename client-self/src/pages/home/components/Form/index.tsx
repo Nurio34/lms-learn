@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, React } from "react";
 import Tabs from "./components/Tabs";
 import FormInputs from "./components/FormInputs";
 import { z } from "zod";
@@ -137,11 +137,7 @@ function Form() {
             setAuthenticated(true);
             setUser(response.data.user);
         } catch (error) {
-            if (error instanceof AxiosError) {
-                console.log(error.response?.data.message);
-            } else {
-                console.log(error);
-            }
+            console.log(error);
         }
     };
 

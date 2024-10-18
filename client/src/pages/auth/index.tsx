@@ -22,7 +22,6 @@ function AuthPage() {
     });
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const { setAuthenticated, setUser } = useGlobalContext();
-    console.log("ok");
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -80,8 +79,6 @@ function AuthPage() {
     };
 
     const checkAuthorization = async () => {
-        console.log("checkAuth");
-
         try {
             const response = await axiosInstance.get("/auth/check-auth");
 
@@ -92,6 +89,8 @@ function AuthPage() {
                 return;
             } else {
                 setAuthenticated(true);
+                console.log({ response });
+
                 setUser(response.data.user);
 
                 return;

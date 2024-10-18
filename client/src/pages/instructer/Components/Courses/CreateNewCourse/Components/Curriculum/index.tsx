@@ -16,8 +16,6 @@ function Curriculum() {
         setIsBulkUploading,
     } = useInstructerContext();
 
-    console.log(curriculumForm);
-
     const uploadVideo = async (
         e: React.ChangeEvent<HTMLInputElement>,
         index: number,

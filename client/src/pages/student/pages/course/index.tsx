@@ -7,6 +7,7 @@ import VideoPlayer from "../../../../components/ReactPlayer";
 import { useEffect, useState } from "react";
 import { LectureType } from "../../../../types/course";
 import PurchaseButton from "./Components/PurchaseButton";
+import PurchaseForm from "./Components/PurchaseForm";
 
 function StudentCoursePage() {
     const { id } = useParams();
@@ -18,6 +19,8 @@ function StudentCoursePage() {
     const [currentLecture, setCurrentLecture] = useState<LectureType>(
         {} as LectureType,
     );
+
+    const [isPaymentFormOpen, setIsPaymentFormOpen] = useState(false);
 
     useEffect(() => {
         if (course) {
@@ -66,7 +69,7 @@ function StudentCoursePage() {
                 </div>
             </header>
             <div className=" flex gap-10 ">
-                <div className=" space-y-10">
+                <div className=" space-y-10 grow">
                     <section className=" space-y-3 bg-secondary text-secondary-content py-6 px-12 rounded-lg">
                         <h2 className=" text-xl font-semibold">
                             What you will learn
@@ -127,10 +130,16 @@ function StudentCoursePage() {
                         </ul>
                     </section>
                 </div>
-                <div className="py-3 px-6 bg-black rounded-lg grid ">
-                    <VideoPlayer lecture={currentLecture} />
-                    <PurchaseButton />
-                </div>
+                {isPaymentFormOpen ? (
+                    <PurchaseForm price={course.pricing} />
+                ) : (
+                    <div className="py-3 px-6 bg-black rounded-lg grid ">
+                        <VideoPlayer lecture={currentLecture} />
+                        <PurchaseButton
+                            setIsPaymentFormOpen={setIsPaymentFormOpen}
+                        />
+                    </div>
+                )}
             </div>
         </main>
     );

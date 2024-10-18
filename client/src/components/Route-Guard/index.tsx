@@ -20,16 +20,12 @@ function RouteGuard({ authenticated, user, element }: RouteGuardType) {
         (location.pathname.includes("/auth") ||
             location.pathname.includes("/instructer"))
     ) {
-        console.log("2");
-
         return <Navigate to="/student" />;
     } else if (
         authenticated &&
         role === "instructer" &&
         !location.pathname.includes("/instructer")
     ) {
-        console.log("3");
-
         return <Navigate to="/instructer" />;
     }
 

@@ -124,7 +124,6 @@ const updateCourse = async (req, res) => {
     }
 
     const courseId = course._id;
-    console.log({ courseId });
     try {
         const UpdatedCourse = await Course.findByIdAndUpdate(courseId, course, {
             new: true,
@@ -162,7 +161,6 @@ const getAllCourses = async (req, res) => {
         }
 
         const courses = await Course.find();
-        console.log(courses);
 
         if (courses.length === 0) {
             return res.status(404).json({
