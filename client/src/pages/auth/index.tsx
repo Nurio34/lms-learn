@@ -5,6 +5,7 @@ import { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import axiosInstance from "../../../services/axios";
 import { initialUser, useGlobalContext } from "../../GlobalContext";
+import getDateTime from "../student/utils/getDateTime";
 
 function AuthPage() {
     const [activeTab, setActiveTab] = useState("signup");
@@ -57,10 +58,10 @@ function AuthPage() {
         //! --- LOGIN ---
         else {
             try {
-                const response = await axiosInstance.post(
-                    "/auth/login",
-                    userInfo.login,
-                );
+                const response = await axiosInstance.post("/auth/login", {
+                    ...userInfo.login,
+                    lastLoginDate: getDateTime(),
+                });
                 toast.success(response.data.message);
 
                 const token = response.data.token;
@@ -89,8 +90,6 @@ function AuthPage() {
                 return;
             } else {
                 setAuthenticated(true);
-                console.log({ response });
-
                 setUser(response.data.user);
 
                 return;

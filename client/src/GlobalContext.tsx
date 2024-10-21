@@ -9,6 +9,7 @@ export type UserType = {
     role: string;
     iat: number;
     exp: number;
+    lastLoginDate: string;
 };
 
 export const initialUser: UserType = {
@@ -18,6 +19,7 @@ export const initialUser: UserType = {
     role: "",
     iat: 0,
     exp: 0,
+    lastLoginDate: "",
 };
 
 type GlobalContextType = {

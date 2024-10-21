@@ -13,7 +13,6 @@ const useCourses = () => {
 
         try {
             const response = await axiosInstance("/course/get-all-courses");
-
             setCourses(response.data.courses);
         } catch (error) {
             if (error instanceof AxiosError) {
@@ -25,9 +24,7 @@ const useCourses = () => {
     };
 
     useEffect(() => {
-        if (courses.length === 0) {
-            fetchAllCourses();
-        }
+        fetchAllCourses();
     }, []);
 
     return { isLoading, courses, error, setCourses };

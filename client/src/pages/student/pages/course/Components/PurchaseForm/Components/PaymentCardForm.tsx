@@ -3,7 +3,7 @@ import {
     PaymentCardSchema,
     PurchaseInfoSchema,
 } from "../../../../../Types/payment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function PaymentCardForm({
     setStep,
@@ -12,7 +12,6 @@ function PaymentCardForm({
 }) {
     const { purchaseForm, setPurchaseForm } = useStudentContext();
     const [errors, setErrors] = useState<any>({});
-    console.log(errors);
 
     const ValidateAndNext = () => {
         const PurchaseInfoValidationResult = PurchaseInfoSchema.safeParse(
@@ -40,6 +39,29 @@ function PaymentCardForm({
         }
     };
 
+    const formatCardNumber = () => {
+        const num = purchaseForm.paymentCard.cardNumber;
+        let array: string[] = [];
+        array = num.toString().split("");
+
+        array = array.map((item, index) => {
+            if (index === 3) {
+                return `${item} - `;
+            } else if (
+                (index <= 11 && index !== 0 && index % 7 === 0) ||
+                (index <= 11 && index !== 0 && index % 11 === 0)
+            ) {
+                return `${item} - `;
+            }
+            return item;
+        });
+
+        return array;
+    };
+    useEffect(() => {
+        formatCardNumber();
+    }, [purchaseForm.paymentCard.cardNumber]);
+
     return (
         <div className=" space-y-3">
             <div className="min-h-80">
@@ -50,13 +72,44 @@ function PaymentCardForm({
                             alt=""
                             className=" w-3/4"
                         />
+                        <div className=" absolute top-[74px] left-[250px] text-black font-semibold">
+                            {purchaseForm.paymentCard.cvc}
+                        </div>
                     </div>
-                    <div className=" absolute top-28 left-20">
+                    <div className=" absolute top-28 left-20 ">
                         <img
                             src="/public/credit_card/bg-card-front.png"
                             alt=""
                             className=" "
                         />
+                        <div
+                            className="absolute top-[20px] left-[25px] font-semibold text-white
+                            flex items-center gap-3
+                        "
+                        >
+                            <div className=" w-9 aspect-square rounded-full bg-gray-300"></div>
+                            <div className=" w-7 aspect-square rounded-full bg-gray-100"></div>
+                        </div>
+                        <div className="absolute top-[74px] left-[50px] font-semibold text-white ">
+                            <div
+                                className=" capitalize"
+                                style={{ fontVariant: "small-caps" }}
+                            >
+                                {purchaseForm.paymentCard.cardHolderName}
+                            </div>
+                            <div>{formatCardNumber()}</div>
+                            <div className=" flex gap-1">
+                                <div>
+                                    {purchaseForm.paymentCard.expireMonth}
+                                </div>
+                                <span>/</span>
+                                <div>
+                                    {purchaseForm.paymentCard.expireYear
+                                        .toString()
+                                        .slice(2)}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </figure>
             </div>
@@ -85,10 +138,11 @@ function PaymentCardForm({
                 </label>
                 <label htmlFor="cardNumber">
                     <input
-                        type="text"
+                        type="tel"
                         name="cardNumber"
                         id="cardNumber"
                         placeholder="Card Number"
+                        maxLength={16}
                         className=" w-full py-1 px-3 rounded-md"
                         value={purchaseForm.paymentCard.cardNumber}
                         onChange={(e) => {
@@ -197,9 +251,10 @@ function PaymentCardForm({
                     </label>
                     <label htmlFor="cvc" className="grow">
                         <input
-                            type="text"
+                            type="tel"
                             name="cvc"
                             id="cvc"
+                            maxLength={3}
                             placeholder="CVC ..."
                             className=" w-full py-1 px-3 rounded-md"
                             value={purchaseForm.paymentCard.cvc}

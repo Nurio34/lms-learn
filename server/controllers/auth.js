@@ -60,7 +60,7 @@ const signup = async (req, res) => {
 };
 
 const login = async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, lastLoginDate } = req.body;
 
     const user = await User.findOne({ email });
 
@@ -90,6 +90,8 @@ const login = async (req, res) => {
             username: user.username,
             email: user.email,
             role: user.role,
+            lastLoginDate: lastLoginDate,
+            ip: req.headers["x-forwarded-for"] || req.connection.remoteAddress,
         },
         JWT_SECRET,
         { expiresIn: "1h" },
@@ -104,6 +106,7 @@ const login = async (req, res) => {
             username: user.username,
             email: user.email,
             role: user.role,
+            lastLoginDate: lastLoginDate,
         },
     });
 };

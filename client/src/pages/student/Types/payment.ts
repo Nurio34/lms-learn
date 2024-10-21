@@ -53,8 +53,8 @@ export const initialPurchaseInfo: PurchaseInfoType = {
     currency: null,
     installment: 1,
     locale: "turkish",
-    paidPrice: "10",
-    price: "10",
+    paidPrice: "",
+    price: "",
 };
 
 export const PaymentCardSchema = z.object({
@@ -114,35 +114,73 @@ export const initialPaymentCard: PaymentCardType = {
     registerCard: "0",
 };
 
-export type BuyerType = {
-    id: string; //!
-    name: string; //!
-    surname: string; //!
-    gsmNumber: string; // optional. when user gives his gsm, save it to "user" data
-    email: string; //!
-    identityNumber: string; //! TC Kimlik No.
-    lastLoginDate: string; // "user" datasına ekle, her loginde güncelle // "2013-04-21 15:12:09" formatında
-    registrationDate: string; // "Buy Course" butonuna bastığın anki zaman // "2013-04-21 15:12:09" formatında
-    registrationAddress: string; //! İkamet adresi
-    ip: string; //! "user" datasına ekle, her loginde güncelle
-    city: string; //!
-    country: string; //!
-    zipCode: string; // optional
-};
+export const BuyerSchema = z.object({
+    id: z.string().nonempty("ID is required."),
+    name: z.string().nonempty("Name is required."),
+    surname: z.string().nonempty("Surname is required."),
+    gsmNumber: z
+        .string()
+        .regex(/^\+?\d{10,15}$/, {
+            message:
+                "GSM number must be between 10 and 15 digits and can include a '+' prefix.",
+        })
+        .nullable(),
+    email: z.string().email("Invalid email format."),
+    identityNumber: z
+        .string()
+        .length(11, "Identity number must be exactly 11 digits.")
+        .regex(/^\d{11}$/, "Identity number must only contain digits."),
+    lastLoginDate: z
+        .string()
+        .regex(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/, {
+            message:
+                "Last login date must be in the format 'YYYY-MM-DD HH:mm:ss'.",
+        })
+        .nullable(),
+    registrationDate: z
+        .string()
+        .regex(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/, {
+            message:
+                "Registration date must be in the format 'YYYY-MM-DD HH:mm:ss'.",
+        }),
+    registrationAddress: z
+        .string()
+        .nonempty("Registration address is required."),
+    ip: z
+        .string()
+        .regex(/^(\d{1,3}\.){3}\d{1,3}$/, {
+            message: "Invalid IP address format.",
+        })
+        .nullable()
+        .optional(),
+    city: z.string().nonempty("City is required."),
+    country: z.string().nonempty("Country is required."),
+    zipCode: z
+        .string()
+        .regex(/^\d{5}$/, {
+            message: "Zip code must be exactly 5 digits.",
+        })
+        .nullable()
+        .optional(),
+});
+
+// Example of type inference
+export type BuyerType = z.infer<typeof BuyerSchema>;
+
 export const initialBuyer: BuyerType = {
-    id: "123456789",
-    name: "John",
-    surname: "Doe",
-    gsmNumber: "5551234567",
-    email: "john.doe@example.com",
-    identityNumber: "12345678901",
-    lastLoginDate: "2024-10-18 12:34:56",
-    registrationDate: "2024-10-01 09:15:00",
-    registrationAddress: "123 Main St, Antalya",
-    ip: "192.168.1.1",
-    city: "Antalya",
-    country: "Turkey",
-    zipCode: "07100",
+    id: "",
+    name: "",
+    surname: "",
+    gsmNumber: "",
+    email: "",
+    identityNumber: "",
+    lastLoginDate: "",
+    registrationDate: "",
+    registrationAddress: "",
+    ip: null,
+    city: "",
+    country: "",
+    zipCode: null,
 };
 
 export type ShippingAddressType = {
