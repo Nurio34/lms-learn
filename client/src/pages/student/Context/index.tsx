@@ -44,7 +44,7 @@ type StudentContextType = {
 const StudentContext = createContext({} as StudentContextType);
 
 function StudentProvider({ children }: { children: React.ReactNode }) {
-    const { setAuthenticated, setUser } = useGlobalContext();
+    const { setAuthenticated, user, setUser } = useGlobalContext();
     const checkAuthorization = async () => {
         try {
             const response = await axiosInstance.get("/auth/check-auth");
@@ -70,7 +70,7 @@ function StudentProvider({ children }: { children: React.ReactNode }) {
         checkAuthorization();
     }, []);
 
-    const { isLoading, courses, error } = useCourses();
+    const { isLoading, courses, error } = useCourses(user);
     const { filter, setFilter, filteredCourses, setFilteredCourses } =
         useFilter(courses);
     const { sort, setSort } = useSort(setFilteredCourses);

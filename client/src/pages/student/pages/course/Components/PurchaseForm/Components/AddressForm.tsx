@@ -9,7 +9,7 @@ function AddressForm({
 }) {
     const { purchaseForm, setPurchaseForm } = useStudentContext();
     const [errors, setErrors] = useState<any>({});
-    console.log(errors);
+
     const ValidateAndNext = () => {
         const BuyerValidationResult = BuyerSchema.safeParse(purchaseForm.buyer);
 
@@ -37,6 +37,7 @@ function AddressForm({
                                 id="name"
                                 placeholder="Name ..."
                                 className=" py-1 px-3 rounded-md grow"
+                                value={purchaseForm.buyer.name}
                                 onChange={(e) => {
                                     setPurchaseForm((prev) => ({
                                         ...prev,
@@ -60,6 +61,7 @@ function AddressForm({
                                 id="surname"
                                 placeholder="Surname ..."
                                 className=" py-1 px-3 rounded-md grow"
+                                value={purchaseForm.buyer.surname}
                                 onChange={(e) => {
                                     setPurchaseForm((prev) => ({
                                         ...prev,
@@ -85,6 +87,8 @@ function AddressForm({
                                 id="identityNumber"
                                 placeholder="Idendity Number ..."
                                 className=" py-1 px-3 rounded-md grow"
+                                maxLength={11}
+                                value={purchaseForm.buyer.identityNumber}
                                 onChange={(e) => {
                                     setPurchaseForm((prev) => ({
                                         ...prev,
@@ -110,6 +114,8 @@ function AddressForm({
                                 id="gsmNumber"
                                 placeholder="Gsm Number ..."
                                 className=" py-1 px-3 rounded-md grow"
+                                maxLength={13}
+                                value={purchaseForm.buyer.gsmNumber?.toString()}
                                 onChange={(e) => {
                                     setPurchaseForm((prev) => ({
                                         ...prev,
@@ -134,6 +140,7 @@ function AddressForm({
                             id="email"
                             placeholder="Email ..."
                             className=" py-1 px-3 rounded-md w-full"
+                            value={purchaseForm.buyer.email}
                             onChange={(e) => {
                                 setPurchaseForm((prev) => ({
                                     ...prev,
@@ -158,6 +165,7 @@ function AddressForm({
                                 id="country"
                                 placeholder="Country ..."
                                 className=" py-1 px-3 rounded-md grow"
+                                value={purchaseForm.buyer.country}
                                 onChange={(e) => {
                                     setPurchaseForm((prev) => ({
                                         ...prev,
@@ -181,6 +189,7 @@ function AddressForm({
                                 id="city"
                                 placeholder="City ..."
                                 className=" py-1 px-3 rounded-md grow"
+                                value={purchaseForm.buyer.city}
                                 onChange={(e) => {
                                     setPurchaseForm((prev) => ({
                                         ...prev,
@@ -206,6 +215,7 @@ function AddressForm({
                             placeholder="Address ..."
                             wrap="true"
                             className="py-1 px-3 rounded-md w-full"
+                            value={purchaseForm.buyer.registrationAddress}
                             onChange={(e) => {
                                 setPurchaseForm((prev) => ({
                                     ...prev,

@@ -1,5 +1,68 @@
 const { Iyzipay, iyzipay } = require("../iyzipay");
+
+// const mockRequest = {
+//     locale: "en",
+//     conversationId: "deviyzico",
+//     price: "10.01",
+//     paidPrice: "10.01",
+//     currency: "TRY",
+//     installment: 1,
+//     paymentChannel: "WEB",
+//     basketId: "B67832",
+//     paymentGroup: "PRODUCT",
+//     paymentCard: {
+//         cardHolderName: "Mehmet Test",
+//         cardNumber: "5526080000000006",
+//         expireYear: "2028",
+//         expireMonth: "11",
+//         cvc: "245",
+//         registerCard: 0,
+//     },
+//     buyer: {
+//         id: "BY789",
+//         name: "John",
+//         surname: "Doe",
+//         identityNumber: "11111111111",
+//         email: "test@testtt.com",
+//         gsmNumber: "+905393623333",
+//         registrationDate: "2013-04-21 15:12:09",
+//         lastLoginDate: "2015-10-05 12:43:35",
+//         registrationAddress:
+//             "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1",
+//         city: "Istanbul",
+//         country: "Turkey",
+//         zipCode: "34732",
+//         ip: "85.34.78.112",
+//     },
+//     shippingAddress: {
+//         address: "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1",
+//         zipCode: "34742",
+//         contactName: "Jane Doe",
+//         city: "Istanbul",
+//         country: "Turkey",
+//     },
+//     billingAddress: {
+//         address: "Nidakule Göztepe, Merdivenköy Mah. Bora Sok. No:1",
+//         zipCode: "34742",
+//         contactName: "Jane Doe",
+//         city: "Istanbul",
+//         country: "Turkey",
+//     },
+//     basketItems: [
+//         {
+//             id: "BI101",
+//             price: "10.01",
+//             name: "Binocular",
+//             category1: "Collectibles",
+//             category2: "Accessories",
+//             itemType: "PHYSICAL",
+//         },
+//     ],
+// };
+
 const makeRequest = async (req, res) => {
+    const { purchaseForm, course } = req.body;
+
     const {
         purchaseInfo,
         paymentCard,
@@ -7,7 +70,8 @@ const makeRequest = async (req, res) => {
         shippingAddress,
         billingAddress,
         basketItems,
-    } = req.body;
+    } = purchaseForm;
+    console.log({ purchaseForm, course });
 
     //! *** LOCALE DÜZELLE ***
     const locale =
@@ -47,23 +111,28 @@ const makeRequest = async (req, res) => {
         paymentChannel,
         paymentGroup,
 
-        paymentCard,
+        paymentCard: { ...paymentCard, cardNumber: "5890040000000016" },
         buyer,
         shippingAddress,
         billingAddress,
         basketItems: newBasketItems,
     };
 
-    console.log(PaymentRequest);
-
     try {
         const response = iyzipay.payment.create(
             PaymentRequest,
             async (err, result) => {
-                console.log({ err, result });
+                if (err) {
+                    return res.status(400).json({
+                        success: false,
+                        message: "Purchase couldn't be done. Try again later !",
+                    });
+                }
+                if (result.status === "success") {
+                    //! Here i am !!!
+                }
             },
         );
-
         console.log({ response });
     } catch (error) {
         console.log(error);

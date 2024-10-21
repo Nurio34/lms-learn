@@ -102,7 +102,9 @@ function PaymentCardForm({
                                 <div>
                                     {purchaseForm.paymentCard.expireMonth}
                                 </div>
-                                <span>/</span>
+                                {purchaseForm.paymentCard.expireMonth && (
+                                    <span>/</span>
+                                )}
                                 <div>
                                     {purchaseForm.paymentCard.expireYear
                                         .toString()
@@ -313,11 +315,7 @@ function PaymentCardForm({
                             name="currency"
                             id="currency"
                             className=" py-1 px-3 rounded-md"
-                            value={
-                                purchaseForm.purchaseInfo.currency === null
-                                    ? ""
-                                    : purchaseForm.purchaseInfo.currency
-                            }
+                            value={purchaseForm.purchaseInfo.currency}
                             onChange={(e) => {
                                 setPurchaseForm((prev) => ({
                                     ...prev,
@@ -326,13 +324,14 @@ function PaymentCardForm({
                                         currency: e.target.value as
                                             | "try"
                                             | "usd"
-                                            | "eur"
-                                            | null,
+                                            | "eur",
                                     },
                                 }));
                             }}
                         >
-                            <option value="">Currency</option>
+                            <option value="" disabled>
+                                Currency
+                            </option>
                             {["TRY", "USD", "EUR"].map((item) => {
                                 return (
                                     <option

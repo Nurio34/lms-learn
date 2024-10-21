@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../../../../../services/axios";
 import { CourseType } from "../../../../types/course";
 import { AxiosError } from "axios";
+import { UserType } from "../../../../GlobalContext";
 
-const useCourses = () => {
+const useCourses = (user: UserType) => {
     const [courses, setCourses] = useState<CourseType[]>([] as CourseType[]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
@@ -24,8 +25,10 @@ const useCourses = () => {
     };
 
     useEffect(() => {
-        fetchAllCourses();
-    }, []);
+        if (user.id) {
+            fetchAllCourses();
+        }
+    }, [user]);
 
     return { isLoading, courses, error, setCourses };
 };

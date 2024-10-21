@@ -26,7 +26,9 @@ export const PurchaseInfoSchema = z.object({
             message:
                 "Paid price must be a valid number with up to two decimal places.",
         }),
-    currency: z.enum(["try", "usd", "eur"]).nullable().optional(),
+    currency: z.enum(["try", "usd", "eur"], {
+        message: "",
+    }),
     installment: z.union(
         [
             z.literal(1),
@@ -50,7 +52,7 @@ export type PurchaseInfoType = z.infer<typeof PurchaseInfoSchema>;
 export const initialPurchaseInfo: PurchaseInfoType = {
     basketId: "",
     conversationId: "",
-    currency: null,
+    currency: "try",
     installment: 1,
     locale: "turkish",
     paidPrice: "",
@@ -98,7 +100,7 @@ export const PaymentCardSchema = z.object({
         .regex(/^\d{3}$/, {
             message: "CVC must only contain digits.",
         }),
-    registerCard: z.enum(["0", "1"], {
+    registerCard: z.union([z.literal(0), z.literal(1)], {
         required_error: "Please select whether to register the card.",
     }),
 });
@@ -111,13 +113,13 @@ export const initialPaymentCard: PaymentCardType = {
     cvc: "",
     expireMonth: "",
     expireYear: "",
-    registerCard: "0",
+    registerCard: 0,
 };
 
 export const BuyerSchema = z.object({
-    id: z.string().nonempty("ID is required."),
-    name: z.string().nonempty("Name is required."),
-    surname: z.string().nonempty("Surname is required."),
+    id: z.string().min(1, "ID is required."),
+    name: z.string().min(1, "Name is required."),
+    surname: z.string().min(1, "Surname is required."),
     gsmNumber: z
         .string()
         .regex(/^\+?\d{10,15}$/, {
@@ -143,28 +145,14 @@ export const BuyerSchema = z.object({
             message:
                 "Registration date must be in the format 'YYYY-MM-DD HH:mm:ss'.",
         }),
-    registrationAddress: z
-        .string()
-        .nonempty("Registration address is required."),
-    ip: z
-        .string()
-        .regex(/^(\d{1,3}\.){3}\d{1,3}$/, {
-            message: "Invalid IP address format.",
-        })
-        .nullable()
-        .optional(),
-    city: z.string().nonempty("City is required."),
-    country: z.string().nonempty("Country is required."),
-    zipCode: z
-        .string()
-        .regex(/^\d{5}$/, {
-            message: "Zip code must be exactly 5 digits.",
-        })
-        .nullable()
-        .optional(),
+    registrationAddress: z.string().min(1, "Registration address is required."),
+    ip: z.string().optional(),
+
+    city: z.string().min(1, "City is required."),
+    country: z.string().min(1, "Country is required."),
+    zipCode: z.string().optional(),
 });
 
-// Example of type inference
 export type BuyerType = z.infer<typeof BuyerSchema>;
 
 export const initialBuyer: BuyerType = {
@@ -177,25 +165,28 @@ export const initialBuyer: BuyerType = {
     lastLoginDate: "",
     registrationDate: "",
     registrationAddress: "",
-    ip: null,
+    ip: "",
     city: "",
     country: "",
-    zipCode: null,
+    zipCode: "",
 };
 
-export type ShippingAddressType = {
-    contactName: string; //!
-    city: string; //!
-    country: string; //!
-    address: string; //!
-    zipCode: string; // optional
-};
+export const ShippingAddressSchema = z.object({
+    contactName: z.string().min(1, "Contact name is required."),
+    city: z.string().min(1, "City is required."),
+    country: z.string().min(1, "Country is required."),
+    address: z.string().min(1, "Address is required."),
+    zipCode: z.string().optional(),
+});
+
+export type ShippingAddressType = z.infer<typeof ShippingAddressSchema>;
+
 export const initialShippingAddress: ShippingAddressType = {
-    contactName: "Jane Doe",
-    city: "Istanbul",
-    country: "Turkey",
-    address: "456 Another St, Besiktas",
-    zipCode: "34349",
+    contactName: "",
+    city: "",
+    country: "",
+    address: "",
+    zipCode: "",
 };
 
 export type BillingAddressType = {
@@ -203,14 +194,14 @@ export type BillingAddressType = {
     city: string; //!
     country: string; //!
     address: string; //!
-    zipCode: string; //
+    zipCode?: string; //
 };
 export const initialBillingAddress: BillingAddressType = {
-    contactName: "John Doe",
-    city: "Antalya",
-    country: "Turkey",
-    address: "123 Main St, Antalya",
-    zipCode: "07100",
+    contactName: "",
+    city: "",
+    country: "",
+    address: "",
+    zipCode: "",
 };
 
 export type BasketItemType = {

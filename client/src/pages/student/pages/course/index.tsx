@@ -131,9 +131,12 @@ function StudentCoursePage() {
                     </section>
                 </div>
                 {isPaymentFormOpen ? (
-                    <PurchaseForm price={course.pricing} />
+                    <PurchaseForm
+                        course={course}
+                        setIsPaymentFormOpen={setIsPaymentFormOpen}
+                    />
                 ) : (
-                    <div className="py-3 px-6 bg-black rounded-lg grid ">
+                    <div className="py-3 px-6 bg-black rounded-lg grid gap-3">
                         <VideoPlayer lecture={currentLecture} />
                         <PurchaseButton
                             setIsPaymentFormOpen={setIsPaymentFormOpen}
