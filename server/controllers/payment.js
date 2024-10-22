@@ -1,4 +1,5 @@
 const { Iyzipay, iyzipay } = require("../iyzipay");
+const studentCourses = require("../models/studentCourses");
 const StudentCourses = require("../models/studentCourses");
 
 const mockRequest = {
@@ -62,7 +63,7 @@ const mockRequest = {
 };
 
 const makeRequest = async (req, res) => {
-    const { purchaseForm, course } = req.body;
+    const { purchaseForm, course, student } = req.body;
 
     const {
         purchaseInfo,
@@ -73,14 +74,10 @@ const makeRequest = async (req, res) => {
         basketItems,
     } = purchaseForm;
 
-    const {
-        studentId,
-        courseId,
-        title,
-        instructerId,
-        instructerName,
-        courseImage,
-    } = course;
+    const { courseId, title, instructerId, instructerName, courseImage } =
+        course;
+
+    const { studentId, studentName, studentEmail } = student;
 
     //! *** LOCALE DÜZELLE ***
     const locale =
@@ -128,64 +125,51 @@ const makeRequest = async (req, res) => {
     };
 
     try {
-        const response = iyzipay.payment.create(
-            PaymentRequest,
-            async (err, result) => {
-                if (err) {
-                    return res.status(400).json({
-                        success: false,
-                        message: "Purchase couldn't be done. Try again later !",
+        iyzipay.payment.create(PaymentRequest, async (err, result) => {
+            if (err) {
+                return res.status(400).json({
+                    success: false,
+                    message: "Purchase couldn't be done. Try again later !",
+                });
+            }
+            if (result.status === "success") {
+                const ExistingStudentCourses = await StudentCourses.findOne({
+                    studentId,
+                });
+                let NewStudentCourses = {};
+                if (!ExistingStudentCourses) {
+                    NewStudentCourses = new StudentCourses({
+                        hello: "World",
+                        studentId,
+                        courses: [
+                            {
+                                courseId,
+                                title,
+                                instructerId,
+                                instructerName,
+                                courseImage: courseImage.imageUrl,
+                            },
+                        ],
+                    });
+                } else {
+                    NewStudentCourses = ExistingStudentCourses;
+                    ExistingStudentCourses.courses.push({
+                        courseId,
+                        title,
+                        instructerId,
+                        instructerName,
+                        courseImage: courseImage.imageUrl,
                     });
                 }
-                if (result.status === "success") {
-                    const ExistingStudentCourses = await StudentCourses.findOne(
-                        { studentId },
-                    );
-                    let NewStudentCourses = [];
-
-                    if (!ExistingStudentCourses) {
-                        NewStudentCourses = new StudentCourses({
-                            studentId,
-                            courses: [
-                                {
-                                    courseId,
-                                    title,
-                                    instructerId,
-                                    instructerName,
-                                    courseImage: courseImage.imageUrl,
-                                },
-                            ],
-                        });
-                        await NewStudentCourses.save();
-                    }
-                    // // else {
-                    // //     NewStudentCourses = await StudentCourses(
-                    // //         studentId,
-                    // //         {
-                    // //             $push: {
-                    // //                 courses: {
-                    // //                     courseId,
-                    // //                     title,
-                    // //                     intructerId,
-                    // //                     instructerName,
-                    // //                     courseImage: courseImage.imageUrl,
-                    // //                 },
-                    // //             },
-                    // //         },
-                    // //         {
-                    // //             new: true,
-                    // //             upsert: true,
-                    // //         },
-                    // //     );
-                    // // }
-                    return res.status(200).json({
-                        success: true,
-                        message: "Course Purchased Successfully ...",
-                        courses: NewStudentCourses,
-                    });
-                }
-            },
-        );
+                await NewStudentCourses.save();
+                return res.status(200).json({
+                    success: true,
+                    message: "Course Purchased Successfully ...",
+                    courses: NewStudentCourses,
+                });
+                //! Here i am !!!
+            }
+        });
     } catch (error) {
         return res.status(500).json({
             success: false,

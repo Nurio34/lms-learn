@@ -58,12 +58,16 @@ function PurchaseForm({ course, setIsPaymentFormOpen }: PurchaseFormType) {
             const response = await axiosInstance.post("/payment/request", {
                 purchaseForm,
                 course: {
-                    studenId: user.id,
                     courseId: course._id,
                     title: course.title,
                     intructerId: course.instructerId,
                     instructerName: course.instructerName,
                     courseImage: course.image,
+                },
+                student: {
+                    studentId: user.id,
+                    studentName: user.username,
+                    studentEmail: user.email,
                 },
             });
             console.log({ response });
