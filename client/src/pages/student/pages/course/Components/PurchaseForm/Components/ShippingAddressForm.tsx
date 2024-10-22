@@ -11,7 +11,6 @@ function ShippingAddressForm({
 }) {
     const { purchaseForm, setPurchaseForm } = useStudentContext();
     const [errors, setErrors] = useState<any>([]);
-    console.log(errors);
 
     const ValidateAndComplate = () => {
         const ShippingAddressValidationResult = ShippingAddressSchema.safeParse(
