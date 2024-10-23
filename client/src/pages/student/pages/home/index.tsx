@@ -1,5 +1,4 @@
 import BackgroundImage from "../../Components/BackgroundImage";
-import { useStudentContext } from "../../Context";
 import FeauteredCourses from "./Components/FeaturedCourses";
 import Hero from "./Components/Hero";
 

@@ -1,7 +1,12 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function NotFoundPage() {
     const navigate = useNavigate();
+
+    useEffect(() => {
+        navigate("/auth");
+    });
 
     return (
         <div className=" min-h-[700px] grid place-content-center gap-y-4">

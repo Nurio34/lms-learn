@@ -1,6 +1,7 @@
 const { Iyzipay, iyzipay } = require("../iyzipay");
 const studentCourses = require("../models/studentCourses");
 const StudentCourses = require("../models/studentCourses");
+const Courses = require("../models/course");
 
 const mockRequest = {
     locale: "en",
@@ -162,6 +163,17 @@ const makeRequest = async (req, res) => {
                     });
                 }
                 await NewStudentCourses.save();
+
+                await Courses.findByIdAndUpdate(courseId, {
+                    $addToSet: {
+                        students: {
+                            id: studentId,
+                            name: studentName,
+                            email: studentEmail,
+                        },
+                    },
+                });
+
                 return res.status(200).json({
                     success: true,
                     message: "Course Purchased Successfully ...",

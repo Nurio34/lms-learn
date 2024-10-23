@@ -6,6 +6,7 @@ const AuthRouter = require("./routes");
 const MediaRouter = require("./routes/cloudinary");
 const CourseRouter = require("./routes/course");
 const PaymentRouter = require("./routes/payment");
+const MyCoursesRouter = require("./routes/my-courses");
 
 const app = express();
 app.use(express.json());
@@ -38,6 +39,7 @@ app.use("/auth", AuthRouter);
 app.use("/media", MediaRouter);
 app.use("/course", CourseRouter);
 app.use("/payment", PaymentRouter);
+app.use("/my-courses", MyCoursesRouter);
 //! --------------
 
 //! --- GLOBAL ERROR HANDLER  ---

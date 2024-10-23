@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { CourseType } from "../../../types/course";
 import useCourses from "./hooks/useCourses";
 import useFilter, { FilterType } from "./hooks/useFilter";
@@ -9,16 +9,12 @@ import {
     BasketItemsType,
     BillingAddressType,
     BuyerType,
-    initialBasketItems,
-    initialBillingAddress,
-    initialBuyer,
-    initialPaymentCard,
-    initialPurchaseInfo,
-    initialShippingAddress,
     PaymentCardType,
     PurchaseInfoType,
     ShippingAddressType,
 } from "../Types/payment";
+import usePurchase from "./hooks/usePurchase";
+import useMyCourses, { myCoursesType } from "./hooks/useMyCourses";
 type PurchaseFormType = {
     purchaseInfo: PurchaseInfoType;
     paymentCard: PaymentCardType;
@@ -39,6 +35,12 @@ type StudentContextType = {
     setSort: React.Dispatch<React.SetStateAction<SortType>>;
     purchaseForm: PurchaseFormType;
     setPurchaseForm: React.Dispatch<React.SetStateAction<PurchaseFormType>>;
+    isLoadingMyCourses: boolean;
+    setIsLoadingMyCourses: React.Dispatch<React.SetStateAction<boolean>>;
+    myCourses: myCoursesType;
+    setMyCourses: React.Dispatch<React.SetStateAction<myCoursesType>>;
+    errorMyCourses: string;
+    setErrorMyCourses: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const StudentContext = createContext({} as StudentContextType);
@@ -74,17 +76,16 @@ function StudentProvider({ children }: { children: React.ReactNode }) {
     const { filter, setFilter, filteredCourses, setFilteredCourses } =
         useFilter(courses);
     const { sort, setSort } = useSort(setFilteredCourses);
-
-    //! *** PAYMENT ***
-    const [purchaseForm, setPurchaseForm] = useState({
-        purchaseInfo: initialPurchaseInfo,
-        paymentCard: initialPaymentCard,
-        buyer: initialBuyer,
-        shippingAddress: initialShippingAddress,
-        billingAddress: initialBillingAddress,
-        basketItems: initialBasketItems,
-    });
-    //! ****************
+    const { purchaseForm, setPurchaseForm } = usePurchase();
+    const {
+        isLoadingMyCourses,
+        setIsLoadingMyCourses,
+        myCourses,
+        setMyCourses,
+        errorMyCourses,
+        setErrorMyCourses,
+    } = useMyCourses();
+    //! *** MY COURSES ***
 
     return (
         <StudentContext.Provider
@@ -100,6 +101,12 @@ function StudentProvider({ children }: { children: React.ReactNode }) {
                 setSort,
                 purchaseForm,
                 setPurchaseForm,
+                isLoadingMyCourses,
+                setIsLoadingMyCourses,
+                myCourses,
+                setMyCourses,
+                errorMyCourses,
+                setErrorMyCourses,
             }}
         >
             {children}

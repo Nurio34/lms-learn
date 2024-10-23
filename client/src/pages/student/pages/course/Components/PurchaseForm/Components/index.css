@@ -1,0 +1,20 @@
+.Animation4_Li {
+    color: transparent;
+
+    animation: bounce calc(0.05s * var(--length)) calc(0.05s * var(--delay))
+        ease-in-out;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0%);
+    }
+    50% {
+        transform: translateY(-100%);
+        color: white;
+        filter: drop-shadow(0 0 5px white) drop-shadow(0 0 10px white);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}

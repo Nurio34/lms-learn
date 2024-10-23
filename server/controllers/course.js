@@ -1,4 +1,5 @@
 const Course = require("../models/course");
+const StudentCourses = require("../models/studentCourses");
 const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = process.env.JWT_Secret;
@@ -35,8 +36,6 @@ const addCourse = async (req, res) => {
             message: "Course's been added successfully...",
         });
     } catch (error) {
-        console.log(error);
-
         return res.status(404).json({
             status: false,
             message: "Unexpected error while adding course !",
@@ -182,10 +181,44 @@ const getAllCourses = async (req, res) => {
     }
 };
 
+const checkIfThisCourseAlreadyBought = async (req, res) => {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+        return res.status(401).json({
+            success: false,
+            message: "Unauthorized action !",
+        });
+    }
+
+    const token = authHeader.split(" ")[1];
+    const { id } = jwt.verify(token, JWT_SECRET);
+    const { courseId } = req.params;
+
+    try {
+        const MyCourses = await StudentCourses.findOne({ studentId: id });
+
+        const isCourseAlreadyBought = MyCourses.courses.some(
+            (course) => course.courseId === courseId,
+        );
+
+        return res.status(200).json({
+            success: true,
+            data: isCourseAlreadyBought,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Unexpected Network Error !",
+        });
+    }
+};
+
 module.exports = {
     addCourse,
     getCourses,
     getCourse,
     updateCourse,
     getAllCourses,
+    checkIfThisCourseAlreadyBought,
 };

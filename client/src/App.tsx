@@ -9,6 +9,8 @@ import HiddenCredentials from "./components/HiddenCredentials";
 import AuthPage from "./pages/auth";
 import StudentCoursesPage from "./pages/student/pages/courses";
 import StudentCoursePage from "./pages/student/pages/course";
+import MyCoursesPage from "./pages/student/pages/my-courses";
+import MyCoursePage from "./pages/student/pages/my-course";
 
 function App() {
     const { authenticated, user } = useGlobalContext();
@@ -49,8 +51,15 @@ function App() {
                     }
                 >
                     <Route path="courses" element={<StudentCoursesPage />} />
-                    <Route path="courses/:id" element={<StudentCoursePage />} />
-                    <Route path="instrcter/:id" element={<p>Hello</p>} />
+                    <Route
+                        path="courses/:courseId"
+                        element={<StudentCoursePage />}
+                    />
+                    <Route path="my-courses" element={<MyCoursesPage />} />
+                    <Route
+                        path="my-courses/:courseId"
+                        element={<MyCoursePage />}
+                    />
                 </Route>
 
                 <Route path="*" element={<NotFoundPage />} />

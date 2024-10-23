@@ -7,6 +7,7 @@ import { useStudentContext } from "../../../../Context";
 import AddressForm from "./Components/AddressForm";
 import ShippingAddressForm from "./Components/ShippingAddressForm";
 import { CourseType } from "../../../../../../types/course";
+import LoadingAnimation from "./Components/LoadingAnimation";
 
 type PurchaseFormType = {
     course: CourseType;
@@ -17,6 +18,9 @@ function PurchaseForm({ course, setIsPaymentFormOpen }: PurchaseFormType) {
     const { user } = useGlobalContext();
     const { purchaseForm, setPurchaseForm } = useStudentContext();
     const [step, setStep] = useState(1);
+
+    const [isProcesing, setIsProcesing] = useState(false);
+    const [isPurchased, setIsPurchased] = useState(false);
 
     useEffect(() => {
         setPurchaseForm((prev) => ({
@@ -54,6 +58,8 @@ function PurchaseForm({ course, setIsPaymentFormOpen }: PurchaseFormType) {
     }, [user, purchaseForm.buyer.registrationAddress]);
 
     const makePaymentRequest = async () => {
+        setIsProcesing(true);
+
         try {
             const response = await axiosInstance.post("/payment/request", {
                 purchaseForm,
@@ -70,7 +76,10 @@ function PurchaseForm({ course, setIsPaymentFormOpen }: PurchaseFormType) {
                     studentEmail: user.email,
                 },
             });
-            console.log({ response });
+
+            if (response.data.success) {
+                setIsPurchased(true);
+            }
         } catch (error) {
             console.log(error);
         }
@@ -96,18 +105,22 @@ function PurchaseForm({ course, setIsPaymentFormOpen }: PurchaseFormType) {
                     Cancel
                 </button>
             </div>
-            <form className=" ">
-                {step === 1 ? (
-                    <PaymentCardForm setStep={setStep} />
-                ) : step === 2 ? (
-                    <AddressForm setStep={setStep} />
-                ) : (
-                    <ShippingAddressForm
-                        setStep={setStep}
-                        makePaymentRequest={makePaymentRequest}
-                    />
-                )}
-            </form>
+            {!isProcesing ? (
+                <form className=" ">
+                    {step === 1 ? (
+                        <PaymentCardForm setStep={setStep} />
+                    ) : step === 2 ? (
+                        <AddressForm setStep={setStep} />
+                    ) : (
+                        <ShippingAddressForm
+                            setStep={setStep}
+                            makePaymentRequest={makePaymentRequest}
+                        />
+                    )}
+                </form>
+            ) : (
+                <LoadingAnimation isPurchased={isPurchased} />
+            )}
         </div>
     );
 }
