@@ -198,6 +198,14 @@ const checkIfThisCourseAlreadyBought = async (req, res) => {
     try {
         const MyCourses = await StudentCourses.findOne({ studentId: id });
 
+        if (!MyCourses) {
+            return res.status(200).json({
+                success: false,
+                message: "You don't have any course bought yet !",
+                data: false,
+            });
+        }
+
         const isCourseAlreadyBought = MyCourses.courses.some(
             (course) => course.courseId === courseId,
         );

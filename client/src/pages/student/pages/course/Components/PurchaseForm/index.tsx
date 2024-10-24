@@ -119,7 +119,10 @@ function PurchaseForm({ course, setIsPaymentFormOpen }: PurchaseFormType) {
                     )}
                 </form>
             ) : (
-                <LoadingAnimation isPurchased={isPurchased} />
+                <LoadingAnimation
+                    isPurchased={isPurchased}
+                    courseId={course._id}
+                />
             )}
         </div>
     );

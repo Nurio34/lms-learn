@@ -1,29 +1,23 @@
 import { useState } from "react";
 
 export type myCourseType = {
-    courseId: String;
-    title: String;
-    instructerName: String;
-    purchaseDate: String;
-    courseImage: String;
+    courseId: string;
+    title: string;
+    instructerName: string;
+    purchaseDate: string;
+    courseImage: string;
 };
 
 export type myCoursesType = myCourseType[];
 
 const useMyCourses = () => {
-    const [isLoadingMyCourses, setIsLoadingMyCourses] = useState(false);
     const [myCourses, setMyCourses] = useState<myCoursesType>(
         [] as myCoursesType,
     );
-    const [errorMyCourses, setErrorMyCourses] = useState("");
 
     return {
-        isLoadingMyCourses,
-        setIsLoadingMyCourses,
         myCourses,
         setMyCourses,
-        errorMyCourses,
-        setErrorMyCourses,
     };
 };
 

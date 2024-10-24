@@ -5,7 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 // let time: React.NodeJS.Timeout | null = null;
 
-function LoadingAnimation({ isPurchased }: { isPurchased: boolean }) {
+function LoadingAnimation({
+    isPurchased,
+    courseId,
+}: {
+    isPurchased: boolean;
+    courseId: string;
+}) {
     const loading = "processing.........";
 
     const [isAnim, setIsAnim] = useState<boolean>(false);
@@ -40,7 +46,7 @@ function LoadingAnimation({ isPurchased }: { isPurchased: boolean }) {
         let time: ReturnType<typeof setTimeout>;
         if (isPurchased) {
             time = setTimeout(() => {
-                navigate("/student/my-courses");
+                navigate(`/student/my-courses/${courseId}`);
             }, 2000);
         }
 

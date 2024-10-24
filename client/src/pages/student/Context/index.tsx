@@ -35,12 +35,8 @@ type StudentContextType = {
     setSort: React.Dispatch<React.SetStateAction<SortType>>;
     purchaseForm: PurchaseFormType;
     setPurchaseForm: React.Dispatch<React.SetStateAction<PurchaseFormType>>;
-    isLoadingMyCourses: boolean;
-    setIsLoadingMyCourses: React.Dispatch<React.SetStateAction<boolean>>;
     myCourses: myCoursesType;
     setMyCourses: React.Dispatch<React.SetStateAction<myCoursesType>>;
-    errorMyCourses: string;
-    setErrorMyCourses: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const StudentContext = createContext({} as StudentContextType);
@@ -77,15 +73,7 @@ function StudentProvider({ children }: { children: React.ReactNode }) {
         useFilter(courses);
     const { sort, setSort } = useSort(setFilteredCourses);
     const { purchaseForm, setPurchaseForm } = usePurchase();
-    const {
-        isLoadingMyCourses,
-        setIsLoadingMyCourses,
-        myCourses,
-        setMyCourses,
-        errorMyCourses,
-        setErrorMyCourses,
-    } = useMyCourses();
-    //! *** MY COURSES ***
+    const { myCourses, setMyCourses } = useMyCourses();
 
     return (
         <StudentContext.Provider
@@ -101,12 +89,8 @@ function StudentProvider({ children }: { children: React.ReactNode }) {
                 setSort,
                 purchaseForm,
                 setPurchaseForm,
-                isLoadingMyCourses,
-                setIsLoadingMyCourses,
                 myCourses,
                 setMyCourses,
-                errorMyCourses,
-                setErrorMyCourses,
             }}
         >
             {children}
