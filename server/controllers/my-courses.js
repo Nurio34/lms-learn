@@ -46,7 +46,7 @@ const fetchMyCourse = async (req, res) => {
     if (!authHeader) {
         return res.status(401).json({
             success: false,
-            messagae: "Unauthorized action !",
+            message: "Unauthorized action !",
         });
     }
 
@@ -74,8 +74,6 @@ const fetchMyCourse = async (req, res) => {
             courseId,
         });
 
-        console.log({ CurrentCourseProgress });
-
         if (!CurrentCourseProgress) {
             const NewCurrentCourseProgress = new CourseProgress({
                 studentId,
@@ -83,19 +81,11 @@ const fetchMyCourse = async (req, res) => {
                 complated: false,
                 complationDate: "",
                 lectureProgress: course.lectures.map((lecture, index) => {
-                    if (index === 0) {
-                        return {
-                            lectureId: lecture._id,
-                            viewed: true,
-                            viewedDate: new Date(),
-                        };
-                    } else {
-                        return {
-                            lectureId: lecture._id,
-                            viewed: false,
-                            viewedDate: "",
-                        };
-                    }
+                    return {
+                        lectureId: lecture._id,
+                        viewed: false,
+                        viewedDate: "",
+                    };
                 }),
             });
             await NewCurrentCourseProgress.save();
@@ -122,4 +112,50 @@ const fetchMyCourse = async (req, res) => {
     }
 };
 
-module.exports = { fetchMyCourses, fetchMyCourse };
+const updateProgress = async (req, res) => {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+        return res.status(401).json({
+            success: false,
+            message: "Unauthorized action !",
+        });
+    }
+
+    const token = authHeader.split(" ")[1];
+    const { id } = jwt.verify(token, JWT_SECRET);
+    const studentId = id;
+    const { courseId } = req.params;
+    const { lectureId } = req.body;
+
+    try {
+        const CurrentProgress = await CourseProgress.findOneAndUpdate(
+            { studentId, courseId, "lectureProgress.lectureId": lectureId },
+            {
+                $set: {
+                    "lectureProgress.$.viewed": true,
+                    "lectureProgress.$.viewedDate": new Date(),
+                },
+            },
+            { new: true },
+        );
+
+        if (!CurrentProgress) {
+            return res
+                .status(404)
+                .json({ success: false, message: "An error occured !" });
+        }
+
+        return res.status(201).json({
+            success: true,
+            message: "New lecture is ready ...",
+            progress: CurrentProgress,
+        });
+    } catch (error) {
+        return res
+            .status(404)
+            .json({ success: false, message: "Unexpected Network Error !" });
+    }
+};
+
+module.exports = { fetchMyCourses, fetchMyCourse, updateProgress };

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { CourseType } from "../../../../../types/course";
+import { motion } from "framer-motion";
 
 type CourseCardType = {
     course: CourseType;
@@ -7,7 +8,10 @@ type CourseCardType = {
 
 function CourseCard({ course }: CourseCardType) {
     return (
-        <li className="rounded-xl overflow-hidden shadow-lg border-2">
+        <motion.li
+            className="rounded-xl overflow-hidden shadow-lg border-2 aspect-square"
+            layout
+        >
             <Link to={`/student/courses/${course._id}`}>
                 <img
                     src={course.image.imageUrl}
@@ -34,7 +38,7 @@ function CourseCard({ course }: CourseCardType) {
                     </div>
                 </div>
             </div>
-        </li>
+        </motion.li>
     );
 }
 

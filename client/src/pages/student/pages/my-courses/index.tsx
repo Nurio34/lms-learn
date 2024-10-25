@@ -48,7 +48,7 @@ function MyCoursesPage() {
 
     return (
         <main>
-            <h1>My Courses</h1>
+            <h1 className="c-subtitle py-3">My Courses</h1>
             <section>
                 <ul className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-6">
                     {myCourses.map((course) => {

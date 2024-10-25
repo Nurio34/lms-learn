@@ -6,4 +6,12 @@
     .c-btn {
         @apply py-1 px-3 font-semibold rounded-md transition-all cursor-pointer hover:scale-105 active:scale-95;
     }
+    .c-title {
+        @apply font-bold text-4xl;
+        font-variant: small-caps;
+    }
+    .c-subtitle {
+        @apply font-semibold text-2xl;
+        font-variant: small-caps;
+    }
 }

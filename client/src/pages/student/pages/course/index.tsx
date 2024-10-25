@@ -183,7 +183,9 @@ function StudentCoursePage() {
                             />
                         ) : (
                             <div className="py-3 px-6 bg-black rounded-lg grid gap-3">
-                                <VideoPlayer lecture={currentLecture} />
+                                <div className=" w-[452px]">
+                                    <VideoPlayer lecture={currentLecture} />
+                                </div>
                                 <PurchaseButton
                                     setIsPaymentFormOpen={setIsPaymentFormOpen}
                                 />

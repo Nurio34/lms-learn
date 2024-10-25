@@ -33,6 +33,8 @@ type GlobalContextType = {
     setActiveTab: React.Dispatch<React.SetStateAction<ActiveTabType>>;
     headerHeight: number;
     setHeaderHeight: React.Dispatch<React.SetStateAction<number>>;
+    isVideoComplated: boolean;
+    setIsVideoComplated: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const GlobalContext = createContext({} as GlobalContextType);
@@ -53,6 +55,8 @@ function GlobalProvider({ children }: { children: React.ReactNode }) {
 
     const [headerHeight, setHeaderHeight] = useState<number>(0);
 
+    const [isVideoComplated, setIsVideoComplated] = useState(false);
+
     return (
         <GlobalContext.Provider
             value={{
@@ -66,6 +70,8 @@ function GlobalProvider({ children }: { children: React.ReactNode }) {
                 setActiveTab,
                 headerHeight,
                 setHeaderHeight,
+                isVideoComplated,
+                setIsVideoComplated,
             }}
         >
             {children}

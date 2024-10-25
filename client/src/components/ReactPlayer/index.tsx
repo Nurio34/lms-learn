@@ -7,13 +7,14 @@ import PlayPauseButton from "./Components/PlayPauseButton";
 import useControlsVisibility from "./Hooks/useControlsVisibility";
 import usePlayPause from "./Hooks/usePlayPause";
 import { useVolume } from "./Hooks/useVolume";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import getFormattedTime from "../../../utils/getFormattedTime";
 import useSeekAndTime from "./Hooks/useSeekAndTime";
 import DurationProgressBar from "./Components/DurationProgressBar";
 import RewindButtons from "./Components/RewindButtons";
 import useRewind from "./Hooks/useRewind";
 import { LectureType } from "../../types/course";
+import { useGlobalContext } from "../../GlobalContext";
 
 export type VideoPlayerType = {
     lecture: LectureType;
@@ -43,6 +44,13 @@ function VideoPlayer({ lecture }: VideoPlayerType) {
     const { playedRange, setPlayedRange, time, setTime } =
         useSeekAndTime(PlayerRef);
 
+    const { setIsVideoComplated } = useGlobalContext();
+    useEffect(() => {
+        if (playedRange === 100) {
+            setIsVideoComplated(true);
+        }
+    }, [playedRange]);
+
     const { isComplated, isLast5Seconds, setIsLastSecconds } = useRewind(
         time,
         PlayerRef,
@@ -51,7 +59,7 @@ function VideoPlayer({ lecture }: VideoPlayerType) {
 
     return (
         <div
-            className={`w-96 aspect-video relative rounded-lg overflow-hidden
+            className={`aspect-video relative rounded-lg overflow-hidden bg-black
                 ${isControlsVisible ? "cursor-auto" : "cursor-none"}    
             `}
             data-theme="mytheme"
