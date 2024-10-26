@@ -22,7 +22,7 @@ function LogoutButton() {
             {!isAuthPage && (
                 <button
                     type="button"
-                    className=" bg-[red] py-1 px-4 rounded-md text-white font-semibold transition-all
+                    className=" bg-[red] py-1 px-4 rounded-md text-white font-semibold w-full transition-all
                 hover:bg-red-500  hover:scale-105
             "
                     onClick={onClick}

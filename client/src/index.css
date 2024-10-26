@@ -14,4 +14,8 @@
         @apply font-semibold text-2xl;
         font-variant: small-caps;
     }
+    .c-s-title {
+        @apply font-semibold text-xl;
+        font-variant: small-caps;
+    }
 }

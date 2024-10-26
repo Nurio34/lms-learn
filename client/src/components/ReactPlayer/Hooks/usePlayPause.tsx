@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useVolume } from "./useVolume";
+import { useGlobalContext } from "../../../GlobalContext";
 
 const usePlayPause = () => {
+    const { isVideoComplated } = useGlobalContext();
     const [isPlaying, setIsPlaying] = useState(false);
     const { isMuted } = useVolume();
 
@@ -19,7 +21,11 @@ const usePlayPause = () => {
         } else {
             pauseVideo();
         }
-    }, [isMuted]);
+
+        if (isVideoComplated) {
+            pauseVideo();
+        }
+    }, [isMuted, isVideoComplated]);
 
     return { isPlaying, setIsPlaying, pauseVideo, playVideo };
 };

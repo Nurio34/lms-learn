@@ -19,7 +19,7 @@ function Header() {
     return (
         <header
             ref={HeaderElement}
-            className="flex items-center gap-6 justify-start shadow-lg py-1 px-3"
+            className="flex items-center gap-6 justify-start shadow-lg py-1 px-3 bg-[rgba(255,255,255,0.8)]"
         >
             <BackToMyCoursesButton />
             <CourseTitle />

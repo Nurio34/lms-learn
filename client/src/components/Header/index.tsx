@@ -42,7 +42,9 @@ function index() {
                     </Link>
                     {isStudentView && <ExploreCoursesButton />}
                     {isStudentView && <MyCoursesButton />}
-                    <LogoutButton />
+                    <div>
+                        <LogoutButton />
+                    </div>
                 </header>
             )}
         </>

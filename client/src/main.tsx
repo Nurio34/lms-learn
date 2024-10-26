@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+// import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
@@ -9,7 +9,7 @@ import InstructerProvider from "./pages/instructer/InstructerContext.tsx";
 import StudentProvider from "./pages/student/Context/index.tsx";
 
 createRoot(document.getElementById("root")!).render(
-    <StrictMode>
+    <>
         <BrowserRouter>
             <GlobalProvider>
                 <InstructerProvider>
@@ -20,5 +20,5 @@ createRoot(document.getElementById("root")!).render(
             </GlobalProvider>
         </BrowserRouter>
         <Toaster />
-    </StrictMode>,
+    </>,
 );

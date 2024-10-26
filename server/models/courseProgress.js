@@ -9,9 +9,10 @@ const LectureProgressSchema = new mongoose.Schema({
 const CourseProgressSchema = new mongoose.Schema({
     studentId: String,
     courseId: String,
-    complated: Boolean,
     complationDate: Date,
     lectureProgress: [LectureProgressSchema],
+    isCourseComplatedOnce: Boolean,
+    playingLecture: Number,
 });
 
 module.exports = mongoose.model("Progress", CourseProgressSchema);
