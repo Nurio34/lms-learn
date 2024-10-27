@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useStudentContext } from "../../../../Context";
 import CourseCard from "../../../Components/CourseCard";
 

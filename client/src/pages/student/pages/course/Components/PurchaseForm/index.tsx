@@ -35,7 +35,7 @@ function PurchaseForm({ course, setIsPaymentFormOpen }: PurchaseFormType) {
             },
             buyer: {
                 ...prev.buyer,
-                id: user.id,
+                id: user._id,
                 lastLoginDate: user.lastLoginDate,
             },
             billingAddress: {

@@ -23,7 +23,7 @@ function LoadingAnimation({
     }, [isAnim]);
 
     const [animMap, setAnimMap] = useState<{ [key: number]: number }>(() => {
-        return loading.split("").reduce((obj, item, ind) => {
+        return loading.split("").reduce((obj, _, ind) => {
             obj[ind] = 0;
             return obj;
         }, {} as { [key: number]: number });
@@ -32,7 +32,7 @@ function LoadingAnimation({
     useEffect(() => {
         if (Object.values(animMap).every((item) => item === 1)) {
             setAnimMap(
-                loading.split("").reduce((obj, item, ind) => {
+                loading.split("").reduce((obj, _, ind) => {
                     obj[ind] = 0;
                     return obj;
                 }, {} as { [key: number]: number }),

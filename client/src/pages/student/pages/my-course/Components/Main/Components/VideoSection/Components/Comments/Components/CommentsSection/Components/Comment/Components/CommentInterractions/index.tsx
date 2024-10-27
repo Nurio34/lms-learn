@@ -1,6 +1,7 @@
 import LikeButton from "./LikeButton";
 import {
     CommentType,
+    DislikeType,
     LikeType,
 } from "../../../../../../../../../../../../Context/Hooks/useComment";
 import DislikeButton from "./DislikeButton";
@@ -14,8 +15,12 @@ function CommentInterractions({
     comment: CommentType;
     setIsReplying: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-    const [likes, setLikes] = useState<LikeType[]>(comment.likes);
-    const [dislikes, setDislikes] = useState<LikeType[]>(comment.dislikes);
+    const [likes, setLikes] = useState<LikeType[]>(
+        comment.likes || ([] as LikeType[]),
+    );
+    const [dislikes, setDislikes] = useState<DislikeType[]>(
+        comment.dislikes || ([] as DislikeType[]),
+    );
 
     return (
         <div className="flex items-center gap-3">
