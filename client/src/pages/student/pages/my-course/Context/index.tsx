@@ -4,6 +4,7 @@ import useCourse, { ProgressType } from "./Hooks/useCourse";
 import { CourseType, LectureType } from "../../../../../types/course";
 import useHeader from "./Hooks/useHeader";
 import useComment, { CommentType } from "./Hooks/useComment";
+import { UserType } from "../../../../../GlobalContext";
 
 type ProgressContextType = {
     isLoading: boolean;
@@ -28,7 +29,11 @@ type ProgressContextType = {
     comments: CommentType[];
     setComments: React.Dispatch<React.SetStateAction<CommentType[]>>;
     sendComment: (comment: string) => Promise<void>;
-    sendReply: (comment: string) => Promise<void>;
+    sendReply: (
+        comment: string,
+        commentToReply: CommentType,
+        userToReply: UserType,
+    ) => Promise<void>;
 };
 
 const ProgressContext = createContext({} as ProgressContextType);

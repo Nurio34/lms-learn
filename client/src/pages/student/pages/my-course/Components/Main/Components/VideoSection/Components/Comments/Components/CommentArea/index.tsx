@@ -4,15 +4,24 @@ import EmojiComponent from "./Components/EmojiComponent";
 import CancelButton from "./Components/CancelButton";
 import CommitTheCommentButton from "./Components/CommitTheCommentButton";
 import { useEffect, useRef, useState } from "react";
+import { CommentType } from "../../../../../../../../Context/Hooks/useComment";
+import { UserType } from "../../../../../../../../../../../../GlobalContext";
 
-function CommentArea({ isReplying }: { isReplying?: boolean }) {
+function CommentArea({
+    isReplying = true,
+    commentToReply,
+    userToReply,
+}: {
+    isReplying?: boolean;
+    commentToReply?: CommentType;
+    userToReply?: UserType;
+}) {
     const [isTextAreaFocused, setIsTextAreaFocused] = useState(false);
     const [comment, setComment] = useState("");
     const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
     const [commentType, setCommentType] = useState<"comment" | "reply">(
         "comment",
     );
-
     const CommentAreaRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
@@ -68,6 +77,8 @@ function CommentArea({ isReplying }: { isReplying?: boolean }) {
                                         }
                                         comment={comment}
                                         commentType={commentType}
+                                        commentToReply={commentToReply}
+                                        userToReply={userToReply}
                                     />
                                 </div>
                             </div>

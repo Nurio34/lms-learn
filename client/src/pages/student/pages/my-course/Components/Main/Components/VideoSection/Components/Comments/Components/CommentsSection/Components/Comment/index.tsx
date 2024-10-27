@@ -11,7 +11,7 @@ import CommentArea from "../../../CommentArea";
 
 function Comment({ comment }: { comment: CommentType }) {
     const [user, setUser] = useState({} as UserType);
-    const [isReplying, setIsReplying] = useState(false);
+    const [isReplying, setIsReplying] = useState(true);
 
     const getUserInfo = async () => {
         try {
@@ -48,7 +48,11 @@ function Comment({ comment }: { comment: CommentType }) {
                     setIsReplying={setIsReplying}
                 />
                 <div className="py-2">
-                    <CommentArea isReplying={isReplying} />
+                    <CommentArea
+                        isReplying={isReplying}
+                        commentToReply={comment}
+                        userToReply={user}
+                    />
                 </div>
             </div>
         </li>

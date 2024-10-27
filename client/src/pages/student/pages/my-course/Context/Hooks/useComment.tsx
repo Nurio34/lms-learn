@@ -2,6 +2,7 @@ import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../../../../../../services/axios";
 import toast from "react-hot-toast";
+import { UserType } from "../../../../../../GlobalContext";
 
 export type LikeType = {
     studentId: string;
@@ -77,12 +78,22 @@ const useComment = (courseId: string, lectureId: string | undefined) => {
     //! ********************
 
     //! *** SEND COMMENT ***
-    const sendReply = async (comment: string) => {
+    const sendReply = async (
+        comment: string,
+        commentToReply: CommentType,
+        userToReply: UserType,
+    ) => {
+        console.log({ userToReply });
         try {
             const response = await axiosInstance.post("/comment/reply", {
-                courseId,
-                lectureId,
-                comment,
+                courseId: commentToReply.courseId,
+                lectureId: commentToReply.lectureId,
+                commentId: commentToReply._id,
+                reply: {
+                    studentId: userToReply._id,
+                    studentName: userToReply.username,
+                    comment,
+                },
             });
 
             if (response.data.success) {

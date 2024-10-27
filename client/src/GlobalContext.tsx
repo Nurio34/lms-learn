@@ -3,7 +3,7 @@ import useInstructerActiveTab from "./Hooks/useInstructerActiveTab";
 import { ActiveTabType } from "./pages/instructer/InstructerContext";
 
 export type UserType = {
-    id: string;
+    _id: string;
     username: string;
     email: string;
     role: string;
@@ -13,7 +13,7 @@ export type UserType = {
 };
 
 export const initialUser: UserType = {
-    id: "",
+    _id: "",
     username: "",
     email: "",
     role: "",
