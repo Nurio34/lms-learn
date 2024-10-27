@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { ActiveTabType } from "../pages/instructer/InstructerContext";
-import Dashboard from "../pages/instructer/Components/Dashboard";
+import Courses from "../pages/instructer/Components/Courses";
 
 const useInstructerActiveTab = () => {
-    const [activeTab, setActiveTab] = useState<ActiveTabType>("dashboard");
+    const [activeTab, setActiveTab] = useState<ActiveTabType>("courses");
     const [activeComponent, setActiveComponent] = useState<JSX.Element>(
-        <Dashboard />,
+        <Courses />,
     );
 
     return { activeTab, setActiveTab, activeComponent, setActiveComponent };

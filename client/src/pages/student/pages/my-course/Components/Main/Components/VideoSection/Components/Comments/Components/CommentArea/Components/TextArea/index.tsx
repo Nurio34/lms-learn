@@ -1,16 +1,19 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
+import React, { useEffect } from "react";
+import { useProgressContext } from "../../../../../../../../../../Context";
 
 function TextArea({
     isTextAreaFocused,
     setIsTextAreaFocused,
     comment,
     setComment,
+    commentToEdit,
 }: {
     isTextAreaFocused: boolean;
     setIsTextAreaFocused: React.Dispatch<React.SetStateAction<boolean>>;
     comment: string;
     setComment: React.Dispatch<React.SetStateAction<string>>;
+    commentToEdit?: string;
 }) {
     const handleInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
         const target = e.currentTarget;
@@ -18,16 +21,36 @@ function TextArea({
         target.style.height = `${target.scrollHeight}px`;
     };
 
+    const { errors, setErrors } = useProgressContext();
+
+    useEffect(() => {
+        if (commentToEdit) {
+            setComment(commentToEdit);
+        }
+    }, [commentToEdit]);
+
     return (
         <div>
             <div className=" relative">
                 <textarea
                     name="comment"
                     id="comment"
-                    placeholder="Comment here ..."
-                    className="w-full bg-transparent text-white outline-none resize-none"
+                    placeholder={
+                        errors?.filter(
+                            (arr) => arr[0] === "comment",
+                        )[0]?.[1]?.[0] || "Comment Here ..."
+                    }
+                    className={`w-full bg-transparent text-white outline-none resize-none
+                        ${
+                            errors?.filter(
+                                (arr) => arr[0] === "comment",
+                            )[0]?.[1]?.[0] &&
+                            "placeholder:text-red-500 placeholder:font-bold placeholder:text-sm"
+                        }
+                        `}
                     onFocus={() => {
                         setIsTextAreaFocused(true);
+                        setErrors([]);
                     }}
                     onInput={handleInput}
                     onChange={(e) => {

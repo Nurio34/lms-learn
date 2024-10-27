@@ -7,21 +7,19 @@ const DislikeSchema = new mongoose.Schema({
     studentId: String,
 });
 
-const ReplySchema = new mongoose.Schema({
-    studentId: String,
-    comment: String,
-    likes: [LikeSchema],
-});
-
 const CommentSchema = new mongoose.Schema(
     {
         courseId: String,
         lectureId: String,
-        studentId: String,
+        studentId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        commentType: String,
         comment: String,
+        repliedCommentId: String,
+        repliedStudentId: String,
+        repliedStudentName: String,
+        mainCommentId: String,
         likes: [LikeSchema],
         dislikes: [DislikeSchema],
-        replies: [ReplySchema],
     },
     { timestamps: true },
 );

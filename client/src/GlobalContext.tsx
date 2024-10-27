@@ -1,16 +1,20 @@
 import { createContext, useContext, useState } from "react";
 import useInstructerActiveTab from "./Hooks/useInstructerActiveTab";
 import { ActiveTabType } from "./pages/instructer/InstructerContext";
+import { z } from "zod";
 
-export type UserType = {
-    _id: string;
-    username: string;
-    email: string;
-    role: string;
-    iat: number;
-    exp: number;
-    lastLoginDate: string;
-};
+export const UserSchema = z.object({
+    _id: z.string().min(1, "User ID is required."),
+    id: z.string().optional(),
+    username: z.string().min(1, "Username is required."),
+    email: z.string().email("Invalid email format."),
+    role: z.string().min(1, "Role is required."),
+    iat: z.number().int("Issued At (iat) must be an integer."),
+    exp: z.number().int("Expiration (exp) must be an integer."),
+    lastLoginDate: z.string().min(1, "Last login date is required."),
+});
+
+export type UserType = z.infer<typeof UserSchema>;
 
 export const initialUser: UserType = {
     _id: "",

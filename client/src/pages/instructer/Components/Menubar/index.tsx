@@ -1,6 +1,4 @@
-import { GoGraph } from "react-icons/go";
 import { SiGoogledisplayandvideo360 } from "react-icons/si";
-import Dashboard from "../Dashboard";
 import MenuButton from "./Components/MenuButton";
 import { ActiveTabType } from "../../InstructerContext";
 import Courses from "../Courses";
@@ -14,12 +12,12 @@ export type MenuItemType = {
 
 function Menubar() {
     const MenuItems = [
-        {
-            icon: <GoGraph />,
-            label: "Dashboard",
-            value: "dashboard" as ActiveTabType,
-            component: <Dashboard />,
-        },
+        // {
+        //     icon: <GoGraph />,
+        //     label: "Dashboard",
+        //     value: "dashboard" as ActiveTabType,
+        //     component: <Dashboard />,
+        // },
         {
             icon: <SiGoogledisplayandvideo360 />,
             label: "Courses",

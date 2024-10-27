@@ -28,12 +28,22 @@ type ProgressContextType = {
     updatePlayingLecture: (index: number) => Promise<void>;
     comments: CommentType[];
     setComments: React.Dispatch<React.SetStateAction<CommentType[]>>;
-    sendComment: (comment: string) => Promise<void>;
+    sendComment: (
+        comment: string,
+        commentType: "comment" | "reply",
+    ) => Promise<void>;
     sendReply: (
+        commentType: "comment" | "reply",
+
         comment: string,
         commentToReply: CommentType,
         userToReply: UserType,
+        mainCommentId: string,
     ) => Promise<void>;
+    errors: any[];
+    setErrors: React.Dispatch<React.SetStateAction<any[]>>;
+    editComment: (commentId: string, comment: string) => Promise<void>;
+    deleteComment: (commentId: string) => Promise<void>;
 };
 
 const ProgressContext = createContext({} as ProgressContextType);
@@ -60,10 +70,16 @@ function ProgressContextProvider({ children }: ProgressContextProviderType) {
     } = useCourse();
     const { isSideMenuOpen, toggleSideMenu } = useSideMenu();
     const { headerHeight, getHeaderHeight } = useHeader();
-    const { comments, setComments, sendComment, sendReply } = useComment(
-        myCourse._id,
-        playingLecture?._id,
-    );
+    const {
+        comments,
+        setComments,
+        sendComment,
+        sendReply,
+        errors,
+        setErrors,
+        editComment,
+        deleteComment,
+    } = useComment(myCourse._id, playingLecture?._id);
 
     return (
         <ProgressContext.Provider
@@ -89,6 +105,10 @@ function ProgressContextProvider({ children }: ProgressContextProviderType) {
                 setComments,
                 sendComment,
                 sendReply,
+                errors,
+                setErrors,
+                editComment,
+                deleteComment,
             }}
         >
             {children}

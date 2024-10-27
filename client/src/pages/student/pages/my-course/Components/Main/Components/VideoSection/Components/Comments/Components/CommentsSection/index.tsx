@@ -8,7 +8,9 @@ function CommentsSection() {
         <section className="CommentsSection">
             <ul className=" space-y-4">
                 {comments.map((comment) => {
-                    return <Comment key={comment._id} comment={comment} />;
+                    if (comment.commentType === "comment") {
+                        return <Comment key={comment._id} comment={comment} />;
+                    }
                 })}
             </ul>
         </section>

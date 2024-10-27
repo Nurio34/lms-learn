@@ -48,7 +48,7 @@ const sendComment = async (req, res) => {
     const token = authHeader.split(" ")[1];
     const { id } = jwt.verify(token, JWT_SECRET);
     const studentId = id;
-    const { courseId, lectureId, comment } = req.body;
+    const { courseId, lectureId, commentType, comment } = req.body;
 
     try {
         //! *** CREATE COMMENT ***
@@ -56,6 +56,7 @@ const sendComment = async (req, res) => {
             courseId,
             lectureId,
             studentId,
+            commentType,
             comment,
         });
 
@@ -99,44 +100,57 @@ const sendReply = async (req, res) => {
     const token = authHeader.split(" ")[1];
     const { id } = jwt.verify(token, JWT_SECRET);
     const studentId = id;
-    const { courseId, lectureId, comment } = req.body;
-    console.log({ courseId, lectureId, comment });
-    //! Here i am !!!
+    const {
+        courseId,
+        lectureId,
+        commentType,
+        comment,
+        repliedCommentId,
+        repliedStudentId,
+        repliedStudentName,
+        mainCommentId,
+    } = req.body;
+    console.log({ mainCommentId });
 
-    // try {
-    //     //! *** CREATE COMMENT ***
-    //     const NewComment = CommentSchema({
-    //         courseId,
-    //         lectureId,
-    //         studentId,
-    //         comment,
-    //     });
+    try {
+        //! *** CREATE COMMENT ***
+        const NewComment = CommentSchema({
+            courseId,
+            lectureId,
+            studentId,
+            commentType,
+            comment,
+            repliedCommentId,
+            repliedStudentId,
+            repliedStudentName,
+            mainCommentId,
+        });
 
-    //     await NewComment.save();
+        await NewComment.save();
 
-    //     if (!NewComment) {
-    //         return res.status(404).json({
-    //             success: false,
-    //             message:
-    //                 "An error ocured while sending comment ! Try again ...",
-    //         });
-    //     }
-    //     //! *************************
+        if (!NewComment) {
+            return res.status(404).json({
+                success: false,
+                message:
+                    "An error ocured while sending comment ! Try again ...",
+            });
+        }
+        //! *************************
 
-    //     //! *** RETURN ALL COMMENTS OF THAT LECTURE TO CLIENT ***
-    //     const AllLectureComments = await CommentSchema.find({ lectureId });
+        //! *** RETURN ALL COMMENTS OF THAT LECTURE TO CLIENT ***
+        const AllLectureComments = await CommentSchema.find({ lectureId });
 
-    //     return res.status(201).json({
-    //         success: true,
-    //         message: "Comment sent successfully ...",
-    //         comments: AllLectureComments,
-    //     });
-    // } catch (error) {
-    //     return res.status(500).json({
-    //         success: false,
-    //         message: "Unexpected Network Error !",
-    //     });
-    // }
+        return res.status(201).json({
+            success: true,
+            message: "Reply sent successfully ...",
+            comments: AllLectureComments,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Unexpected Network Error !",
+        });
+    }
 };
 
 const likeComment = async (req, res) => {
@@ -276,10 +290,162 @@ const dislikeComment = async (req, res) => {
     }
 };
 
+const fetchRepliesOfComment = async (req, res) => {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+        return res.status(401).json({
+            success: false,
+            message: "Unauthorized action !",
+        });
+    }
+
+    const { commentId } = req.params;
+
+    try {
+        const Replies = await CommentSchema.find({
+            repliedCommentId: commentId,
+        }).populate("studentId");
+
+        if (!Replies) {
+            return res.status(404).json({
+                success: false,
+                message: "An error occured while fetchRepliesOfComment!",
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Replies got successfully ...",
+            replies: Replies,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Unexpected error while fetchRepliesOfComment!",
+        });
+    }
+};
+
+const editComment = async (req, res) => {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+        return res.status(401).json({
+            success: false,
+            message: "Unauthorized action !",
+        });
+    }
+
+    const token = authHeader.split(" ")[1];
+    const { id } = jwt.verify(token, JWT_SECRET);
+
+    const { commentId, lectureId, comment } = req.body;
+    console.log({ commentId, lectureId, comment });
+
+    try {
+        //! *** EDIT COMMENT ***
+        const EditedComment = await CommentSchema.findByIdAndUpdate(
+            commentId,
+            { comment },
+            { new: true, runValidators: true },
+        );
+
+        if (!EditedComment) {
+            return res.status(404).json({
+                success: false,
+                message:
+                    "An error ocured while sending comment ! Try again ...",
+            });
+        }
+
+        console.log({ EditedComment });
+
+        //! *************************
+
+        //! *** RETURN ALL COMMENTS OF THAT LECTURE TO CLIENT ***
+        const AllLectureComments = await CommentSchema.find({
+            lectureId,
+        }).populate("studentId");
+
+        return res.status(200).json({
+            success: true,
+            message: "Comment updated successfully ...",
+            comments: AllLectureComments,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Unexpected Network Error !",
+        });
+    }
+};
+
+const deleteComment = async (req, res) => {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+        return res.status(401).json({
+            success: false,
+            message: "Unauthorized action !",
+        });
+    }
+
+    const token = authHeader.split(" ")[1];
+    const { id } = jwt.verify(token, JWT_SECRET);
+
+    const { commentId, lectureId } = req.body;
+
+    try {
+        //! *** DELETE COMMENT ***
+        const DeletedComment = await CommentSchema.findByIdAndDelete(commentId);
+
+        if (DeletedComment.commentType === "comment") {
+            const DeleteAllReletadComments = await CommentSchema.deleteMany({
+                mainCommentId: DeletedComment._id,
+            });
+        } else {
+            await CommentSchema.deleteMany({
+                mainCommentId: DeletedComment.mainCommentId,
+                createdAt: { $gt: DeletedComment.createdAt },
+            });
+        }
+
+        if (!DeletedComment) {
+            return res.status(404).json({
+                success: false,
+                message:
+                    "An error ocured while sending comment ! Try again ...",
+            });
+        }
+
+        //! *************************
+
+        //! *** RETURN ALL COMMENTS OF THAT LECTURE TO CLIENT ***
+        const AllLectureComments = await CommentSchema.find({
+            lectureId,
+        }).populate("studentId");
+
+        return res.status(200).json({
+            success: true,
+            message: "Comment deleted successfully ...",
+            comments: AllLectureComments,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Unexpected Network Error !",
+        });
+    }
+};
+
 module.exports = {
     fetchComments,
     sendComment,
     sendReply,
     likeComment,
     dislikeComment,
+    fetchRepliesOfComment,
+    editComment,
+    deleteComment,
 };

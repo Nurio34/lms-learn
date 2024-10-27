@@ -4,23 +4,27 @@ import { UserType } from "../../../../../../../../../../../../../../GlobalContex
 import { AxiosError } from "axios";
 import axiosInstance from "../../../../../../../../../../../../../../../services/axios";
 import ProfilePicture from "./Components/ProfilePicture";
-import NameAndTime from "./Components/NameAndTime";
 import TheComment from "./Components/TheComment";
 import CommentInterractions from "./Components/CommentInterractions";
 import CommentArea from "../../../CommentArea";
+import Replies from "./Components/Replies";
+import NameTimeUpdateDelete from "./Components/NameTimeUpdateDelete";
 
 function Comment({ comment }: { comment: CommentType }) {
-    const [user, setUser] = useState({} as UserType);
+    const [commentOwner, setCommentOwner] = useState({} as UserType);
     const [isReplying, setIsReplying] = useState(true);
+    const [isEditing, setIsEditing] = useState(false);
+    const [commentToEdit, setCommentToEdit] = useState("");
+    const [editingCommentId, setEditingCommentId] = useState("");
 
     const getUserInfo = async () => {
         try {
             const response = await axiosInstance(
-                `/auth/get-user-info/${comment.studentId}`,
+                `/auth/get-user-info/${comment.studentId!._id}`,
             );
 
             if (response.data.success) {
-                setUser(response.data.user);
+                setCommentOwner(response.data.user);
             }
         } catch (error) {
             if (error instanceof AxiosError) {
@@ -30,32 +34,53 @@ function Comment({ comment }: { comment: CommentType }) {
     };
 
     useEffect(() => {
-        getUserInfo();
-        setIsReplying(false);
-    }, []);
+        if (comment.studentId?._id) {
+            getUserInfo();
+            setIsReplying(false);
+        }
+    }, [comment]);
 
     return (
-        <li className="flex gap-3">
-            <ProfilePicture />
-            <div className="grow">
-                <NameAndTime
-                    username={user.username}
-                    commentTime={comment.updatedAt}
+        <>
+            {isEditing ? (
+                <CommentArea
+                    isEditing={isEditing}
+                    commentToEdit={commentToEdit}
+                    editingCommentId={editingCommentId}
+                    setIsEditing={setIsEditing}
                 />
-                <TheComment comment={comment.comment} />
-                <CommentInterractions
-                    comment={comment}
-                    setIsReplying={setIsReplying}
-                />
-                <div className="py-2">
-                    <CommentArea
-                        isReplying={isReplying}
-                        commentToReply={comment}
-                        userToReply={user}
-                    />
-                </div>
-            </div>
-        </li>
+            ) : (
+                <li className="flex gap-3">
+                    <ProfilePicture />
+                    <div className="grow">
+                        <NameTimeUpdateDelete
+                            commentOwner={commentOwner}
+                            comment={comment}
+                            setIsEditing={setIsEditing}
+                            setCommentToEdit={setCommentToEdit}
+                            setEditingCommentId={setEditingCommentId}
+                        />
+                        <TheComment comment={comment.comment} />
+                        <CommentInterractions
+                            comment={comment}
+                            setIsReplying={setIsReplying}
+                        />
+                        <div className="py-2">
+                            <CommentArea
+                                isReplying={isReplying}
+                                commentToReply={comment}
+                                userToReply={commentOwner}
+                                setIsReplying={setIsReplying}
+                                mainCommentId={
+                                    comment.mainCommentId || comment._id
+                                }
+                            />
+                        </div>
+                        {<Replies comment={comment} />}
+                    </div>
+                </li>
+            )}
+        </>
     );
 }
 

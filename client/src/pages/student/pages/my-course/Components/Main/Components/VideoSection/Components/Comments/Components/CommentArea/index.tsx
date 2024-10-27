@@ -11,10 +11,22 @@ function CommentArea({
     isReplying = true,
     commentToReply,
     userToReply,
+    setIsReplying,
+    isEditing,
+    commentToEdit,
+    editingCommentId,
+    setIsEditing,
+    mainCommentId,
 }: {
     isReplying?: boolean;
     commentToReply?: CommentType;
     userToReply?: UserType;
+    setIsReplying?: React.Dispatch<React.SetStateAction<boolean>>;
+    isEditing?: boolean;
+    commentToEdit?: string;
+    editingCommentId?: string;
+    setIsEditing?: React.Dispatch<React.SetStateAction<boolean>>;
+    mainCommentId?: string;
 }) {
     const [isTextAreaFocused, setIsTextAreaFocused] = useState(false);
     const [comment, setComment] = useState("");
@@ -34,6 +46,12 @@ function CommentArea({
         }
     }, []);
 
+    useEffect(() => {
+        if (isEditing) {
+            setIsTextAreaFocused(true);
+        }
+    }, [isEditing]);
+
     return (
         <>
             {isReplying && (
@@ -48,6 +66,7 @@ function CommentArea({
                             setIsTextAreaFocused={setIsTextAreaFocused}
                             comment={comment}
                             setComment={setComment}
+                            commentToEdit={commentToEdit}
                         />
                         {isTextAreaFocused && (
                             <div className=" flex items-center justify-between">
@@ -66,6 +85,8 @@ function CommentArea({
                                         setIsEmojiPickerOpen={
                                             setIsEmojiPickerOpen
                                         }
+                                        setIsReplying={setIsReplying}
+                                        setIsEditing={setIsEditing}
                                     />
                                     <CommitTheCommentButton
                                         setIsTextAreaFocused={
@@ -79,6 +100,11 @@ function CommentArea({
                                         commentType={commentType}
                                         commentToReply={commentToReply}
                                         userToReply={userToReply}
+                                        setIsReplying={setIsReplying}
+                                        isEditing={isEditing}
+                                        editingCommentId={editingCommentId}
+                                        setIsEditing={setIsEditing}
+                                        mainCommentId={mainCommentId}
                                     />
                                 </div>
                             </div>
