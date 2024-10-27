@@ -100,7 +100,7 @@ const useCourse = () => {
                         ].lectureId,
                 );
             } else {
-                const lecture = myCourse.lectures[progress.playingLecture | 0];
+                const lecture = myCourse.lectures[progress.playingLecture];
                 setPlayingLecture(lecture);
             }
         }
@@ -112,7 +112,18 @@ const useCourse = () => {
         try {
             const response = await axiosInstance.post(
                 `/my-courses/update-progress/${myCourse._id}`,
-                { lectureId: playingLecture?._id },
+                {
+                    lectureId: playingLecture?._id,
+                    nextLectureIndex: progress.lectureProgress.reduce(
+                        (acc, lecture, index) => {
+                            if (lecture.lectureId === playingLecture?._id) {
+                                acc = index + 1;
+                            }
+                            return acc;
+                        },
+                        0,
+                    ),
+                },
             );
 
             toast.success(response.data.message);
@@ -161,7 +172,6 @@ const useCourse = () => {
                 `/my-courses/update-playingLecture/${myCourse._id}/${index}`,
             );
             setMyCourseProgress(response.data.progress);
-            console.log(response);
         } catch (error) {
             console.log(error);
         }

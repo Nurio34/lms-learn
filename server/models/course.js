@@ -94,6 +94,7 @@ const CourseSchema = new mongoose.Schema(
             type: Boolean,
             default: true,
         },
+        comments: [String],
     },
     { timestamps: true },
 );

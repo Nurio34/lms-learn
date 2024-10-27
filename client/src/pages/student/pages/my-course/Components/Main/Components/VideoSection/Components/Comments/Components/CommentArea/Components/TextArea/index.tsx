@@ -1,28 +1,21 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
-import { useProgressContext } from "../../../../../../../../../../Context";
 
-function TextArea() {
-    const {
-        isTextAreaFocused,
-        setIsTextAreaFocused,
-        comment,
-        setComment,
-        setIndexToPutEmoji,
-        setClickCount,
-        setIsEmojiPickerOpen,
-    } = useProgressContext();
-
+function TextArea({
+    isTextAreaFocused,
+    setIsTextAreaFocused,
+    comment,
+    setComment,
+}: {
+    isTextAreaFocused: boolean;
+    setIsTextAreaFocused: React.Dispatch<React.SetStateAction<boolean>>;
+    comment: string;
+    setComment: React.Dispatch<React.SetStateAction<string>>;
+}) {
     const handleInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
         const target = e.currentTarget;
 
         target.style.height = `${target.scrollHeight}px`;
-    };
-
-    const handleClick = (e: React.MouseEvent<HTMLTextAreaElement>) => {
-        const position = e.currentTarget.selectionStart;
-        setIndexToPutEmoji(position);
-        setClickCount((pre) => pre + 1);
     };
 
     return (
@@ -41,7 +34,6 @@ function TextArea() {
                         setComment(e.target.value);
                     }}
                     value={comment}
-                    onClick={handleClick}
                 ></textarea>
                 <div className="absolute w-full h-[1px] bg-black"></div>
                 <div className="absolute w-full h-[2px] grid grid-cols-2">

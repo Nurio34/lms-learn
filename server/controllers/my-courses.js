@@ -87,6 +87,7 @@ const fetchMyCourse = async (req, res) => {
                         viewedDate: "",
                     };
                 }),
+                playingLecture: 0,
             });
             await NewCurrentCourseProgress.save();
             return res.status(200).json({
@@ -126,7 +127,7 @@ const updateProgress = async (req, res) => {
     const { id } = jwt.verify(token, JWT_SECRET);
     const studentId = id;
     const { courseId } = req.params;
-    const { lectureId } = req.body;
+    const { lectureId, nextLectureIndex } = req.body;
 
     try {
         const CurrentProgress = await CourseProgress.findOneAndUpdate(
@@ -136,6 +137,7 @@ const updateProgress = async (req, res) => {
                     "lectureProgress.$.viewed": true,
                     "lectureProgress.$.viewedDate": new Date(),
                 },
+                playingLecture: nextLectureIndex,
             },
             { new: true },
         );
@@ -181,6 +183,7 @@ const resetProgress = async (req, res) => {
                     "lectureProgress.$[lastLecture].viewed": true,
                     isCourseComplatedOnce: true,
                 },
+                playingLecture: 0,
             },
             {
                 new: true,

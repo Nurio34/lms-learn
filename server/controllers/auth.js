@@ -111,4 +111,35 @@ const login = async (req, res) => {
     });
 };
 
-module.exports = { signup, login };
+const getUserInfo = async (req, res) => {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader) {
+        return res.status(401).json({
+            success: false,
+            message: "Unauthorized action !",
+        });
+    }
+
+    const { userId } = req.params;
+
+    try {
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "An error occured while getUserInfo !",
+            });
+        }
+
+        return res.status(200).json({ success: true, user });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Unexpected network error while getUserInfo !",
+        });
+    }
+};
+
+module.exports = { signup, login, getUserInfo };

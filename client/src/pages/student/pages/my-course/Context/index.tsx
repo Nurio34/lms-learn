@@ -3,7 +3,7 @@ import useSideMenu from "./Hooks/useSideMenu";
 import useCourse, { ProgressType } from "./Hooks/useCourse";
 import { CourseType, LectureType } from "../../../../../types/course";
 import useHeader from "./Hooks/useHeader";
-import useComment from "./Hooks/useComment";
+import useComment, { CommentType } from "./Hooks/useComment";
 
 type ProgressContextType = {
     isLoading: boolean;
@@ -25,18 +25,10 @@ type ProgressContextType = {
     setIsCourseComplated: React.Dispatch<React.SetStateAction<boolean>>;
     resetProgress: () => Promise<void>;
     updatePlayingLecture: (index: number) => Promise<void>;
-    isTextAreaFocused: boolean;
-    setIsTextAreaFocused: React.Dispatch<React.SetStateAction<boolean>>;
-    comment: string;
-    setComment: React.Dispatch<React.SetStateAction<string>>;
-    indexToPutEmoji: number;
-    setIndexToPutEmoji: React.Dispatch<React.SetStateAction<number>>;
-    isAnyIndexSelected: boolean;
-    setIsAnyIndexSelected: React.Dispatch<React.SetStateAction<boolean>>;
-    clickCount: number;
-    setClickCount: React.Dispatch<React.SetStateAction<number>>;
-    isEmojiPickerOpen: boolean;
-    setIsEmojiPickerOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    comments: CommentType[];
+    setComments: React.Dispatch<React.SetStateAction<CommentType[]>>;
+    sendComment: (comment: string) => Promise<void>;
+    sendReply: (comment: string) => Promise<void>;
 };
 
 const ProgressContext = createContext({} as ProgressContextType);
@@ -63,20 +55,11 @@ function ProgressContextProvider({ children }: ProgressContextProviderType) {
     } = useCourse();
     const { isSideMenuOpen, toggleSideMenu } = useSideMenu();
     const { headerHeight, getHeaderHeight } = useHeader();
-    const {
-        isTextAreaFocused,
-        setIsTextAreaFocused,
-        comment,
-        setComment,
-        indexToPutEmoji,
-        setIndexToPutEmoji,
-        isAnyIndexSelected,
-        setIsAnyIndexSelected,
-        clickCount,
-        setClickCount,
-        isEmojiPickerOpen,
-        setIsEmojiPickerOpen,
-    } = useComment();
+    const { comments, setComments, sendComment, sendReply } = useComment(
+        myCourse._id,
+        playingLecture?._id,
+    );
+
     return (
         <ProgressContext.Provider
             value={{
@@ -97,18 +80,10 @@ function ProgressContextProvider({ children }: ProgressContextProviderType) {
                 setIsCourseComplated,
                 resetProgress,
                 updatePlayingLecture,
-                isTextAreaFocused,
-                setIsTextAreaFocused,
-                comment,
-                setComment,
-                indexToPutEmoji,
-                setIndexToPutEmoji,
-                isAnyIndexSelected,
-                setIsAnyIndexSelected,
-                clickCount,
-                setClickCount,
-                isEmojiPickerOpen,
-                setIsEmojiPickerOpen,
+                comments,
+                setComments,
+                sendComment,
+                sendReply,
             }}
         >
             {children}
