@@ -6,7 +6,13 @@ type DeleteButtoType = {
 
 function DeleteButton({ courseId }: DeleteButtoType) {
     return (
-        <button type="button" title="Delete">
+        <button
+            type="button"
+            title="Delete"
+            onClick={() => {
+                console.log(courseId);
+            }}
+        >
             <RiChatDeleteFill
                 size={20}
                 color="red"
