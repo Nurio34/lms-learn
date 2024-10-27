@@ -21,7 +21,7 @@ const CLIENT_URL = process.env.CLIENT_URL;
 //! --- CORS CONFIGURATION  ---
 app.use(
     cors({
-        origin: [CLIENT_URL],
+        origin: "*",
         methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
         allowedHeaders: ["Content-Type", "Authorization"],
     }),
