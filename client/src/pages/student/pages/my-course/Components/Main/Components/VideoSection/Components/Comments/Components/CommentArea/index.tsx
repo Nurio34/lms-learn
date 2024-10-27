@@ -5,7 +5,7 @@ import CancelButton from "./Components/CancelButton";
 import CommitTheCommentButton from "./Components/CommitTheCommentButton";
 import { useEffect, useRef, useState } from "react";
 
-function CommentArea() {
+function CommentArea({ isReplying }: { isReplying?: boolean }) {
     const [isTextAreaFocused, setIsTextAreaFocused] = useState(false);
     const [comment, setComment] = useState("");
     const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
@@ -26,44 +26,56 @@ function CommentArea() {
     }, []);
 
     return (
-        <div
-            ref={CommentAreaRef}
-            className="grid grid-cols-[auto,1fr] gap-x-3 "
-        >
-            <ProfileImage />
-            <div className=" space-y-2">
-                <TextArea
-                    isTextAreaFocused={isTextAreaFocused}
-                    setIsTextAreaFocused={setIsTextAreaFocused}
-                    comment={comment}
-                    setComment={setComment}
-                />
-                {isTextAreaFocused && (
-                    <div className=" flex items-center justify-between">
-                        <EmojiComponent
+        <>
+            {isReplying && (
+                <div
+                    ref={CommentAreaRef}
+                    className="grid grid-cols-[auto,1fr] gap-x-3 "
+                >
+                    <ProfileImage />
+                    <div className=" space-y-2">
+                        <TextArea
+                            isTextAreaFocused={isTextAreaFocused}
                             setIsTextAreaFocused={setIsTextAreaFocused}
+                            comment={comment}
                             setComment={setComment}
-                            isEmojiPickerOpen={isEmojiPickerOpen}
-                            setIsEmojiPickerOpen={setIsEmojiPickerOpen}
                         />
-                        <div className="space-x-3">
-                            <CancelButton
-                                setIsTextAreaFocused={setIsTextAreaFocused}
-                                setComment={setComment}
-                                setIsEmojiPickerOpen={setIsEmojiPickerOpen}
-                            />
-                            <CommitTheCommentButton
-                                setIsTextAreaFocused={setIsTextAreaFocused}
-                                setComment={setComment}
-                                setIsEmojiPickerOpen={setIsEmojiPickerOpen}
-                                comment={comment}
-                                commentType={commentType}
-                            />
-                        </div>
+                        {isTextAreaFocused && (
+                            <div className=" flex items-center justify-between">
+                                <EmojiComponent
+                                    setIsTextAreaFocused={setIsTextAreaFocused}
+                                    setComment={setComment}
+                                    isEmojiPickerOpen={isEmojiPickerOpen}
+                                    setIsEmojiPickerOpen={setIsEmojiPickerOpen}
+                                />
+                                <div className="space-x-3">
+                                    <CancelButton
+                                        setIsTextAreaFocused={
+                                            setIsTextAreaFocused
+                                        }
+                                        setComment={setComment}
+                                        setIsEmojiPickerOpen={
+                                            setIsEmojiPickerOpen
+                                        }
+                                    />
+                                    <CommitTheCommentButton
+                                        setIsTextAreaFocused={
+                                            setIsTextAreaFocused
+                                        }
+                                        setComment={setComment}
+                                        setIsEmojiPickerOpen={
+                                            setIsEmojiPickerOpen
+                                        }
+                                        comment={comment}
+                                        commentType={commentType}
+                                    />
+                                </div>
+                            </div>
+                        )}
                     </div>
-                )}
-            </div>
-        </div>
+                </div>
+            )}
+        </>
     );
 }
 

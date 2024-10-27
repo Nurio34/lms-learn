@@ -5,8 +5,15 @@ import {
 } from "../../../../../../../../../../../../Context/Hooks/useComment";
 import DislikeButton from "./DislikeButton";
 import { useState } from "react";
+import ReplyButton from "./ReplyButton";
 
-function CommentInterractions({ comment }: { comment: CommentType }) {
+function CommentInterractions({
+    comment,
+    setIsReplying,
+}: {
+    comment: CommentType;
+    setIsReplying: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
     const [likes, setLikes] = useState<LikeType[]>(comment.likes);
     const [dislikes, setDislikes] = useState<LikeType[]>(comment.dislikes);
 
@@ -24,9 +31,7 @@ function CommentInterractions({ comment }: { comment: CommentType }) {
                 setLikes={setLikes}
                 setDislikes={setDislikes}
             />
-            <button type="button" className="font-bold text-sm">
-                Reply
-            </button>
+            <ReplyButton setIsReplying={setIsReplying} />
         </div>
     );
 }
