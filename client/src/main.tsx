@@ -2,7 +2,7 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { BrowserRouter, HashRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import GlobalProvider from "./GlobalContext.tsx";
 import InstructerProvider from "./pages/instructer/InstructerContext.tsx";
