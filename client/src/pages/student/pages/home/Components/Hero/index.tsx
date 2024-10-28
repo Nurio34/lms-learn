@@ -78,13 +78,10 @@ function Hero() {
 
             <figure className=" rounded-xl overflow-hidden">
                 <picture>
-                    <source
-                        media="(min-width: 1225px)"
-                        srcSet="public/hero.webp"
-                    />
+                    <source media="(min-width: 1225px)" srcSet="/hero.webp" />
 
                     <img
-                        src="public/hero_small_screen.webp"
+                        src="/hero_small_screen.webp"
                         alt="Description of the image"
                         className=" h-full"
                     />

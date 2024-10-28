@@ -68,7 +68,7 @@ function PaymentCardForm({
                 <figure className=" relative">
                     <div className=" absolute">
                         <img
-                            src="/public/credit_card/bg-card-back.png"
+                            src="/credit_card/bg-card-back.png"
                             alt=""
                             className=" w-3/4"
                         />
@@ -78,7 +78,7 @@ function PaymentCardForm({
                     </div>
                     <div className=" absolute top-28 left-20 ">
                         <img
-                            src="/public/credit_card/bg-card-front.png"
+                            src="/credit_card/bg-card-front.png"
                             alt=""
                             className=" "
                         />
