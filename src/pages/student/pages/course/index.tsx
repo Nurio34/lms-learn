@@ -22,10 +22,9 @@ function StudentCoursePage() {
     const { filteredCourses } = useStudentContext();
 
     const course = filteredCourses.filter((c) => c._id === courseId)[0];
-    console.log(course);
 
     const checkIfThisCourseAlreadyBought = async () => {
-        if (course.students.some((student) => student.id === user.id)) {
+        if (course?.students?.some((student) => student.id === user.id)) {
             navigate(`/student/my-courses/${courseId}`);
             return;
         } else {
