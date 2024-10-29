@@ -160,7 +160,7 @@ function AddressForm({
                         </p>
                     </label>
                 </div>
-                <div className="flex gap-3">
+                <div className=" space-y-3 md:space-y-0 md:flex gap-3">
                     <div>
                         <label htmlFor="country" className=" grow">
                             <input
@@ -168,7 +168,7 @@ function AddressForm({
                                 name="country"
                                 id="country"
                                 placeholder="Country ..."
-                                className=" py-1 px-3 rounded-md grow"
+                                className=" py-1 px-3 rounded-md grow w-full"
                                 value={purchaseForm.buyer.country}
                                 onChange={(e) => {
                                     setPurchaseForm((prev) => ({
@@ -192,7 +192,7 @@ function AddressForm({
                                 name="city"
                                 id="city"
                                 placeholder="City ..."
-                                className=" py-1 px-3 rounded-md grow"
+                                className=" py-1 px-3 rounded-md grow w-full"
                                 value={purchaseForm.buyer.city}
                                 onChange={(e) => {
                                     setPurchaseForm((prev) => ({

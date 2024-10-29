@@ -57,7 +57,7 @@ function LoadingAnimation({
         };
     }, [isPurchased]);
     return (
-        <div className="h-full">
+        <div className="h-48">
             {isPurchased ? (
                 <div className="grid justify-items-center gap-6 pt-10">
                     <SiTicktick size={100} color="green" />

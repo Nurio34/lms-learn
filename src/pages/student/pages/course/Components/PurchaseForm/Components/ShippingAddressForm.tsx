@@ -16,13 +16,11 @@ function ShippingAddressForm({
         const ShippingAddressValidationResult = ShippingAddressSchema.safeParse(
             purchaseForm.shippingAddress,
         );
-
         if (!ShippingAddressValidationResult.success) {
             setErrors({
                 ...ShippingAddressValidationResult.error.flatten().fieldErrors,
             });
         }
-
         if (ShippingAddressValidationResult.success) {
             makePaymentRequest();
         }
