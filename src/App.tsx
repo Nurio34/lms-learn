@@ -11,6 +11,7 @@ import StudentCoursesPage from "./pages/student/pages/courses";
 import StudentCoursePage from "./pages/student/pages/course";
 import MyCoursesPage from "./pages/student/pages/my-courses";
 import MyCoursePage from "./pages/student/pages/my-course";
+import BackgroundImage from "./components/BackgroundImage";
 
 function App() {
     const { authenticated, user } = useGlobalContext();
@@ -64,6 +65,7 @@ function App() {
 
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
+            <BackgroundImage />
         </div>
     );
 }

@@ -11,14 +11,14 @@ function AuthPage() {
     const [activeTab, setActiveTab] = useState("signup");
     const [userInfo, setUserInfo] = useState({
         login: {
-            email: "nuri@mail.com",
-            password: "1234",
+            email: "",
+            password: "",
         },
         signup: {
-            username: "nuri",
-            email: "nuri@mail.com",
-            password: "1234",
-            confirmPassword: "1234",
+            username: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
         },
     });
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -106,7 +106,7 @@ function AuthPage() {
     return (
         <div className="flex justify-center items-center md:min-h-[600px] ">
             <form
-                className="grid justify-items-center gap-3 border-2 py-8 px-[3vw] rounded-lg shadow-md"
+                className="grid justify-items-center gap-3 border-2 py-8 px-[3vw] rounded-lg shadow-md bg-white"
                 onSubmit={handleSubmit}
             >
                 <AuthTabs

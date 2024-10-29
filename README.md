@@ -1,50 +1,79 @@
-# React + TypeScript + Vite
+# Online Learning Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is an online learning platform similar to Udemy, where users can register either as instructors to create courses or as students to purchase and watch courses. It provides a full learning experience with user authentication, course creation, video streaming, and progress tracking.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Authentication
 
-## Expanding the ESLint configuration
+-   Users can register and log in as either an instructor or student.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Student Role
 
-- Configure the top-level `parserOptions` property like this:
+-   **Homepage**: Redirected to a personalized homepage after login.
+-   **Explore Courses**: Browse a catalog of all available courses.
+-   **Course Details**: Watch a free preview video and purchase the course if desired.
+-   **My Courses**: View a list of purchased courses.
+-   **Course Progress**:
+    -   Access and watch all lectures.
+    -   Track progress visually.
+    -   Engage with course content by leaving, replying to, and liking comments on videos.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Instructor Role
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+-   **Instructor Homepage**: Access a dashboard with a table listing the instructor's courses, the number of enrolled students, and total profit for each course.
+-   **Create New Course**:
+    -   Open a form to create a new course.
+    -   Upload lectures, videos, and a banner image.
+    -   Enter course information, including title, description, and pricing.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Tech Stack
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### Frontend
+
+-   **React.js & Vite**: Frontend framework and build tool for a fast, modular application.
+-   **react-router-dom**: For seamless navigation and routing within the app.
+-   **react-player**: Customized video player for streaming lectures and previews.
+-   **Tailwind CSS & daisyUI**: For responsive and styled UI components.
+-   **TypeScript**: Provides type safety and improved development experience.
+-   **Zod**: Schema-based validation for form and API data.
+-   **Framer Motion**: Smooth animations for a polished user experience.
+
+### Backend
+
+-   **Express.js & Mongoose**: REST API and database modeling with MongoDB.
+-   **cors**: Enables secure cross-origin resource sharing.
+-   **bcryptjs**: Hashes passwords for secure storage.
+-   **jsonwebtoken**: Handles user authentication with tokens.
+-   **Cloudinary**: Manages media storage for course images and video content.
+-   **iyzico**: Manages secure payment processing.
+
+### Database
+
+-   **MongoDB**: NoSQL database for storing users, courses, and progress data.
+
+## Screenshots
+
+-   #### Auth Page
+
+    ![Auth Page](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730243528/1_jrjqut.gif)
+
+-   #### Explore Courses
+
+    ![Alt](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730243534/s1_vkkeky.gif)
+
+-   #### Course Details
+
+    ![Alt](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730243530/s2_uhajoc.gif)
+
+-   #### Course Progress
+
+    ![Alt](Link)
+
+-   #### Course Creation Form
+
+    ![Alt](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730243528/i1_k1q9la.gif)
+
+-   #### Course Update
+    ![Alt](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730243526/i2_nouzbp.gif)
+    [Live at : https://lms-learn.vercel.app](https://lms-learn.vercel.app/)
