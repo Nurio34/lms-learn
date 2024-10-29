@@ -7,30 +7,29 @@ import { useEffect, useState } from "react";
 import { LectureType } from "../../../../types/course";
 import PurchaseButton from "./Components/PurchaseButton";
 import PurchaseForm from "./Components/PurchaseForm";
-import axiosInstance from "../../../../../services/axios";
 import { SiTicktick } from "react-icons/si";
+import { useGlobalContext } from "../../../../GlobalContext";
 
 function StudentCoursePage() {
+    const { user } = useGlobalContext();
+
     const { courseId } = useParams();
 
     //! *** IF STUDENT ALREADY BOUGHT THIS COURSE, REDIRECT TO MY-COURSE PAGE ***
     const [isCourseAlreadyBought, setIsCourseAlreadyBought] = useState(true);
     const navigate = useNavigate();
 
-    const checkIfThisCourseAlreadyBought = async () => {
-        try {
-            const response = await axiosInstance(
-                `/course/check-already-bought-course/${courseId}`,
-            );
+    const { filteredCourses } = useStudentContext();
 
-            if (response.data.data) {
-                navigate(`/student/my-courses/${courseId}`);
-                return;
-            } else {
-                setIsCourseAlreadyBought(false);
-            }
-        } catch (error) {
-            console.log(error);
+    const course = filteredCourses.filter((c) => c._id === courseId)[0];
+    console.log(course);
+
+    const checkIfThisCourseAlreadyBought = async () => {
+        if (course.students.some((student) => student.id === user.id)) {
+            navigate(`/student/my-courses/${courseId}`);
+            return;
+        } else {
+            setIsCourseAlreadyBought(false);
         }
     };
 
@@ -39,10 +38,6 @@ function StudentCoursePage() {
     }, []);
 
     //! *************************************************************************
-
-    const { filteredCourses } = useStudentContext();
-
-    const course = filteredCourses.filter((c) => c._id === courseId)[0];
 
     const [currentLecture, setCurrentLecture] = useState<LectureType>(
         {} as LectureType,
