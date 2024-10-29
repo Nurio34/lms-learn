@@ -7,7 +7,9 @@ function Video() {
     return (
         <section>
             <VideoPlayer lecture={playingLecture!} />
-            <p className="c-subtitle">{playingLecture?.title}</p>
+            <p className="c-subtitle px-[1vw] md:px-0">
+                {playingLecture?.title}
+            </p>
         </section>
     );
 }

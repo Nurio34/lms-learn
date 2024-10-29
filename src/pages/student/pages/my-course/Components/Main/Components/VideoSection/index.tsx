@@ -13,7 +13,7 @@ function VideoSection() {
     if (myCourse._id)
         return (
             <section
-                className="grow bg-[rgba(0,0,0,0.8)] text-white px-[12vw] pt-[2vh] overflow-y-scroll"
+                className="grow bg-[rgba(0,0,0,0.8)] text-white md:px-[12vw] md:pt-[2vh] overflow-y-scroll"
                 style={{ scrollbarWidth: "none" }}
             >
                 <Video />

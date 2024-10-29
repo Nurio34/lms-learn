@@ -16,7 +16,7 @@ function App() {
     const { authenticated, user } = useGlobalContext();
 
     return (
-        <div className="m-3">
+        <div className="md:m-3">
             <HiddenCredentials />
             <Header />
             <Routes>

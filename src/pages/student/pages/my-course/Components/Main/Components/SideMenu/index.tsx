@@ -22,7 +22,7 @@ function SideMenu() {
             {isSideMenuOpen && (
                 <motion.aside
                     ref={SideMenuRef}
-                    className=" shadow-lg py-1 pl-3 pr-9 bg-[rgba(255,255,255,0.8)] absolute  right-0 md:relative"
+                    className=" shadow-lg py-1 pl-3 pr-9 bg-white md:bg-[rgba(255,255,255,0.8)] absolute  right-0 md:relative"
                     style={{ minHeight: sideMenuHeight }}
                     initial={{ x: "100%" }}
                     animate={{ x: 0 }}

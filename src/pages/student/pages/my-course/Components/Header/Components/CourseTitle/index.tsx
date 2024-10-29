@@ -5,7 +5,7 @@ function CourseTitle() {
 
     return (
         <h1
-            className={`c-title ${
+            className={`c-title truncate ${
                 isLoading && "min-w-32 min-h-10 bg-gray-100 animate-pulse"
             }`}
         >

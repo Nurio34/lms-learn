@@ -12,6 +12,7 @@ function AddressForm({
 
     const ValidateAndNext = () => {
         const BuyerValidationResult = BuyerSchema.safeParse(purchaseForm.buyer);
+        console.log(BuyerValidationResult);
 
         if (!BuyerValidationResult.success) {
             setErrors({
@@ -28,15 +29,15 @@ function AddressForm({
         <>
             <fieldset className=" text-black grid gap-3">
                 <legend>Buyer Information</legend>
-                <div className="flex gap-3">
+                <div className="space-y-3 md:space-y-0 md:flex gap-3">
                     <div>
-                        <label htmlFor="name" className=" grow">
+                        <label htmlFor="name" className=" grow w-full">
                             <input
                                 type="text"
                                 name="name"
                                 id="name"
                                 placeholder="Name ..."
-                                className=" py-1 px-3 rounded-md grow"
+                                className=" py-1 px-3 rounded-md grow w-full"
                                 value={purchaseForm.buyer.name}
                                 onChange={(e) => {
                                     setPurchaseForm((prev) => ({
@@ -54,13 +55,13 @@ function AddressForm({
                         </p>
                     </div>
                     <div>
-                        <label htmlFor="surname" className=" grow">
+                        <label htmlFor="surname" className=" grow w-full">
                             <input
                                 type="text"
                                 name="surname"
                                 id="surname"
                                 placeholder="Surname ..."
-                                className=" py-1 px-3 rounded-md grow"
+                                className=" py-1 px-3 rounded-md grow w-full"
                                 value={purchaseForm.buyer.surname}
                                 onChange={(e) => {
                                     setPurchaseForm((prev) => ({
@@ -78,15 +79,18 @@ function AddressForm({
                         </label>
                     </div>
                 </div>
-                <div className="flex gap-3">
+                <div className="space-y-3 md:space-y-0 md:flex gap-3">
                     <div>
-                        <label htmlFor="identityNumber" className=" grow">
+                        <label
+                            htmlFor="identityNumber"
+                            className=" grow w-full"
+                        >
                             <input
                                 type="tel"
                                 name="identityNumber"
                                 id="identityNumber"
                                 placeholder="Idendity Number ..."
-                                className=" py-1 px-3 rounded-md grow"
+                                className=" py-1 px-3 rounded-md grow w-full"
                                 maxLength={11}
                                 value={purchaseForm.buyer.identityNumber}
                                 onChange={(e) => {
@@ -107,13 +111,13 @@ function AddressForm({
                         </label>
                     </div>
                     <div>
-                        <label htmlFor="gsmNumber" className=" grow">
+                        <label htmlFor="gsmNumber" className=" grow w-full">
                             <input
                                 type="tel"
                                 name="gsmNumber"
                                 id="gsmNumber"
                                 placeholder="Gsm Number ..."
-                                className=" py-1 px-3 rounded-md grow"
+                                className=" py-1 px-3 rounded-md grow w-full"
                                 maxLength={13}
                                 value={purchaseForm.buyer.gsmNumber?.toString()}
                                 onChange={(e) => {

@@ -2,13 +2,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useStudentContext } from "../../Context";
 import { FaGlobe, FaLock, FaPlayCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { AiOutlineFileDone } from "react-icons/ai";
 import VideoPlayer from "../../../../components/ReactPlayer";
 import { useEffect, useState } from "react";
 import { LectureType } from "../../../../types/course";
 import PurchaseButton from "./Components/PurchaseButton";
 import PurchaseForm from "./Components/PurchaseForm";
 import axiosInstance from "../../../../../services/axios";
+import { SiTicktick } from "react-icons/si";
 
 function StudentCoursePage() {
     const { courseId } = useParams();
@@ -64,7 +64,7 @@ function StudentCoursePage() {
         <>
             {!isCourseAlreadyBought && (
                 <main className=" space-y-10">
-                    <header className="bg-primary text-primary-content py-6 px-12 rounded-lg space-y-1">
+                    <header className="bg-primary text-primary-content py-[2vh] px-[2vw] rounded-lg space-y-1">
                         <hgroup className=" space-y-1">
                             <h1 className=" font-bold text-2xl">
                                 {course.title}
@@ -74,7 +74,7 @@ function StudentCoursePage() {
                             </h2>
                         </hgroup>
 
-                        <div className=" flex gap-12 text-lg px-6">
+                        <div className=" md:flex gap-12 text-lg px-6">
                             <p>
                                 Released at{" "}
                                 {new Date(
@@ -104,15 +104,15 @@ function StudentCoursePage() {
                             </p>
                         </div>
                     </header>
-                    <div className=" flex gap-10 ">
+                    <div className="space-y-[2vh] lg:space-y-0 lg:flex items-start gap-10 ">
                         <div className=" space-y-10 grow">
-                            <section className=" space-y-3 bg-secondary text-secondary-content py-6 px-12 rounded-lg">
+                            <section className=" space-y-3 bg-secondary text-secondary-content py-[2vh] px-[2vw] rounded-lg">
                                 <h2 className=" text-xl font-semibold">
                                     What you will learn
                                 </h2>
-                                <ul className=" grid grid-cols-2 gap-3 px-3">
+                                <ul className=" grid gap-3 px-3">
                                     {course.objectives
-                                        .split(".")
+                                        .split("**")
                                         .map((item, index) => {
                                             if (
                                                 index <
@@ -123,21 +123,19 @@ function StudentCoursePage() {
                                                 return (
                                                     <li
                                                         key={index}
-                                                        className="flex gap-3 items-center"
+                                                        className="flex gap-1 items-center"
                                                     >
-                                                        <span className=" bg-green-500 rounded-md p-1">
-                                                            <AiOutlineFileDone
-                                                                size={26}
-                                                            />
+                                                        <span className="  rounded-full p-1">
+                                                            <SiTicktick color="rgb(0,255,0)" />
                                                         </span>
-                                                        <p>{item}.</p>
+                                                        <p>{item}</p>
                                                     </li>
                                                 );
                                             }
                                         })}
                                 </ul>
                             </section>
-                            <section className=" bg-accent text-accent-content py-6 px-12 rounded-lg space-y-3">
+                            <section className=" bg-accent text-accent-contentpy-[2vh] px-[2vw] rounded-lg space-y-3">
                                 <h2 className=" text-xl font-semibold">
                                     Curriculum
                                 </h2>
@@ -182,8 +180,8 @@ function StudentCoursePage() {
                                 setIsPaymentFormOpen={setIsPaymentFormOpen}
                             />
                         ) : (
-                            <div className="py-3 px-6 bg-black rounded-lg grid gap-3">
-                                <div className=" w-[452px]">
+                            <div className="py-3 px-6 bg-black rounded-lg grid gap-3 ">
+                                <div className=" md:w-[452px]">
                                     <VideoPlayer lecture={currentLecture} />
                                 </div>
                                 <PurchaseButton

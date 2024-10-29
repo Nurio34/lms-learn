@@ -117,7 +117,7 @@ export const initialPaymentCard: PaymentCardType = {
 };
 
 export const BuyerSchema = z.object({
-    id: z.string().min(1, "ID is required."),
+    id: z.string().min(1, "ID is required.").optional(),
     name: z.string().min(1, "Name is required."),
     surname: z.string().min(1, "Surname is required."),
     gsmNumber: z

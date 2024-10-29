@@ -35,7 +35,7 @@ function PurchaseForm({ course, setIsPaymentFormOpen }: PurchaseFormType) {
             },
             buyer: {
                 ...prev.buyer,
-                id: user._id,
+                id: user.id,
                 lastLoginDate: user.lastLoginDate,
             },
             billingAddress: {
@@ -86,10 +86,10 @@ function PurchaseForm({ course, setIsPaymentFormOpen }: PurchaseFormType) {
     };
 
     return (
-        <div className=" bg-black rounded-lg text-white py-3 px-9 w-[50%] max-w-[500px] space-y-3">
+        <div className=" bg-black rounded-lg text-white py-3 px-9 md:w-[50%] md:max-w-[500px] space-y-3">
             <div className=" relative">
                 <h1
-                    className=" text-center text-xl font-semibold"
+                    className=" md:text-center text-xl font-semibold"
                     style={{ fontVariant: "small-caps" }}
                 >
                     Purchase Form

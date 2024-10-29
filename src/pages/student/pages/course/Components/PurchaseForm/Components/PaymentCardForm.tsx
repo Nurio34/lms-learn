@@ -64,7 +64,7 @@ function PaymentCardForm({
 
     return (
         <div className=" space-y-3">
-            <div className="min-h-80">
+            <div className="min-h-[40vh] md:min-h-80">
                 <figure className=" relative">
                     <div className=" absolute">
                         <img
@@ -84,28 +84,32 @@ function PaymentCardForm({
                         />
                         <div
                             className="absolute top-[20px] left-[25px] font-semibold text-white
-                            flex items-center gap-3
+                            flex items-center gap-[2vw] md:gap-3
                         "
                         >
-                            <div className=" w-9 aspect-square rounded-full bg-gray-300"></div>
-                            <div className=" w-7 aspect-square rounded-full bg-gray-100"></div>
+                            <div className="w-[5vw] md:w-9 aspect-square rounded-full bg-gray-300"></div>
+                            <div className="w-[3vw] md:w-7 aspect-square rounded-full bg-gray-100"></div>
                         </div>
-                        <div className="absolute top-[74px] left-[50px] font-semibold text-white ">
+                        <div className="absolute top-[6vh] md:top-[74px] left-[9vw] md:left-[50px] font-semibold text-white ">
                             <div
-                                className=" capitalize"
+                                className=" capitalize text-xs md:text-base"
                                 style={{ fontVariant: "small-caps" }}
                             >
                                 {purchaseForm.paymentCard.cardHolderName}
                             </div>
-                            <div>{formatCardNumber()}</div>
+                            <div className="text-xs md:text-base">
+                                {formatCardNumber()}
+                            </div>
                             <div className=" flex gap-1">
-                                <div>
+                                <div className="text-xs md:text-base">
                                     {purchaseForm.paymentCard.expireMonth}
                                 </div>
                                 {purchaseForm.paymentCard.expireMonth && (
-                                    <span>/</span>
+                                    <span className="text-xs md:text-base">
+                                        /
+                                    </span>
                                 )}
-                                <div>
+                                <div className="text-xs md:text-base">
                                     {purchaseForm.paymentCard.expireYear
                                         .toString()
                                         .slice(2)}

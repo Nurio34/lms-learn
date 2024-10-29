@@ -24,6 +24,7 @@ function LecturesList() {
                         )}
                         <button
                             type="button"
+                            className=" md:truncate"
                             onClick={() => updatePlayingLecture(index)}
                             disabled={!progress.isCourseComplatedOnce}
                         >
