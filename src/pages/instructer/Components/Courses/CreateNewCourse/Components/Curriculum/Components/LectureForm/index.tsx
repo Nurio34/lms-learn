@@ -35,10 +35,10 @@ function LectureForm({
                                     flex flex-col gap-3 "
         >
             <div className=" space-y-3">
-                <div className="flex items-center gap-6">
+                <div className="grid md:flex md:items-center md:gap-6">
                     <label
                         htmlFor={"title" + index}
-                        className=" flex gap-3 items-center w-1/3"
+                        className=" flex gap-3 items-center md:w-1/3"
                     >
                         <p className="font-semibold min-w-max">
                             Lecture {index + 1}
@@ -102,7 +102,7 @@ function LectureForm({
                         type="file"
                         name="video"
                         id="video"
-                        className="border-2  rounded-md"
+                        className="border-2  rounded-md max-w-full"
                         onChange={async (e) => {
                             const response = await uploadVideo(e, index);
 
@@ -121,8 +121,10 @@ function LectureForm({
                     ariaLabel="rotating-lines-loading"
                 />
             ) : uploadProgress !== 0 && curriculumForm[index].videoUrl ? (
-                <div className=" flex gap-6 items-center">
-                    <VideoPlayer lecture={lecture} />
+                <div className="  md:flex md:gap-6 md:items-center">
+                    <div className="md:max-w-96">
+                        <VideoPlayer lecture={lecture} />
+                    </div>
                     <ReplaceVideoButton
                         uploadVideo={uploadVideo}
                         deleteVideo={deleteVideo}

@@ -1,6 +1,6 @@
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { initialUser, useGlobalContext } from "../../../../GlobalContext";
-import Dashboard from "../../../../pages/instructer/Components/Dashboard";
+import Courses from "../../../../pages/instructer/Components/Courses";
 
 function LogoutButton() {
     const {
@@ -16,7 +16,7 @@ function LogoutButton() {
         setAuthenticated(false);
         setUser(initialUser);
         setActiveTab("dashboard");
-        setActiveComponent(<Dashboard />);
+        setActiveComponent(<Courses />);
     };
 
     return (

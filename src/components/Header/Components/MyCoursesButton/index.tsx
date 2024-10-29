@@ -8,7 +8,7 @@ function MyCoursesButton() {
     return (
         <Link
             to={"/student/my-courses"}
-            className="c-btn bg-[green] hover:bg-green-500 text-white
+            className="c-btn bg-[green] hover:bg-green-500 text-white min-w-max
                 flex items-center gap-3
             "
         >

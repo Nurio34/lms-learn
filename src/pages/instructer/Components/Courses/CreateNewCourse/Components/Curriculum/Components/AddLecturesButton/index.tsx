@@ -5,7 +5,10 @@ type AddLecturesButtonType = {
 function AddLecturesButton({ uploadVideos }: AddLecturesButtonType) {
     return (
         <div>
-            <button type="button">
+            <button
+                type="button"
+                className="c-btn bg-[orange] hover:bg-orange-500 text-white"
+            >
                 <label htmlFor="bulk-upload">
                     Add Lectures
                     <input

@@ -181,7 +181,7 @@ function Curriculum() {
 
     return (
         <form className="space-y-6">
-            <div>
+            <div className="flex gap-[4vw]">
                 <AddLectureButton
                     curriculumForm={curriculumForm}
                     setCurriculumForm={setCurriculumForm}

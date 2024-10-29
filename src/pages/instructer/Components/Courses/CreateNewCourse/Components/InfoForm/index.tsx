@@ -1,7 +1,9 @@
 import { InfoFormControls } from "../../../../../../../config";
+import { useGlobalContext } from "../../../../../../../GlobalContext";
 import { useInstructerContext } from "../../../../../InstructerContext";
 
 function InfoForm() {
+    const { isSmallScreen } = useGlobalContext();
     const { infoForm, setInfoForm } = useInstructerContext();
 
     return (
@@ -13,9 +15,11 @@ function InfoForm() {
                             htmlFor={item.name}
                             className="flex gap-3 items-center"
                         >
-                            <p className=" font-semibold text-lg min-w-[153px] text-end">
-                                {item.label}
-                            </p>
+                            {!isSmallScreen && (
+                                <p className=" font-semibold text-lg min-w-[153px] text-end">
+                                    {item.label}
+                                </p>
+                            )}
                             {item.componentType === "input" ? (
                                 <input
                                     type={item.type}

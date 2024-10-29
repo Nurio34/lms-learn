@@ -8,8 +8,13 @@ import {
     SettingsInitialData,
 } from "../../../../../../../config";
 import Dashboard from "../../..";
+import { useGlobalContext } from "../../../../../../../GlobalContext";
+import { MdOutlinePublish } from "react-icons/md";
+import { GrDocumentUpdate } from "react-icons/gr";
 
 function PublishButton() {
+    const { isSmallScreen } = useGlobalContext();
+
     const {
         curriculumForm,
         infoForm,
@@ -90,7 +95,17 @@ function PublishButton() {
             }
             onClick={publishCourse}
         >
-            {isEditing ? "Update" : "Publish"}
+            {isEditing ? (
+                isSmallScreen ? (
+                    <GrDocumentUpdate />
+                ) : (
+                    "Update"
+                )
+            ) : isSmallScreen ? (
+                <MdOutlinePublish />
+            ) : (
+                "Publish"
+            )}
         </button>
     );
 }

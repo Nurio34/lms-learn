@@ -16,7 +16,7 @@ function CreateNewCourse() {
         useInstructerContext();
 
     return (
-        <section className=" bg-white my-8 mx-16 py-3 px-6 rounded-l space-y-3 min-h-[760px]">
+        <section className=" bg-white md:my-8 md:mx-16 md:py-3 md:px-6 rounded-l space-y-3 min-h-[760px]">
             <div className="flex justify-between items-center border-b-2 shadow-sm pb-1  relative">
                 <h1 className=" text-2xl font-semibold">Create New Course</h1>
                 <div className=" space-x-3">
@@ -36,13 +36,17 @@ function CreateNewCourse() {
                 </div>
                 <ProgressBar />
             </div>
-            <div className=" flex items-center justify-between">
-                <TabButtons
-                    activeTab={createActiveTab}
-                    setActiveTab={setCreateActiveTab}
-                    setComponent={setComponent}
-                />
-                <PublishButton />
+            <div className="md:flex md:justify-between space-y-[1vh]">
+                <div>
+                    <TabButtons
+                        activeTab={createActiveTab}
+                        setActiveTab={setCreateActiveTab}
+                        setComponent={setComponent}
+                    />
+                </div>
+                <div className="flex justify-end">
+                    <PublishButton />
+                </div>
             </div>
 
             <ActiveTab component={component} />

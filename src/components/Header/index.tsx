@@ -41,10 +41,16 @@ function index() {
                     <Link to="/auth" className="flex items-center gap-3">
                         <IoIosSchool className=" text-6xl" />
                         {!isSmallScreen && (
-                            <p className=" font-bold text-3xl">LMS School</p>
+                            <p className=" font-bold text-3xl min-w-max">
+                                LMS School
+                            </p>
                         )}
                     </Link>
-                    <div className=" flex justify-between items-center grow gap-[6vw]">
+                    <div
+                        className={`flex ${
+                            isStudentView ? "justify-end" : "justify-end"
+                        } items-center grow gap-[6vw]`}
+                    >
                         {isStudentView && <ExploreCoursesButton />}
                         {isStudentView && <MyCoursesButton />}
                         {!isAuthPage && (

@@ -8,7 +8,7 @@ function ExploreCoursesButton() {
     return (
         <Link
             to={"/student/courses"}
-            className="c-btn bg-[purple] hover:bg-purple-500 text-white"
+            className="c-btn bg-[purple] hover:bg-purple-500 text-white min-w-max"
         >
             {isSmallScreen ? <FaWpexplorer size={24} /> : "Explore Courses"}
         </Link>

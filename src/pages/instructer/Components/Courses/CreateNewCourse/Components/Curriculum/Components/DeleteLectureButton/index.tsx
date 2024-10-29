@@ -57,7 +57,7 @@ function DeleteLectureButton({
             {deleteButtonVisibilityValidation() && (
                 <button
                     type="button"
-                    className={`ml-auto c-btn border-2
+                    className={`my-[2vh] md:my-auto md:ml-auto c-btn border-2 justify-self-end
                         ${
                             wannaDelete &&
                             " bg-[orange] text-white text-lg font-bold"

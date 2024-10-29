@@ -33,7 +33,7 @@ function TabButtons({ activeTab, setActiveTab, setComponent }: TabButtonsType) {
     ];
 
     return (
-        <div className="inline-grid grid-cols-[repeat(3,130px)] border-[1px] border-black rounded-md overflow-hidden">
+        <div className="grid md:inline-grid grid-cols-[repeat(3,1fr)] md:grid-cols-[repeat(3,130px)] border-[1px] border-black rounded-md overflow-hidden">
             {Tab_Buttons.map((item) => {
                 return (
                     <TabButton

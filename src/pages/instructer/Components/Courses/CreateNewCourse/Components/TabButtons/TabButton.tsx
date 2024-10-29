@@ -16,7 +16,7 @@ function TabButton({
     return (
         <button
             type="button"
-            className={`capitalize py-1 px-3 bg-gray-200  transition-all
+            className={`capitalize py-1 md:px-3 text-sm bg-gray-200  transition-all
                 ${
                     activeTab === item.value &&
                     "font-bold text-white bg-gray-950  shadow-white shadow-inner"
