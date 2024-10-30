@@ -12,12 +12,12 @@ const useFetchCourses = (isEditing: boolean) => {
     const fetchCourses = async () => {
         try {
             const response = await axiosInstance.get(`/course/get-courses`);
+
             setCourses(response.data.courses);
         } catch (error) {
             if (error instanceof AxiosError) {
                 console.log(error);
             }
-            console.log(error);
         }
     };
 

@@ -21,7 +21,7 @@ function Table() {
                     key={index}
                     className="grid grid-cols-4 justify-items-center items-center"
                 >
-                    <p className="capitalize">{course.title}</p>
+                    <p className={`capitalize text-center `}>{course.title}</p>
                     <p className="capitalize">
                         {course.students.length * +course.pricing}
                     </p>

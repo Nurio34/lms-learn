@@ -68,7 +68,7 @@ This project is an online learning platform similar to Udemy, where users can re
 
 -   #### Course Progress
 
-    ![Alt](Link)
+    ![Alt](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730327978/s3_wdxnxt.gif)
 
 -   #### Course Creation Form
 

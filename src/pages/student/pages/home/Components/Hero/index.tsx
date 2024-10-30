@@ -19,16 +19,16 @@ function Hero() {
 
     const { headerHeight, isSmallScreen } = useGlobalContext();
 
-    const windowHe = window.innerHeight - headerHeight;
+    const windowHe = window.innerHeight - headerHeight - 31;
 
     const fontStaticValue = isSmallScreen ? 8 : 16;
 
     return (
         <section
-            className="grid md:grid-cols-2 gap-3 py-[1vh] px-[4vw]"
+            className="grid md:grid-cols-2 gap-3 "
             style={{ minHeight: windowHe }}
         >
-            <div className=" self-center">
+            <div className=" self-center py-[1vh] px-[4vw]">
                 <h1
                     className=" text-2xl md:text-6xl pb-[4vh] font-bold md:max-w-[15ch]"
                     style={{ fontVariant: "small-caps" }}
@@ -81,14 +81,14 @@ function Hero() {
                 </ul>
             </div>
 
-            <figure className=" rounded-xl overflow-hidden">
-                <picture>
+            <figure className="  md:py-[1vh]">
+                <picture className=" block md:rounded-xl overflow-hidden h-full">
                     <source media="(min-width: 1225px)" srcSet="/hero.webp" />
 
                     <img
                         src="/hero_small_screen.webp"
                         alt="Description of the image"
-                        className=" h-full"
+                        className=" h-full "
                     />
                 </picture>
             </figure>
