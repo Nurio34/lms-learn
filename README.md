@@ -75,5 +75,8 @@ This project is an online learning platform similar to Udemy, where users can re
     ![Alt](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730243528/i1_k1q9la.gif)
 
 -   #### Course Update
+
     ![Alt](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730243526/i2_nouzbp.gif)
-    [Live at : https://lms-learn.vercel.app](https://lms-learn.vercel.app/)
+
+-   Live at [https://lms-learn.vercel.app](https://lms-learn.vercel.app/)
+-   Server Repository at [https://github.com/Nurio34/lms-learn-server](https://github.com/Nurio34/lms-learn-server)
