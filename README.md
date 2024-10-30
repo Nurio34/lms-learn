@@ -56,27 +56,28 @@ This project is an online learning platform similar to Udemy, where users can re
 
 -   #### Auth Page
 
-    ![Auth Page](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730243528/1_jrjqut.gif)
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/IYNQFh80CvU?si=O5CNizLJtOwtrLts" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 -   #### Explore Courses
 
-    ![Alt](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730243534/s1_vkkeky.gif)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0ButZ9ippzc?si=1B0EkEeCLLdhOLAl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 -   #### Course Details
 
-    ![Alt](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730243530/s2_uhajoc.gif)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8ZxYepEWUMA?si=UtGrk4DZZq-GjLbY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 -   #### Course Progress
 
-    ![Alt](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730327978/s3_wdxnxt.gif)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GC7oxkBHhvI?si=Upe1irU0tjYN5T74" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
--   #### Course Creation Form
+-   #### Create Course
 
-    ![Alt](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730243528/i1_k1q9la.gif)
+ <iframe width="560" height="315" src="https://www.youtube.com/embed/cjszHKSPpWA?si=GrotmtVH4rPbkr3S" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
--   #### Course Update
+-   #### Update Course
 
-    ![Alt](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730243526/i2_nouzbp.gif)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Kpq1AAVkpn8?si=wvJGi9eYqWWF36qo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
--   Live at [https://lms-learn.vercel.app](https://lms-learn.vercel.app/)
--   Server Repository at [https://github.com/Nurio34/lms-learn-server](https://github.com/Nurio34/lms-learn-server)
+###### Live at [https://lms-learn.vercel.app](https://lms-learn.vercel.app/)
+
+###### Server Repository at [https://github.com/Nurio34/lms-learn-server](https://github.com/Nurio34/lms-learn-server)

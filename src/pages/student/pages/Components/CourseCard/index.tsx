@@ -1,15 +1,12 @@
 import { Link } from "react-router-dom";
 import { CourseType } from "../../../../../types/course";
 import { motion } from "framer-motion";
-import { useGlobalContext } from "../../../../../GlobalContext";
 
 type CourseCardType = {
     course: CourseType;
 };
 
 function CourseCard({ course }: CourseCardType) {
-    const { isSmallScreen } = useGlobalContext();
-
     return (
         <motion.li
             className="md:rounded-xl overflow-hidden shadow-lg border-2 md:aspect-square "
