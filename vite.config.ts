@@ -10,13 +10,12 @@ export default defineConfig({
             registerType: "autoUpdate",
             manifest: {
                 name: "My LMS Learn App",
-                short_name: "PWA",
-                description: "Bring instructors and students together",
-                theme_color: "#ffffff",
-                background_color: "#ffffff",
+                short_name: "LMS Learn",
+                description: "My Vite + React LMS Learn application",
+                theme_color: "#000000",
+                background_color: "#000000",
                 display: "standalone",
-                orientation: "portrait",
-                start_url: "/",
+                start_url: "/?source=pwa",
                 scope: "/",
                 icons: [
                     {
