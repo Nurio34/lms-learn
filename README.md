@@ -56,27 +56,26 @@ This project is an online learning platform similar to Udemy, where users can re
 
 -   #### Auth Page
 
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/IYNQFh80CvU?si=O5CNizLJtOwtrLts" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    [![Auth Page](https://img.youtube.com/vi/IYNQFh80CvU/0.jpg)](https://www.youtube.com/watch?v=IYNQFh80CvU)
 
 -   #### Explore Courses
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/0ButZ9ippzc?si=1B0EkEeCLLdhOLAl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    [![Explore Courses](https://img.youtube.com/vi/0ButZ9ippzc/0.jpg)](https://www.youtube.com/watch?v=0ButZ9ippzc)
 
 -   #### Course Details
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/8ZxYepEWUMA?si=UtGrk4DZZq-GjLbY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    [![Course Details](https://img.youtube.com/vi/8ZxYepEWUMA/0.jpg)](https://www.youtube.com/watch?v=8ZxYepEWUMA)
 
 -   #### Course Progress
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/GC7oxkBHhvI?si=Upe1irU0tjYN5T74" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    [![Course Progress](https://img.youtube.com/vi/GC7oxkBHhvI/0.jpg)](https://www.youtube.com/watch?v=GC7oxkBHhvI)
 
 -   #### Create Course
 
- <iframe width="560" height="315" src="https://www.youtube.com/embed/cjszHKSPpWA?si=GrotmtVH4rPbkr3S" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    [![Create Course](https://img.youtube.com/vi/cjszHKSPpWA/0.jpg)](https://www.youtube.com/watch?v=cjszHKSPpWA)
 
 -   #### Update Course
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Kpq1AAVkpn8?si=wvJGi9eYqWWF36qo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    [![Update Course](https://img.youtube.com/vi/Kpq1AAVkpn8/0.jpg)](https://www.youtube.com/watch?v=Kpq1AAVkpn8)
 
 ###### Live at [https://lms-learn.vercel.app](https://lms-learn.vercel.app/)
 
