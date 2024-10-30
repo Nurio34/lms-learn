@@ -54,28 +54,36 @@ This project is an online learning platform similar to Udemy, where users can re
 
 ## Screenshots
 
+### Screenshots
+
 -   #### Auth Page
 
     [![Auth Page](https://img.youtube.com/vi/IYNQFh80CvU/0.jpg)](https://www.youtube.com/watch?v=IYNQFh80CvU)
+    **[Watch the Auth Page Video on YouTube](https://www.youtube.com/watch?v=IYNQFh80CvU)**
 
 -   #### Explore Courses
 
     [![Explore Courses](https://img.youtube.com/vi/0ButZ9ippzc/0.jpg)](https://www.youtube.com/watch?v=0ButZ9ippzc)
+    **[Watch the Explore Courses Video on YouTube](https://www.youtube.com/watch?v=0ButZ9ippzc)**
 
 -   #### Course Details
 
     [![Course Details](https://img.youtube.com/vi/8ZxYepEWUMA/0.jpg)](https://www.youtube.com/watch?v=8ZxYepEWUMA)
+    **[Watch the Course Details Video on YouTube](https://www.youtube.com/watch?v=8ZxYepEWUMA)**
 
 -   #### Course Progress
 
     [![Course Progress](https://img.youtube.com/vi/GC7oxkBHhvI/0.jpg)](https://www.youtube.com/watch?v=GC7oxkBHhvI)
+    **[Watch the Course Progress Video on YouTube](https://www.youtube.com/watch?v=GC7oxkBHhvI)**
 
 -   #### Create Course
 
     [![Create Course](https://img.youtube.com/vi/cjszHKSPpWA/0.jpg)](https://www.youtube.com/watch?v=cjszHKSPpWA)
+    **[Watch the Create Course Video on YouTube](https://www.youtube.com/watch?v=cjszHKSPpWA)**
 
 -   #### Update Course
     [![Update Course](https://img.youtube.com/vi/Kpq1AAVkpn8/0.jpg)](https://www.youtube.com/watch?v=Kpq1AAVkpn8)
+    **[Watch the Update Course Video on YouTube](https://www.youtube.com/watch?v=Kpq1AAVkpn8)**
 
 ###### Live at [https://lms-learn.vercel.app](https://lms-learn.vercel.app/)
 
