@@ -54,36 +54,28 @@ This project is an online learning platform similar to Udemy, where users can re
 
 ## Screenshots
 
-### Screenshots
-
 -   #### Auth Page
 
-    [![Auth Page](https://img.youtube.com/vi/IYNQFh80CvU/0.jpg)](https://www.youtube.com/watch?v=IYNQFh80CvU)
-    **[Watch the Auth Page Video on YouTube](https://www.youtube.com/watch?v=IYNQFh80CvU)**
+    [![Auth Page](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730331870/1_rulljg.png)](https://www.youtube.com/watch?v=IYNQFh80CvU)
 
 -   #### Explore Courses
 
-    [![Explore Courses](https://img.youtube.com/vi/0ButZ9ippzc/0.jpg)](https://www.youtube.com/watch?v=0ButZ9ippzc)
-    **[Watch the Explore Courses Video on YouTube](https://www.youtube.com/watch?v=0ButZ9ippzc)**
+    [![Explore Courses](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730331871/2_ub0ki7.png)](https://www.youtube.com/watch?v=0ButZ9ippzc)
 
 -   #### Course Details
 
-    [![Course Details](https://img.youtube.com/vi/8ZxYepEWUMA/0.jpg)](https://www.youtube.com/watch?v=8ZxYepEWUMA)
-    **[Watch the Course Details Video on YouTube](https://www.youtube.com/watch?v=8ZxYepEWUMA)**
+    [![Course Details](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730331871/3_a09lqj.png)](https://www.youtube.com/watch?v=8ZxYepEWUMA)
 
 -   #### Course Progress
 
-    [![Course Progress](https://img.youtube.com/vi/GC7oxkBHhvI/0.jpg)](https://www.youtube.com/watch?v=GC7oxkBHhvI)
-    **[Watch the Course Progress Video on YouTube](https://www.youtube.com/watch?v=GC7oxkBHhvI)**
+    [![Course Progress](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730331873/4_gpuxxz.png)](https://www.youtube.com/watch?v=GC7oxkBHhvI)
 
 -   #### Create Course
 
-    [![Create Course](https://img.youtube.com/vi/cjszHKSPpWA/0.jpg)](https://www.youtube.com/watch?v=cjszHKSPpWA)
-    **[Watch the Create Course Video on YouTube](https://www.youtube.com/watch?v=cjszHKSPpWA)**
+    [![Create Course](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730331869/5_wsldtp.png)](https://www.youtube.com/watch?v=cjszHKSPpWA)
 
 -   #### Update Course
-    [![Update Course](https://img.youtube.com/vi/Kpq1AAVkpn8/0.jpg)](https://www.youtube.com/watch?v=Kpq1AAVkpn8)
-    **[Watch the Update Course Video on YouTube](https://www.youtube.com/watch?v=Kpq1AAVkpn8)**
+    [![Update Course](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730331870/6_zavvgz.png)](https://www.youtube.com/watch?v=Kpq1AAVkpn8)
 
 ###### Live at [https://lms-learn.vercel.app](https://lms-learn.vercel.app/)
 
