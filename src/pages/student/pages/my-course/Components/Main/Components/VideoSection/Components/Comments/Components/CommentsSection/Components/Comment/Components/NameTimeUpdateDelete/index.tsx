@@ -27,16 +27,21 @@ function NameTimeUpdateDelete({
         const secs = Math.floor(diff % 60);
         const mins = Math.floor((diff / 60) % 60);
         const hours = Math.floor((diff / 3600) % 24);
+        const days = Math.floor(diff / 24 / 60 / 60);
 
-        if (hours === 0 && mins === 0) {
+        if (days < 0 && hours === 0 && mins === 0) {
             return `${secs} ${isSmallScreen ? "s" : "seconds"} ago`;
         }
 
-        if (hours === 0 && mins !== 0) {
+        if (days < 0 && hours === 0 && mins !== 0) {
             return `${mins} ${isSmallScreen ? "m" : "minutes"} ago`;
         }
-        if (hours !== 0) {
+        if (days < 0 && hours !== 0) {
             return `${hours} ${isSmallScreen ? "h" : "hours"} ago`;
+        }
+
+        if (days > 0) {
+            return `${days} ${isSmallScreen ? "d" : "days"} ago`;
         }
     }
 

@@ -9,11 +9,11 @@ export default defineConfig({
         VitePWA({
             registerType: "autoUpdate",
             manifest: {
-                name: "My LMS Learn App",
+                name: "LMS Learn",
                 short_name: "LMS Learn",
                 description: "My Vite + React LMS Learn application",
-                theme_color: "#ffffff",
-                background_color: "#ffffff",
+                theme_color: "#000000",
+                background_color: "#000000",
                 display: "standalone",
                 start_url: "/?source=pwa",
                 scope: "/",

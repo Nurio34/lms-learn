@@ -106,7 +106,9 @@ function AuthPage() {
     return (
         <div className="flex justify-center items-center md:min-h-[600px] ">
             <form
-                className="grid justify-items-center gap-3 border-2 py-8 px-[3vw] rounded-lg shadow-md bg-white"
+                className="grid justify-items-center gap-3 border-2 py-8 px-[3vw] rounded-lg shadow-md bg-white
+                    w-screen md:w-auto max-w-96 md:max-w-none mx-[2vw] md:mx-0 my-[2vh] md:my-0 
+                "
                 onSubmit={handleSubmit}
             >
                 <AuthTabs
@@ -117,19 +119,21 @@ function AuthPage() {
                 <h2 className="  uppercase font-bold text-xl">
                     {activeTab === "login" ? "login" : "sign-up"}
                 </h2>
-                <div className="grid gap-2 ">
+                <div className="grid gap-2 w-full">
                     {activeTab === "signup" && (
                         <label
                             htmlFor="username"
                             className=" font-semibold flex items-center gap-3 text-end"
                         >
-                            <span className=" min-w-36 ">Username</span>
+                            <span className=" min-w-36 hidden md:block  ">
+                                Username
+                            </span>
                             <input
                                 type="text"
                                 name="username"
                                 id="username"
                                 placeholder="Enter username..."
-                                className=" border-2 py-1 px-3 rounded-md"
+                                className=" border-2 py-1 px-3 rounded-md w-full md:w-auto"
                                 onChange={(e) => {
                                     setUserInfo((prevState) => {
                                         return {
@@ -150,13 +154,13 @@ function AuthPage() {
                         htmlFor="email"
                         className=" font-semibold flex items-center gap-3 text-end"
                     >
-                        <span className=" min-w-36 ">Email</span>
+                        <span className=" min-w-36 hidden md:block">Email</span>
                         <input
                             type="email"
                             name="email"
                             id="email"
                             placeholder="Enter email..."
-                            className=" border-2 py-1 px-3 rounded-md"
+                            className=" border-2 py-1 px-3 rounded-md w-full md:w-auto"
                             onChange={(e) => {
                                 if (activeTab === "login") {
                                     setUserInfo((prevState) => {
@@ -191,13 +195,15 @@ function AuthPage() {
                         htmlFor="password"
                         className=" font-semibold flex items-center gap-3 text-end"
                     >
-                        <span className=" min-w-36 ">Password</span>
+                        <span className=" min-w-36 hidden md:block">
+                            Password
+                        </span>
                         <input
                             type="password"
                             name="password"
                             id="password"
                             placeholder="Enter password..."
-                            className=" border-2 py-1 px-3 rounded-md"
+                            className=" border-2 py-1 px-3 rounded-md w-full md:w-auto"
                             onChange={(e) => {
                                 if (activeTab === "login") {
                                     setUserInfo((prevState) => {
@@ -233,13 +239,15 @@ function AuthPage() {
                             htmlFor="confirmPassword"
                             className="  font-semibold flex items-center gap-3 text-end"
                         >
-                            <span className=" min-w-36 ">Confirm Password</span>
+                            <span className=" min-w-36 hidden md:block">
+                                Confirm Password
+                            </span>
                             <input
                                 type="password"
                                 name="confirmPassword"
                                 id="confirmPassword"
                                 placeholder="Confirm the password..."
-                                className=" border-2 py-1 px-3 rounded-md"
+                                className=" border-2 py-1 px-3 rounded-md w-full md:w-auto"
                                 onChange={(e) => {
                                     setUserInfo((prevState) => {
                                         return {
