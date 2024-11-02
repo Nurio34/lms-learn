@@ -40,8 +40,8 @@ function index() {
                 >
                     <Link to="/auth" className="flex items-center gap-3">
                         <IoIosSchool className=" text-6xl" />
-                        {!isSmallScreen && (
-                            <p className=" font-bold text-3xl min-w-max">
+                        {(!isSmallScreen || isAuthPage) && (
+                            <p className="font-bold text-3xl min-w-max">
                                 LMS School
                             </p>
                         )}
