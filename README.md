@@ -52,31 +52,6 @@ This project is an online learning platform similar to Udemy, where users can re
 
 -   **MongoDB**: NoSQL database for storing users, courses, and progress data.
 
-## Screenshots
-
--   #### Auth Page
-
-    [![Auth Page](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730331870/1_rulljg.png)](https://www.youtube.com/watch?v=IYNQFh80CvU)
-
--   #### Explore Courses
-
-    [![Explore Courses](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730331871/2_ub0ki7.png)](https://www.youtube.com/watch?v=0ButZ9ippzc)
-
--   #### Course Details
-
-    [![Course Details](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730331871/3_a09lqj.png)](https://www.youtube.com/watch?v=8ZxYepEWUMA)
-
--   #### Course Progress
-
-    [![Course Progress](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730331873/4_gpuxxz.png)](https://www.youtube.com/watch?v=GC7oxkBHhvI)
-
--   #### Create Course
-
-    [![Create Course](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730331869/5_wsldtp.png)](https://www.youtube.com/watch?v=cjszHKSPpWA)
-
--   #### Update Course
-    [![Update Course](https://res.cloudinary.com/dmvfabr5i/image/upload/v1730331870/6_zavvgz.png)](https://www.youtube.com/watch?v=Kpq1AAVkpn8)
-
 ###### Live at [https://lms-learn.vercel.app](https://lms-learn.vercel.app/)
 
 ###### Server Repository at [https://github.com/Nurio34/lms-learn-server](https://github.com/Nurio34/lms-learn-server)
