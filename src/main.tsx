@@ -7,18 +7,20 @@ import { Toaster } from "react-hot-toast";
 import GlobalProvider from "./GlobalContext.tsx";
 import InstructerProvider from "./pages/instructer/InstructerContext.tsx";
 import StudentProvider from "./pages/student/Context/index.tsx";
+import Ping from "./components/Ping/index.tsx";
 
 createRoot(document.getElementById("root")!).render(
-    <>
-        <HashRouter>
-            <GlobalProvider>
-                <InstructerProvider>
-                    <StudentProvider>
-                        <App />
-                    </StudentProvider>
-                </InstructerProvider>
-            </GlobalProvider>
-        </HashRouter>
-        <Toaster />
-    </>,
+  <>
+    <HashRouter>
+      <GlobalProvider>
+        <InstructerProvider>
+          <StudentProvider>
+            <App />
+          </StudentProvider>
+        </InstructerProvider>
+      </GlobalProvider>
+    </HashRouter>
+    <Toaster toastOptions={{ duration: 5000 }} />
+    <Ping />
+  </>
 );
