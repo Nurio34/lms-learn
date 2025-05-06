@@ -12,6 +12,7 @@ function AddressForm({
 
   const ValidateAndNext = () => {
     const BuyerValidationResult = BuyerSchema.safeParse(purchaseForm.buyer);
+    console.log({ BuyerValidationResult });
 
     if (!BuyerValidationResult.success) {
       setErrors({

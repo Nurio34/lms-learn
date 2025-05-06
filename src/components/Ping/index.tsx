@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 
 function Ping() {
   const [lastPing, setLastPing] = useState(0);
-  console.log({ lastPing });
 
   const ErrorTimeoutRef = useRef<number | null>(null);
   const LoopTimeoutRef = useRef<number | null>(null);

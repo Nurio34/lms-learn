@@ -35,7 +35,7 @@ function PurchaseForm({ course, setIsPaymentFormOpen }: PurchaseFormType) {
       buyer: {
         ...prev.buyer,
         id: user.id,
-        lastLoginDate: user.lastLoginDate || new Date().toDateString(),
+        lastLoginDate: user.lastLoginDate,
       },
       billingAddress: {
         ...prev.billingAddress,
